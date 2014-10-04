@@ -12,6 +12,7 @@ public class MockSceneController : MonoBehaviour {
 
 	void InstantiateMockObjects()
 	{
+		// Should use our factory to instantiate
 		this.MockSinglePlatform = (GameObject) Instantiate(Resources.Load ("Prefabs/Mock/" + "pref_platform"));
 	}
 	
