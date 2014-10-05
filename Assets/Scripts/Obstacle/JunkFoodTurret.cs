@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JunkFoodTurret : MonoBehaviour {
+public class JunkFoodTurret : Obstacle {
 
 	// Use this for initialization
 	void Start () {

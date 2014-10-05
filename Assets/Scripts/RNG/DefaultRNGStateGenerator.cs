@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DefaultRNGStateGenerator : MonoBehaviour {
+public class DefaultRNGStateGenerator : RNGStateGenerator {
 
 	// Use this for initialization
 	void Start () {

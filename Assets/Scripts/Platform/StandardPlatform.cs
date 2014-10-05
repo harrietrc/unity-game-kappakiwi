@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript1 : Platform {
+public class StandardPlatform : Platform {
 
 	// Use this for initialization
 	void Start () {

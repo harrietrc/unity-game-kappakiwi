@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasicBirdEnemy : MonoBehaviour {
+public class BasicBirdEnemy : Enemy {
 
 	// Use this for initialization
 	void Start () {
