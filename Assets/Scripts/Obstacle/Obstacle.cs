@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Obstacle : MonoBehaviour {
+public class Obstacle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
