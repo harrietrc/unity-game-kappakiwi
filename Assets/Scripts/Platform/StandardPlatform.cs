@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Platform : MonoBehaviour {
+public class NewBehaviourScript1 : Platform {
 
 	// Use this for initialization
 	void Start () {
