@@ -12,4 +12,9 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		transform.Translate(Input.acceleration.x, 0, 0);
 	}
+	void OnTriggerEnter(Collider other){
+		if (other.gameObject.tag == "Item") {
+			other.gameObject.SetActive (false);
+		}
+	}
 }
