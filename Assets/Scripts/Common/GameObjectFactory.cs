@@ -9,8 +9,15 @@ public class GameObjectFactory : MonoBehaviour {
 
 	private RNGStateGenerator rng;
 
+	
+	GameObject currentPlatform;
+
 	// Use this for initialization
 	void Start () {
+
+
+
+
 	
 	}
 	
@@ -23,16 +30,43 @@ public class GameObjectFactory : MonoBehaviour {
 		this.rng = dependency;
 		}
 
-	public void generateTick(){
-		Debug.Log ("here in generateTick method");
-		if (1 == 1) {
-			this.newPlatform = (GameObject) Instantiate(Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-			this.newPlatform.transform.position = new Vector3(xpos,ypos,0);
-			this.newPlatform.transform.parent = GameObject.FindGameObjectWithTag ("MainCamera" ).transform;
-			ypos = ypos + 1;
-			xpos = xpos + 1;
-				}
+	public void generateLevelStart(){
 
+		hardCodedLevelStartHook ();
+		}
+
+	private void hardCodedLevelStartHook(){
+
+		currentPlatform = (GameObject) Instantiate(Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+		Vector3 temp = new Vector3(2,3,0);
+		currentPlatform.transform.position += temp;
+//		currentPlatform.transform.parent = GameObject.FindGameObjectWithTag ("MainCamera" ).transform;
+
+		currentPlatform = (GameObject) Instantiate(Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+		temp = new Vector3(-2,6,0);
+		currentPlatform.transform.position += temp;
+//		currentPlatform.transform.parent = GameObject.FindGameObjectWithTag ("MainCamera" ).transform;
+	
+		}
+
+	public void generateTick(){
+			hardCodedGenerateTickHook ();
+
+		}
+
+	private bool temp = true;
+	private void hardCodedGenerateTickHook(){	
+		if (temp) {
+
+						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+						this.newPlatform.transform.position = new Vector3 (2, 9, 0);
+
+						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+						this.newPlatform.transform.position = new Vector3 (-2, 12, 0);
+				} else {
+					
+				}
+		temp = !temp;
 		}
 
 	public GameObjectFactory(){
