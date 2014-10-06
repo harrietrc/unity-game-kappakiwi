@@ -20,7 +20,7 @@ public class levelSelection : MonoBehaviour {
 		GUI.skin.label.alignment = TextAnchor.LowerCenter;
 
 		if (GUI.Button (new Rect (Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Endless")) {
-			Application.LoadLevel("scn_game");	
+			Application.LoadLevel("scn_mock");	
 		}
 
 		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Story");
