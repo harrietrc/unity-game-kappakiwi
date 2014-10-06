@@ -68,7 +68,10 @@ public class PlayerController : MonoBehaviour {
 		}
 	
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.gameObject.tag == "Item") {
+		if (other.gameObject.tag == "vegetable") {
+			other.gameObject.SetActive (false);
+		}
+		if (other.gameObject.tag == "candy") {
 			other.gameObject.SetActive (false);
 		}
 	}
