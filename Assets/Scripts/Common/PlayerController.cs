@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
 
+	private PlayerStatus playerStatus = new PlayerStatus();
+
 
 	// Use this for initialization
 	void Start () {
@@ -26,9 +28,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
-		jumpForceBounce = new Vector2(0, (int)(850*jumpRate));
-		jumpForce = new Vector2(0, 530*(int)(jumpRate));
-//		transform.LookAt (new Vector3(3, 9 ,0));
+
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			transform.position += Vector3.left * speed * Time.deltaTime;
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		screenShifter.Update ();
+
 		achievementManager.checkForAchievements ();
 
 	}
@@ -55,7 +56,12 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "platform" && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+
+		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+
+
+			jumpForce = new Vector2(0, 530 * playerStatus.FitnessLevel);
+
 			factory.generateTick();
 			screenShifter.ShiftScreen();
 
@@ -65,23 +71,29 @@ public class PlayerController : MonoBehaviour {
 			rigidbody2D.AddForce (jumpForce);
 			achievementManager.incrementPlatformCount();
 		}
-		else if (coll.gameObject.tag == "platform" && this.transform.position.y > coll.gameObject.transform.position.y) {
+		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
+
+			jumpForceBounce = new Vector2(0, 850 * playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
 			rigidbody2D.AddForce (jumpForceBounce);
 		}
+
 	}
 	
+
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.name == "pref_healthyfood") {
 			other.gameObject.SetActive (false);
-			if(jumpRate<1.5){
-				jumpRate=jumpRate+0.1;
+			if(jumpRate<1.5f){
+				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
+				healthyFood.modifyFitnessLevel(playerStatus,0.1f);
 			}
 		}
 		if (other.gameObject.name == "pref_junkfood") {
 			other.gameObject.SetActive (false);
-			if(jumpRate>0.5){
-				jumpRate=jumpRate-0.1;
+			if(jumpRate>0.5f){
+				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
+				junkfood.modifyFitnessLevel(playerStatus,-0.1f);
 			}
 		}
 	}

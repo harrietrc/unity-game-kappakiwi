@@ -12,4 +12,12 @@ public class Item : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void modifyFitnessLevel(PlayerStatus playerStatus, float modification){
+
+		playerStatus.FitnessLevel += modification;
+			 
+		}
+
+
 }
