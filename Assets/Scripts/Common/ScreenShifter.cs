@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScreenShifter : MonoBehaviour {
 
-	private ArrayList gameObjectsOnScreen = new ArrayList();
+	private Object[] gameObjectsOnScreen;
 
 	// Use this for initialization
 	void Start () {
