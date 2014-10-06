@@ -3,8 +3,13 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Item
+  - item
   - platform
+  - obstacle
+  - enemy
+  - player
+  - vegetable
+  - candy
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
