@@ -13,7 +13,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pref_player
   m_TagString: player
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
