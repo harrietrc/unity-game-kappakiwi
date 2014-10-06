@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ScreenShifter : MonoBehaviour {
 
+	private ArrayList gameObjectsOnScreen = new ArrayList();
+
 	// Use this for initialization
 	void Start () {
 	
@@ -12,4 +14,12 @@ public class ScreenShifter : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public ScreenShifter() {
+		}
+
+	public void shiftScreen(){
+		gameObjectsOnScreen = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
+		}
+
 }

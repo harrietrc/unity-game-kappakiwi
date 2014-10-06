@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour {
 	private GameObject currentPlatform;
 
 	private ArrayList visitedPlatforms = new ArrayList();
+
 	private GameObjectFactory factory = new GameObjectFactory();
+	private ScreenShifter screenShifter = new ScreenShifter();
 
 
 	// Use this for initialization
@@ -34,11 +36,26 @@ public class PlayerController : MonoBehaviour {
 
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
+	}
+
+	public void setScreenShifterDependency(ScreenShifter dependency){
+		this.screenShifter = dependency;
+	}
+
+	private void invokeScreenShifter(){
+		this.screenShifter.shiftScreen ();
+		}
+
+	private void invokeFactory(){
+		this.factory.generateTick ();
 		}
 
 	void OnCollisionEnter2D(Collision2D coll) {
 				if (!visitedPlatforms.Contains(coll.gameObject)) {
-					factory.generateTick();
+
+					this.invokeFactory();
+					this.invokeScreenShifter();
+
 					visitedPlatforms.Add(coll.gameObject);
 				}
 				if (coll.gameObject.tag == "platform" && this.transform.position.y > coll.gameObject.transform.position.y) {

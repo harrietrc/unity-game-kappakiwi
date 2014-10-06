@@ -7,7 +7,7 @@ public class GameObjectFactory : MonoBehaviour {
 	private int ypos = -2;
 	private int xpos = 2;
 
-	private RNGStateGenerator;
+	private RNGStateGenerator rng;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class GameObjectFactory : MonoBehaviour {
 	}
 
 	public void setRNGDependency(RNGStateGenerator dependency){
-		this.setRNGDependency = dependency;
+		this.rng = dependency;
 		}
 
 	public void generateTick(){
