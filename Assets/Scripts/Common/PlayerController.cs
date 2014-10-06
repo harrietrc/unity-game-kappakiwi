@@ -41,7 +41,20 @@ public class PlayerController : MonoBehaviour {
 
 		achievementManager.checkForAchievements ();
 
+
+
 	}
+
+	void OnDestroy(){
+		Debug.Log ("saving to playerprefs");
+		playerStatus.saveDataToPersistence ();
+	}
+
+	private void updateMaxHeight(){
+		playerStatus.MaxHeight = playerStatus.MaxHeight + 1.0f;
+
+		Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
+		}
 
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
@@ -76,6 +89,8 @@ public class PlayerController : MonoBehaviour {
 			rigidbody2D.velocity = Vector2.zero;
 			rigidbody2D.AddForce (jumpForce);
 			achievementManager.incrementPlatformCount();
+
+			updateMaxHeight ();
 		}
 		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
