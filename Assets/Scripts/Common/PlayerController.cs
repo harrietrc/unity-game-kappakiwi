@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 				if (coll.gameObject.tag == "platform" && this.transform.position.y > coll.gameObject.transform.position.y) {
 						rigidbody2D.velocity = Vector2.zero;
 						rigidbody2D.AddForce (jumpForce);
-
+						rigidbody2D.fixedAngle = true;
 				}
 		}
 	
