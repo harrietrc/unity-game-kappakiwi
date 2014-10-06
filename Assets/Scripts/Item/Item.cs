@@ -10,7 +10,14 @@ public class Item : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		destoryIfOffScreen ();
+
+	}
+
+	public void destoryIfOffScreen(){
+		if (transform.position.y < -5.0f) {
+			Destroy(this);
+		}
 	}
 
 	public void modifyFitnessLevel(PlayerStatus playerStatus, float modification){

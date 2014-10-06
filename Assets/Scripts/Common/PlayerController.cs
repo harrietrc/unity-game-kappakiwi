@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 
 		achievementManager.checkForAchievements ();
 
-
+		failIfBelowScreen ();
 
 	}
 
@@ -49,6 +49,14 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log ("saving to playerprefs");
 		playerStatus.saveDataToPersistence ();
 	}
+
+	private void failIfBelowScreen(){
+		if (transform.position.y < -4.5) {
+			Application.LoadLevel ("ExitFailed");	
+
+				}
+		}
+
 
 	private void updateMaxHeight(){
 		playerStatus.MaxHeight = playerStatus.MaxHeight + 1.0f;

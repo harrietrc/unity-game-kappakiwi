@@ -10,6 +10,13 @@ public class Platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 	
+	}
+
+	public void destoryIfOffScreen(){
+		if (transform.position.y < -5.0f) {
+			Destroy(this.gameObject);
+		}
 	}
 }

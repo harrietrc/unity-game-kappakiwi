@@ -10,6 +10,6 @@ public class CollapsingPlatform : Platform {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		destoryIfOffScreen ();
 	}
 }

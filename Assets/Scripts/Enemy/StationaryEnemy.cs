@@ -12,4 +12,5 @@ public class StationaryEnemy : Enemy {
 	void Update () {
 	
 	}
+	
 }
