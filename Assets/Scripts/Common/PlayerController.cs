@@ -17,11 +17,12 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		rigidbody2D.fixedAngle = true;
 	}
 
 	void Update ()
 	{
+//		transform.LookAt (new Vector3(3, 9 ,0));
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			transform.position += Vector3.left * speed * Time.deltaTime;
@@ -31,6 +32,9 @@ public class PlayerController : MonoBehaviour {
 			transform.position += Vector3.right * speed * Time.deltaTime;
 		}
 		transform.Translate(Input.acceleration.x, 0, 0);
+
+		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
+		screenShifter.Update ();
 
 	}
 
@@ -43,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void invokeScreenShifter(){
-		this.screenShifter.shiftScreen ();
+		this.screenShifter.ShiftScreen ();
 		}
 
 	private void invokeFactory(){

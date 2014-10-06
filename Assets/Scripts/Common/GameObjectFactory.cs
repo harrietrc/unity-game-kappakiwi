@@ -24,9 +24,11 @@ public class GameObjectFactory : MonoBehaviour {
 		}
 
 	public void generateTick(){
+		Debug.Log ("here in generateTick method");
 		if (1 == 1) {
 			this.newPlatform = (GameObject) Instantiate(Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 			this.newPlatform.transform.position = new Vector3(xpos,ypos,0);
+			this.newPlatform.transform.parent = GameObject.FindGameObjectWithTag ("MainCamera" ).transform;
 			ypos = ypos + 1;
 			xpos = xpos + 1;
 				}
