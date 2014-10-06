@@ -24,6 +24,8 @@ public class exitFailed : MonoBehaviour {
 
 		GUI.Button (new Rect(Screen.width * 0.35f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Try again");
 
-		GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu");
+		if (GUI.Button (new Rect (Screen.width * 0.65f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu")) {
+			Application.LoadLevel("WelcomeScreen");		
+		}
 	}
 }
