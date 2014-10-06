@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			transform.position += Vector3.right * speed * Time.deltaTime;
 		}
-		transform.Translate(Input.acceleration.x, 0, 0);
+		transform.Translate(Input.acceleration.x/3, 0, 0);
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		screenShifter.Update ();
@@ -66,8 +66,7 @@ public class PlayerController : MonoBehaviour {
 
 				}
 		}
-
-
+	
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "Item") {
 			other.gameObject.SetActive (false);
