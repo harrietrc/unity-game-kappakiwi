@@ -15,7 +15,7 @@ public class FallingEnemy : Enemy {
 	// Overiding the default method, called when it collides with another object
 	void OnCollisionEnter2D(Collision2D col) 
 	{
-		if (col.gameObject.tag == "player") { // the colliding object is player, destroy the rocket.
+		if (col.gameObject.tag == Tags.TAG_PLAYER) { // the colliding object is player, destroy the rocket.
 			Destroy(this.gameObject); 
 		}
 	}

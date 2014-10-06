@@ -23,7 +23,7 @@ public class exitFailed : MonoBehaviour {
 		float highscore = PlayerPrefs.GetFloat ("HighScore");
 //		Debug.Log ("highscore from playerprefs was " + highscore);
 
-		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: " + highscore);
+		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "High score: " + highscore);
 
 		GUI.Button (new Rect(Screen.width * 0.35f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Try again");
 
