@@ -173,7 +173,7 @@ GameObject:
   - 212: {fileID: 465938882}
   - 114: {fileID: 465938881}
   - 61: {fileID: 465938880}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pref_platform
   m_TagString: platform
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   - 50: {fileID: 2139993271}
   m_Layer: 0
   m_Name: character
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
