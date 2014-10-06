@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 
 	private GameObjectFactory factory = new GameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
+	private AchievementManager achievementManager = new AchievementManager();
 
 
 	// Use this for initialization
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		screenShifter.Update ();
+		achievementManager.checkForAchievements ();
 
 	}
 
@@ -54,30 +56,29 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (!visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+			factory.generateTick();
+			screenShifter.ShiftScreen();
 
-					factory.generateTick();
-					screenShifter.ShiftScreen();
+			visitedPlatforms.Add(coll.gameObject);
 
-					visitedPlatforms.Add(coll.gameObject);
-
-					rigidbody2D.velocity = Vector2.zero;
-					rigidbody2D.AddForce (jumpForce);
-				}
-				else if (coll.gameObject.tag == "platform" && this.transform.position.y > coll.gameObject.transform.position.y) {
-						rigidbody2D.velocity = Vector2.zero;
-						rigidbody2D.AddForce (jumpForceBounce);
-
-				}
+			rigidbody2D.velocity = Vector2.zero;
+			rigidbody2D.AddForce (jumpForce);
+			achievementManager.incrementPlatformCount();
 		}
+		else if (coll.gameObject.tag == "platform" && this.transform.position.y > coll.gameObject.transform.position.y) {
+			rigidbody2D.velocity = Vector2.zero;
+			rigidbody2D.AddForce (jumpForceBounce);
+		}
+	}
 	
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.gameObject.tag == "vegetable") {
+		if (other.gameObject.name == "pref_healthyfood") {
 			other.gameObject.SetActive (false);
 			if(jumpRate<1.5){
 				jumpRate=jumpRate+0.1;
 			}
 		}
-		if (other.gameObject.tag == "candy") {
+		if (other.gameObject.name == "pref_junkfood") {
 			other.gameObject.SetActive (false);
 			if(jumpRate>0.5){
 				jumpRate=jumpRate-0.1;

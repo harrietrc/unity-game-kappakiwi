@@ -26,7 +26,9 @@ public class exitSuccess : MonoBehaviour {
 		
 		GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Next level");
 
-		GUI.Button (new Rect(Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu");
+		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu")) {
+			Application.LoadLevel("WelcomeScreen");		
+		}
 
 	}
 }

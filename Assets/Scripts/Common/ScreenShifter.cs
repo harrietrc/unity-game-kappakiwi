@@ -25,14 +25,14 @@ public class ScreenShifter : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 
-		shiftElemtents ();
+		shiftElements ();
 	
 	}
 
 	public ScreenShifter() {
 		}
 
-	private void shiftElemtents(){
+	private void shiftElements(){
 			if (shifting) {
 			for (int i = 0; i < platforms.Length; i++) {
 				platforms[i].transform.Translate(new Vector3(0,speed,0));
