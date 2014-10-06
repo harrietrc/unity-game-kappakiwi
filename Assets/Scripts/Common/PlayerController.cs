@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (!visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+		if (coll.gameObject.tag == "platform" && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 			factory.generateTick();
 			screenShifter.ShiftScreen();
 
