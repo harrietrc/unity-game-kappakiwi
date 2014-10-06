@@ -85,7 +85,7 @@ GameObject:
   - 212: {fileID: 7947681}
   - 114: {fileID: 7947680}
   - 61: {fileID: 7947679}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pref_trampoline_platform
   m_TagString: platform
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - 212: {fileID: 465938882}
   - 114: {fileID: 465938881}
   - 61: {fileID: 465938880}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pref_platform
   m_TagString: platform
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 167b0f5837ad54f42b9fc8c0251ff5ab, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 167b0f5837ad54f42b9fc8c0251ff5ab, type: 2}
@@ -770,7 +770,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c48f19f99d0fe40569f005a557d41fc7, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c48f19f99d0fe40569f005a557d41fc7, type: 2}
       propertyPath: m_Name
