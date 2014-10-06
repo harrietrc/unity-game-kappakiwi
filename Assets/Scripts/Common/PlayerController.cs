@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector2 jumpForce = new Vector2(0, 530);
 	private int selectedId;
 	private int speed = 5;
-
+	private double jumpRate;
 	private GameObject currentPlatform;
 
 	private ArrayList visitedPlatforms = new ArrayList();
@@ -20,10 +20,13 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
+		jumpRate = 1;
 	}
 
 	void Update ()
 	{
+		jumpForceBounce = new Vector2(0, (int)(850*jumpRate));
+		jumpForce = new Vector2(0, 530*(int)(jumpRate));
 //		transform.LookAt (new Vector3(3, 9 ,0));
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
@@ -70,9 +73,15 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "vegetable") {
 			other.gameObject.SetActive (false);
+			if(jumpRate<1.5){
+				jumpRate=jumpRate+0.1;
+			}
 		}
 		if (other.gameObject.tag == "candy") {
 			other.gameObject.SetActive (false);
+			if(jumpRate>0.5){
+				jumpRate=jumpRate-0.1;
+			}
 		}
 	}
 }
