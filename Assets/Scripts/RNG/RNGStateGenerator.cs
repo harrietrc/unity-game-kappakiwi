@@ -5,6 +5,8 @@ public class RNGStateGenerator {
 	
 	// Note: Random.Range(min, max) 
 	// has overloaded methods, that returns the value in the both float and int
+	// you can use Random.Range(min, max) directly in code anywhere
+	// no need to call the method below actually
 	
 	public int rangeInt(int min, int max){
 		// returns a random value of integer within given the range
@@ -43,9 +45,7 @@ public class RNGStateGenerator {
 		Vector2 randomV3 = new Vector3(Random.Range(x, y), 0, Random.Range(x, y), Random.Range(x, y));
 		return randomV3;
 	}
-	
-	
-	
+
 	public int getRandomInRange(int min, int max){
 		
 		
