@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AchievementManager : MonoBehaviour {
 
-	private List<PlatformAchievement> paList = new List<PlatformAchievement>();
+	private List<PlatformAchievement> paList  = new List<PlatformAchievement> ();
 
 	public AchievementManager() {
 		makePlatformAchievements ();
@@ -18,7 +18,7 @@ public class AchievementManager : MonoBehaviour {
 
 	public void makePlatformAchievements() {
 		for (int i = 10; i < 100; i = i + 10 ) {
-			string tempMsg = "You have bounced on " + i + " platforms!";
+			string tempMsg = "Bounced on " + i + " platforms!";
 			PlatformAchievement temp = new PlatformAchievement(tempMsg, i);
 			paList.Add(temp);
 		}

@@ -25,7 +25,7 @@ public class PlatformAchievement : MonoBehaviour {
 	}
 
 	public void displayMessage() {
-		Debug.Log (this.message);
+		Debug.Log ("Achievement Unlocked: " + this.message);
 	}
 
 	public static void incrementCount() {
