@@ -97,10 +97,9 @@ public class PlayerController : MonoBehaviour {
 
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
-			
-			
+
 			jumpForce = new Vector2(0, 450 * playerStatus.FitnessLevel);
-			
+
 			factory.generateTick();
 			screenShifter.ShiftScreen();
 			

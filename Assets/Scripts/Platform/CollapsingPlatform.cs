@@ -12,4 +12,11 @@ public class CollapsingPlatform : Platform {
 	void Update () {
 		destoryIfOffScreen ();
 	}
+
+	void OnCollisionExit2D(Collision2D col) {
+		if (col.gameObject.tag == Tags.TAG_PLAYER) {
+			Destroy(gameObject);
+		}
+
+	}
 }
