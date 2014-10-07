@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-
+	private Vector2 vel;
 	private Vector2 jumpForceBounce = new Vector2(0, 400);
 	private Vector2 jumpForce = new Vector2(0, 300);
 	private int speed = 5;
@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
-
+		vel = rigidbody2D.velocity;
+		Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			transform.position += Vector3.left * speed * Time.deltaTime;
