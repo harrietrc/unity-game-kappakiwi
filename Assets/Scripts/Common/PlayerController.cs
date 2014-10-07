@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
 	public GUIText scoreText;
 	private int score = 0;
-
+	private bool death = false;
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.fixedAngle = true;
@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour {
 	void Update ()
 	{
 		vel = rigidbody2D.velocity;
-		Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
+		if (!death) {
+			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
+		}
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			transform.position += Vector3.left * speed * Time.deltaTime;
@@ -122,20 +124,25 @@ public class PlayerController : MonoBehaviour {
 
 				if (coll.gameObject.tag == Tags.TAG_ENEMY) {
 						if (coll.gameObject.name == "pref_basic_enemy") {
-				Debug.Log("collided with a basic enemy");
+							Debug.Log("collided with a basic enemy");
 							//	Application.LoadLevel ("ExitFailed");
-						Physics2D.IgnoreLayerCollision (10,9);
+							handleDeath();
+
 						} else if (coll.gameObject.name == "pref_falling_enemy") {
 							//	Application.LoadLevel ("ExitFailed");
-						Physics2D.IgnoreLayerCollision (10,9);
-
+							handleDeath();
 						} else if (coll.gameObject.name == "pref_stationary_enemy") {
 							//	Application.LoadLevel ("ExitFailed");
-						Physics2D.IgnoreLayerCollision (10,9);
+							handleDeath();
 
 						}
 				}
 		}
+
+	private void handleDeath() {
+		death = true;
+		Physics2D.IgnoreLayerCollision (10,9);
+	}
 
 	private void handleObstacleCollision(Collision2D coll){
 		//todo
