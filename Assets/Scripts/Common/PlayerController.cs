@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	private Vector2 jumpForceBounce = new Vector2(0, 850);
-	private Vector2 jumpForce = new Vector2(0, 530);
+	private Vector2 jumpForceBounce = new Vector2(0, 400);
+	private Vector2 jumpForce = new Vector2(0, 300);
 	private int speed = 5;
 	private GameObject currentPlatform;
 
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour {
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
 			
-			jumpForce = new Vector2(0, 530 * playerStatus.FitnessLevel);
+			jumpForce = new Vector2(0, 400 * playerStatus.FitnessLevel);
 			
 			factory.generateTick();
 			screenShifter.ShiftScreen();
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
-			jumpForceBounce = new Vector2(0, 850 * playerStatus.FitnessLevel);
+			jumpForceBounce = new Vector2(0, 300 * playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
 			rigidbody2D.AddForce (jumpForceBounce);
 		}
