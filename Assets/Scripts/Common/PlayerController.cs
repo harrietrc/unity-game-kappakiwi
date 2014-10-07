@@ -16,12 +16,14 @@ public class PlayerController : MonoBehaviour {
 
 	private PlayerStatus playerStatus = new PlayerStatus();
 
-	private float pos;
+	public GUIText scoreText;
+	private int score = 0;
 
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
+		updateScore ();
 	}
 
 	void Update ()
@@ -44,10 +46,7 @@ public class PlayerController : MonoBehaviour {
 
 		failIfBelowScreen ();
 
-		// Keeps track of the position of the main character
-		pos = transform.position.y;
-		Debug.Log ("position is " + pos);
-
+		updateScore ();
 	}
 
 	void OnDestroy(){
@@ -57,18 +56,22 @@ public class PlayerController : MonoBehaviour {
 
 	private void failIfBelowScreen(){
 		if (transform.position.y < -4.5) {
-			Application.LoadLevel ("ExitFailed");	
-
-				}
+			Application.LoadLevel ("ExitFailed");
 		}
-
+	}
 
 	private void updateMaxHeight(){
+		// Platform count
 		playerStatus.MaxHeight = playerStatus.MaxHeight + 1.0f;
-
+		// Position count
 		Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
-		}
+	}
 
+	void updateScore(){
+		score = (int)playerStatus.MaxHeight;
+		scoreText.text = "Score : " + score;
+		Debug.Log ("Score is : " + score);
+	}
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
 	}
@@ -90,8 +93,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
-			
-			
+
 			jumpForce = new Vector2(0, 530 * playerStatus.FitnessLevel);
 			
 			factory.generateTick();

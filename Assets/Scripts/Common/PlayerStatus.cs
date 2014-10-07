@@ -24,16 +24,14 @@ public class PlayerStatus {
 		bool haskey = PlayerPrefs.HasKey (highScoreKey);
 		float highscore;
 		if (haskey) {
-						highscore = PlayerPrefs.GetFloat (highScoreKey);
-						if (highscore < MaxHeight) {
+			highscore = PlayerPrefs.GetFloat (highScoreKey);
+			if (highscore < MaxHeight) {
 				PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
-						}
-				} else {
-			PlayerPrefs.SetFloat(highScoreKey, MaxHeight);
-				}
-
-		Debug.Log ("just saved to max height: " + MaxHeight);
-		PlayerPrefs.Save ();
+			} else {
+				PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
+			}
+			Debug.Log ("just saved to max height: " + MaxHeight);
+			PlayerPrefs.Save ();
+		}
 	}
-
 }
