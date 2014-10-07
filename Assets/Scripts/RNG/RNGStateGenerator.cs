@@ -47,9 +47,9 @@ public class RNGStateGenerator {
 		return randomV3;
 	}
 
-	public int getRandomInRange(int min, int max){
+	/*public int getRandomInRange(int min, int max){
 		
 		
 	}
-	
+	*/
 }
