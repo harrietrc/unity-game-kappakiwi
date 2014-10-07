@@ -25,26 +25,34 @@ public class ScreenShifter : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 
-		shiftElemtents ();
+		shiftElements ();
 	
 	}
 
 	public ScreenShifter() {
 		}
 
-	private void shiftElemtents(){
+	private void shiftElements(){
 			if (shifting) {
 			for (int i = 0; i < platforms.Length; i++) {
-				platforms[i].transform.Translate(new Vector3(0,speed,0));
+				if(platforms[i] != null){
+					platforms[i].transform.Translate(new Vector3(0,speed,0));
+				}
 			}
 			for (int i = 0; i < items.Length; i++) {
-				items[i].transform.Translate(new Vector3(0,speed,0));
+				if(items[i] != null){
+					items[i].transform.Translate(new Vector3(0,speed,0));
+				}
 			}
 			for (int i = 0; i < enemies.Length; i++) {
-				enemies[i].transform.Translate(new Vector3(0,speed,0));
+				if(enemies[i] != null){
+					enemies[i].transform.Translate(new Vector3(0,speed,0));
+				}
 			}
 			for (int i = 0; i < obstacles.Length; i++) {
-				obstacles[i].transform.Translate(new Vector3(0,speed,0));
+				if(obstacles[i] != null){
+					obstacles[i].transform.Translate(new Vector3(0,speed,0));
+				}
 			}
 //			player.transform.Translate(new Vector3(0,speed,0));
 			if(frames == 5){

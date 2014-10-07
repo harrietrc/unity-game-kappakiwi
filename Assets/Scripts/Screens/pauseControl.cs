@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Platform : MonoBehaviour {
+public class pauseControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,13 +10,13 @@ public class Platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-	
+		DesktopInput ();
 	}
 
-	public void destoryIfOffScreen(){
-		if (transform.position.y < -5.0f) {
-			Destroy(this.gameObject);
+	void DesktopInput(){
+		if (Input.GetMouseButton (0)) {
+			Application.LoadLevel("PauseScreen");		
 		}
 	}
+	
 }

@@ -10,6 +10,6 @@ public class JunkFoodTurret : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		destoryIfOffScreen ();
 	}
 }

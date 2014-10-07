@@ -10,6 +10,6 @@ public class WallSpike : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		destoryIfOffScreen ();
 	}
 }
