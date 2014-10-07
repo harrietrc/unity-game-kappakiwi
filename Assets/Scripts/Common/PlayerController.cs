@@ -68,13 +68,13 @@ public class PlayerController : MonoBehaviour {
 		// Platform count
 		playerStatus.MaxHeight = playerStatus.MaxHeight + 1.0f;
 		// Position count
-		Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
+	//	Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
 	}
 
 	void updateScore(){
 		score = (int)playerStatus.MaxHeight;
-		scoreText.text = "Score : " + score;
-		Debug.Log ("Score is : " + score);
+	//	scoreText.text = "Score : " + score;
+	//	Debug.Log ("Score is : " + score);
 	}
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
@@ -146,15 +146,15 @@ public class PlayerController : MonoBehaviour {
 		}
 
 	private void handleItemCollision(Collider2D other){
-		if (other.gameObject.name == "pref_healthyfood") {
+		if (other.gameObject.tag == "vegetable") {
 			other.gameObject.SetActive (false);
 			if(playerStatus.FitnessLevel<playerStatus.MaxFitnessLevel){
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
 				healthyFood.modifyFitnessLevel(playerStatus,0.1f);
 			}
 		}
-		if (other.gameObject.name == "pref_junkfood") {
-			other.gameObject.SetActive (false);
+		if (other.gameObject.tag == "candy") {
+			Destroy (other.gameObject);
 			if(playerStatus.FitnessLevel>playerStatus.MinFitenessLevel){
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
 				junkfood.modifyFitnessLevel(playerStatus,-0.1f);

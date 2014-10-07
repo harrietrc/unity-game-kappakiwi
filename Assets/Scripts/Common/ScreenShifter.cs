@@ -7,8 +7,10 @@ public class ScreenShifter : MonoBehaviour {
 	private GameObject[] items;
 	private GameObject[] obstacles;
 	private GameObject[] enemies;
+	private GameObject[] vegetables;
+	private GameObject[] candy;
 	private GameObject player;
-
+		
 	private float speed = -.4f;
 
 	private bool shifting = false;
@@ -54,6 +56,16 @@ public class ScreenShifter : MonoBehaviour {
 					obstacles[i].transform.Translate(new Vector3(0,speed,0));
 				}
 			}
+			for (int i =0; i< candy.Length; i++ ) {
+				if(candy[i] != null){
+					candy[i].transform.Translate(new Vector3(0,speed,0));
+				}
+			}
+			for (int i =0; i< vegetables.Length; i++ ) {
+				if(vegetables[i] != null){
+					vegetables[i].transform.Translate(new Vector3(0,speed,0));
+				}
+			}
 //			player.transform.Translate(new Vector3(0,speed,0));
 			if(frames == 5){
 				shifting = false;
@@ -68,6 +80,8 @@ public class ScreenShifter : MonoBehaviour {
 		items = GameObject.FindGameObjectsWithTag(Tags.TAG_ITEM);
 		enemies = GameObject.FindGameObjectsWithTag(Tags.TAG_ENEMY);
 		obstacles = GameObject.FindGameObjectsWithTag(Tags.TAG_OBSTACLE);
+		candy = GameObject.FindGameObjectsWithTag("candy");
+		vegetables = GameObject.FindGameObjectsWithTag("vegetable");
 
 		player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
 		shifting = true;
