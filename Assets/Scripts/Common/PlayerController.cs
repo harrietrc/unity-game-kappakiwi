@@ -123,11 +123,16 @@ public class PlayerController : MonoBehaviour {
 				if (coll.gameObject.tag == Tags.TAG_ENEMY) {
 						if (coll.gameObject.name == "pref_basic_enemy") {
 				Debug.Log("collided with a basic enemy");
-								Application.LoadLevel ("ExitFailed");		
+							//	Application.LoadLevel ("ExitFailed");
+						Physics2D.IgnoreLayerCollision (10,9);
 						} else if (coll.gameObject.name == "pref_falling_enemy") {
-								Application.LoadLevel ("ExitFailed");
+							//	Application.LoadLevel ("ExitFailed");
+						Physics2D.IgnoreLayerCollision (10,9);
+
 						} else if (coll.gameObject.name == "pref_stationary_enemy") {
-								Application.LoadLevel ("ExitFailed");
+							//	Application.LoadLevel ("ExitFailed");
+						Physics2D.IgnoreLayerCollision (10,9);
+
 						}
 				}
 		}
