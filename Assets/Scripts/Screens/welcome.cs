@@ -25,7 +25,7 @@ public class welcome : MonoBehaviour {
 		}
 		
 		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.65f, Screen.width * 0.2f, Screen.height * 0.1f), "Achievement")) {
-			Application.LoadLevel("Achievement");		
+			Application.LoadLevel("scn_achievements");		
 		}
 		
 		GUI.Button (new Rect(Screen.width * 0.4f, Screen.height * 0.8f, Screen.width * 0.2f, Screen.height * 0.1f), "Setting");
