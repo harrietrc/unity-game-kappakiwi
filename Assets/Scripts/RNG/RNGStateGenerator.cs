@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RNGStateGenerator {
-	
+	static int dist = 5;
 	// Note: Random.Range(min, max) 
 	// has overloaded methods, that returns the value in the both float and int
 	// you can use Random.Range(min, max) directly in code anywhere
@@ -24,25 +24,26 @@ public class RNGStateGenerator {
 	
 	public Vector2 getRandomV2(){
 		// returns a Vector2 that x and y in range of -10 , +10
-		Vector2  randomV2 = new Vector2(Random.Range(-10.0, 10.0), 0, Random.Range(-10.0, 10.0));
+		Vector2  randomV2 = new Vector2(Random.Range(-dist, dist), Random.Range(-dist, dist));
 		return randomV2;
 	}
 	
 	public Vector2 getRandomV2(float x, float y){
 		//returns a Vector2 instance given range of x, y float values
-		Vector2 randomV2 = new Vector2(Random.Range(x, y), 0, Random.Range(x, y));
+		Vector2 randomV2 = new Vector2(Random.Range(x-dist, x+dist), Random.Range(y-dist, y+dist));
 		return randomV2;
 	}
 	
 	public Vector3 getRandomV3(float x, float y){
 		// returns aVector3 instance of x, y and z=0 values
-		Vector2 randomV3 = new Vector3(Random.Range(x, y), 0, Random.Range(x, y), 0);
+		Vector2 randomV3 = new Vector3(Random.Range(x-dist, x+dist), Random.Range(y-dist, y+dist), 0);
 		return randomV3;
 	}
 	
 	public Vector3 getRandomV3(float x, float y, float z){
 		// returns aVector3 instance of x, y and z values
-		Vector2 randomV3 = new Vector3(Random.Range(x, y), 0, Random.Range(x, y), Random.Range(x, y));
+		Vector2 randomV3 = new Vector3(Random.Range(x-dist, x+dist), Random.Range(y-dist, y+dist),
+		                               Random.Range(z-dist, z+dist));
 		return randomV3;
 	}
 
