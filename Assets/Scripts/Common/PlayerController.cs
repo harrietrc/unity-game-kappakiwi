@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 
 	private PlayerStatus playerStatus = new PlayerStatus();
 
+	private float pos;
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +43,10 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.checkForAchievements ();
 
 		failIfBelowScreen ();
+
+		// Keeps track of the position of the main character
+		pos = transform.position.y;
+		Debug.Log ("position is " + pos);
 
 	}
 
