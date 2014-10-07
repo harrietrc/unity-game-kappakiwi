@@ -46,8 +46,6 @@ public class PlayerController : MonoBehaviour {
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		screenShifter.Update ();
 
-		achievementManager.checkAchievements ();
-
 		failIfBelowScreen ();
 
 		updateScore ();
@@ -56,6 +54,8 @@ public class PlayerController : MonoBehaviour {
 	void OnDestroy(){
 		Debug.Log ("saving to playerprefs");
 		playerStatus.saveDataToPersistence ();
+		achievementManager.saveAchievementsToPersistence ();
+		achievementManager.checkAchievements ();
 	}
 
 	private void failIfBelowScreen(){
