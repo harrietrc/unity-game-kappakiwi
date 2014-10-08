@@ -22,11 +22,13 @@ public class AchievementScreen : MonoBehaviour {
 			
 			if (PlayerPrefs.GetInt(al[i].getKey()) == 1) {
 				style.normal.textColor = Color.black;
+				GUI.Label (tempRect, al[i].getKey () + " ✔", style);
 			}else{
 				style.normal.textColor = Color.grey;
+				GUI.Label (tempRect, al[i].getKey (), style);
 			}
 
-			GUI.Label (tempRect, al[i].getKey (), style);
+
 
 		}
 
