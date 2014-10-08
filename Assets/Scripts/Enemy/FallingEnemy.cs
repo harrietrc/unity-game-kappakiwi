@@ -10,6 +10,8 @@ public class FallingEnemy : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		destoryIfOffScreen ();
 	}
 
 	// Overiding the default method, called when it collides with another object

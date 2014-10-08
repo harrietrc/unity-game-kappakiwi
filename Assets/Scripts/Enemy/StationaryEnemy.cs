@@ -10,6 +10,9 @@ public class StationaryEnemy : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
+
+		
+		destoryIfOffScreen ();
 	
 	}
 	
