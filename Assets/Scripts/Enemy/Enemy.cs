@@ -12,4 +12,10 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void destoryIfOffScreen(){
+		if (transform.position.y < Constants.ITEM_DESTRY_THRESHHOLD) {
+			Destroy(this);
+		}
+	}
 }
