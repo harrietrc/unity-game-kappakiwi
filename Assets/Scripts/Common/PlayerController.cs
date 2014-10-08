@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 			
 			rigidbody2D.velocity = Vector2.zero;
 			rigidbody2D.AddForce (jumpForce);
-			achievementManager.incrementPlatformCount();
+			PlatformAchievement.incrementPlatformCount();
 
 			updateMaxHeight ();
 		}

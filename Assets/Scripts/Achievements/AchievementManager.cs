@@ -4,37 +4,47 @@ using System.Collections.Generic;
 
 public class AchievementManager : MonoBehaviour {
 
-	private List<PlatformAchievement> paList  = new List<PlatformAchievement> ();
+	private List<Achievement> achievementList  = new List<Achievement> ();
 
 	public AchievementManager() {
-		makePlatformAchievements ();
+		makeAchievements ();
 	}
 
+	//Go through achievements and output the key and its corresponding value (int type which determines if achievement
+	//is locked or unlocked.
 	public void checkAchievements() {
-		foreach (PlatformAchievement pa in paList) {
-			Debug.Log (pa.getKey() + " " + PlayerPrefs.GetInt (pa.getKey ()));
+		foreach (Achievement a in achievementList) {
+			Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
 		}
 	}
 
-	public void makePlatformAchievements() {
+	//Build list of achievements, with the key being a string of the goal
+	public void makeAchievements() {
 		for (int i = 20; i <= 100; i = i + 20 ) {
 			string tempMsg = "Bounced on " + i + " platforms!";
 			PlatformAchievement temp = new PlatformAchievement(tempMsg, i);
-			paList.Add(temp);
+			achievementList.Add(temp);
 		}
 	}
 
+	//Save all Achievement objects stored inside achievementList to PlayerPrefs
 	public void saveAchievementsToPersistence() {
-		for(int i = 0; i < paList.Count; i++) {
-			string key = paList[i].getKey ();
+		for(int i = 0; i < achievementList.Count; i++) {
+			string key = achievementList[i].getKey ();
 			bool hasKey = PlayerPrefs.HasKey(key);
+
+			//If achievement is already in PlayerPrefs
 			if (hasKey) {
+				//Check if achievement has already been unlocked >> 1 = unlocked, 0 = locked
 				int isUnlocked = PlayerPrefs.GetInt (key);
-				if (paList[i].isAchievementUnlocked() || isUnlocked == 1) {
+				//If achievement has just been unlocked, or unlocked previously, then unlock
+				if (achievementList[i].isAchievementUnlocked() || isUnlocked == 1) {
 					PlayerPrefs.SetInt(key,1); 
+				//Else achievement is still locked
 				}else{
 					PlayerPrefs.SetInt(key,0);
 				}
+			//Else add achievement to PlayerPrefs, locked
 			}else{
 				PlayerPrefs.SetInt (key, 0);
 			}
@@ -42,8 +52,5 @@ public class AchievementManager : MonoBehaviour {
 			PlayerPrefs.Save ();
 		}
 	}
-
-	public void incrementPlatformCount() {
-		PlatformAchievement.incrementCount ();
-	}
+	
 }
