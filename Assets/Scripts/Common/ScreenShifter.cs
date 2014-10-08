@@ -10,7 +10,7 @@ public class ScreenShifter : MonoBehaviour {
 	private GameObject[] vegetables;
 	private GameObject[] candy;
 	private GameObject player;
-		
+	private GameObject flag;	
 	private float speed;
 
 	public ScreenShifter() {
@@ -25,6 +25,7 @@ public class ScreenShifter : MonoBehaviour {
 		obstacles = GameObject.FindGameObjectsWithTag(Tags.TAG_OBSTACLE);
 		candy = GameObject.FindGameObjectsWithTag(Tags.TAG_CANDY);
 		vegetables = GameObject.FindGameObjectsWithTag(Tags.TAG_VEGETABLE);
+		flag = GameObject.FindGameObjectWithTag(Tags.TAG_FLAG);
 
 		player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
 
@@ -59,6 +60,7 @@ public class ScreenShifter : MonoBehaviour {
 			}
 		}
 		player.transform.Translate(new Vector3(0,speed,0));
+		flag.transform.Translate(new Vector3(0,speed,0));
 	}
 	
 }

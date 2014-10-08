@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour {
 		handleItemCollision (other);
 	}
 
+
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
@@ -135,6 +136,10 @@ public class PlayerController : MonoBehaviour {
 	private void handleDeath() {
 		death = true;
 		Physics2D.IgnoreLayerCollision (10,9);
+
+		AudioSource deathSound = gameObject.AddComponent<AudioSource>();
+		deathSound.clip = Resources.Load("Audio/Pacman-Die") as AudioClip;
+		deathSound.Play();
 	}
 
 	private void handleObstacleCollision(Collision2D coll){
@@ -148,6 +153,10 @@ public class PlayerController : MonoBehaviour {
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
 				healthyFood.modifyFitnessLevel(playerStatus,Constants.VEGETABLE_FITNESS_CHANGE);
 			}
+			
+			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
+			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
+			vegetableSound.Play();
 		}
 		if (other.gameObject.tag == Tags.TAG_CANDY) {
 			Destroy (other.gameObject);
@@ -156,9 +165,10 @@ public class PlayerController : MonoBehaviour {
 				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
 		}
+		if (other.gameObject.tag == Tags.TAG_FLAG) {
+			Application.LoadLevel ("ExitSuccess");
+			}
+		}
 	}
 
 	
-
-
-}
