@@ -16,9 +16,17 @@ public class GameObjectFactory : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
-
-
+		switch (LevelSelection.CURRENT_THEME) {
+		case Theme.endless:
+			rng = new EndlessRNGStateGenerator();
+			break;
+		case Theme.story:
+			rng = new DefaultRNGStateGenerator();
+			break;
+		case Theme.xmas:
+			rng = new DefaultRNGStateGenerator();
+			break;
+				}
 	
 	}
 	
