@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour {
 		handleItemCollision (other);
 	}
 
+
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
@@ -156,9 +157,10 @@ public class PlayerController : MonoBehaviour {
 				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
 		}
+		if (other.gameObject.tag == Tags.TAG_FLAG) {
+			Application.LoadLevel ("ExitSuccess");
+			}
+		}
 	}
 
 	
-
-
-}
