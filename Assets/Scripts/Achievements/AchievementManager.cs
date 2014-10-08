@@ -21,10 +21,14 @@ public class AchievementManager : MonoBehaviour {
 	//Build list of achievements, with the key being a string of the goal
 	public void makeAchievements() {
 		for (int i = 20; i <= 100; i = i + 20 ) {
-			string tempMsg = "Bounced on " + i + " platforms!";
-			PlatformAchievement temp = new PlatformAchievement(tempMsg, i);
+			string tempkey = "Bounced on " + i + " platforms!";
+			PlatformAchievement temp = new PlatformAchievement(tempkey, i);
 			achievementList.Add(temp);
 		}
+	}
+
+	public List<Achievement> getAchievements() {
+		return this.achievementList;
 	}
 
 	//Save all Achievement objects stored inside achievementList to PlayerPrefs
@@ -52,5 +56,7 @@ public class AchievementManager : MonoBehaviour {
 			PlayerPrefs.Save ();
 		}
 	}
+
+
 	
 }

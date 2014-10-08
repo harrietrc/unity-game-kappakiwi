@@ -26,15 +26,18 @@ public class PlatformAchievement : Achievement {
 		}
 		return this.isUnlocked;
 	}
-
+	
+	//Increment the static variable 'count'
+	public static void incrementPlatformCount() {
+		PlatformAchievement.count++;
+	}
 
 	public void displayMessage() {
 		Debug.Log ("Achievement Unlocked: " + this.key);
 	}
 
-	//Increment the static variable 'count'
-	public static void incrementPlatformCount() {
-		PlatformAchievement.count++;
+	public int getCountToUnlock() {
+		return this.countToUnlock;
 	}
 
 }
