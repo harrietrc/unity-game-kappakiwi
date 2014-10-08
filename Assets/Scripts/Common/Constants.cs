@@ -20,6 +20,9 @@ public class Constants {
 
 	public static float FAIL_THRESHHOLD = -7.5f;
 
+	public static float VEGETABLE_WEIGHT_CHANGE = -.01f;
+	public static float CANDY_WEIGHT_CHANGE = .01f;
+
 	private Constants(){
 		}
 

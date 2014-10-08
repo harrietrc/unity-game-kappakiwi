@@ -22,17 +22,25 @@ public class AchievementScreen : MonoBehaviour {
 			
 			if (PlayerPrefs.GetInt(al[i].getKey()) == 1) {
 				style.normal.textColor = Color.black;
+				GUI.Label (tempRect, al[i].getKey () + " ✔", style);
 			}else{
 				style.normal.textColor = Color.grey;
+				GUI.Label (tempRect, al[i].getKey (), style);
 			}
 
-			GUI.Label (tempRect, al[i].getKey (), style);
+
 
 		}
 
 		style.normal.textColor = Color.white;
+
+		GUIStyle styles = new GUIStyle (GUI.skin.label);
 		
-		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.8f, Screen.width * 0.2f, Screen.height * 0.1f), "Back")) {
+		styles.font = (Font)Resources.Load ("font/Animated");
+		styles.fontSize = 30;
+		styles.normal.textColor = Color.black;
+		
+		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.8f, Screen.width * 0.2f, Screen.height * 0.1f), "Back", styles)) {
 			Application.LoadLevel("WelcomeScreen");	
 		}
 	}

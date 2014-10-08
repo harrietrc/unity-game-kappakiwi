@@ -10,3 +10,5 @@
 
 6. This game should automatically start after the installation. If not, it can be found in the Apps section.(Usually the last one)
 
+------ Alternative ------
+Use game.apk to install app.
