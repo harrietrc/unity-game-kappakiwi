@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+
+	public AudioClip hitByEnemy;
+	public AudioClip eatSomething;
+
 	private Vector2 vel;
 	private Vector2 jumpForceBounce = new Vector2(0, 850);
 	private Vector2 jumpForce = new Vector2(0, 530);
