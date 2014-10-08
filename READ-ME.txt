@@ -1,0 +1,12 @@
+1. Clone codes from github by using ¡°git clone https://github.com/clee842/se306-project2.git¡±
+
+2. Open ¡°Unity¡±, and go to File ¡ª> Open project
+
+3. Connect an android phone with a USB cable to the computer.
+
+4. A window called ¡°¡±Project Wizard¡± will pop up, press ¡°Open other¡±. Select the directory where stores our codes from github. Should be a folder called ¡°se306-project2¡±. Press ¡°Open project¡± afterwards.
+
+5. Unity should be reloaded. Then go to File ¡ª> BuildSetting. Click ¡°Android¡± in ¡°Platform¡± window, and then click ¡°Switch platform¡± at the bottom. Press ¡°Build and Run¡± button at the bottom. Then you need to name an apk for this project, names can be such as ¡°KappaKiwi¡±. After that, it will let you locate Android SDK folder. Then, it will take one or two minutes to install the game into the phone.
+
+6. This game should automatically start after the installation. If not, it can be found in the Apps section.(Usually the last one)
+
