@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class GameObjectFactory : MonoBehaviour {
 
 	private GameObject newPlatform;
@@ -57,27 +58,13 @@ public class GameObjectFactory : MonoBehaviour {
 	private bool temp = true;
 	private void hardCodedGenerateTickHook(){	
 		if (temp) {
-
+			if (Application.loadedLevelName != "level_one") {
 						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 						this.newPlatform.transform.position = new Vector3 (2, 9, 0);
 
 						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 						this.newPlatform.transform.position = new Vector3 (-2, 12, 0);
-
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (0, 10, 0);
-
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (-5, 9, 0);
-
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (4, 11, 0);
-
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (6, 8, 0);
-
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (-3, 10, 0);
+			}
 				} else {
 					
 				}

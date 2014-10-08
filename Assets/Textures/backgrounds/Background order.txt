@@ -1,0 +1,24 @@
+order is:
+background-ground
+background-day (can repeat)
+bacground-clouds (can repeat)
+background-clouds-2 (can repeat)
+background-clouds-3 (can repeat)
+background-day-transition
+bacground-night-transition
+moon
+background-space-transition
+background-space, or background-space-2, or background-space-3 (should repeat)
+
+then, with any of the space backgrounds in between:
+mars
+asteroid belt
+jupiter
+saturn
+uranus
+neptune
+kuiper belt
+
+Then just space, I guess
+
+All can be resized before the final build, as they are quite high res.

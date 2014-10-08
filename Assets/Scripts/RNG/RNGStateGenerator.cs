@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RNGStateGenerator : MonoBehaviour {
+public interface RNGStateGenerator {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	RNGState currentRNGState { get; set; }
+	RNGState previousRNGState { get; set; }
+
+	void generateNextState();
+
 }

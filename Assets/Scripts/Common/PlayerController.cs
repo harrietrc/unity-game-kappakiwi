@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	private Vector2 jumpForceBounce = new Vector2(0, 400);
-	private Vector2 jumpForce = new Vector2(0, 300);
-	private int speed = 5;
-	private GameObject currentPlatform;
-
 	private ArrayList visitedPlatforms = new ArrayList();
 
 	private GameObjectFactory factory = new GameObjectFactory();
@@ -16,59 +11,68 @@ public class PlayerController : MonoBehaviour {
 
 	private PlayerStatus playerStatus = new PlayerStatus();
 
-	private float pos;
+	public GUIText scoreText;
+	private int score = 0;
+	private bool death = false;
 
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
+		updateScore ();
 	}
 
 	void Update ()
 	{
-
+		Vector2 vel = rigidbody2D.velocity;
+		if (!death) {
+			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
+		}
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			transform.position += Vector3.left * speed * Time.deltaTime;
+			transform.position += Vector3.left * Constants.SPEED_MOVE * Time.deltaTime;
 		}
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			transform.position += Vector3.right * speed * Time.deltaTime;
+			transform.position += Vector3.right * Constants.SPEED_MOVE * Time.deltaTime;
 		}
 		transform.Translate(Input.acceleration.x/3, 0, 0);
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
-		screenShifter.Update ();
-
-		achievementManager.checkForAchievements ();
+		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
+			screenShifter.ShiftScreen (-.1f);
+				}
 
 		failIfBelowScreen ();
 
-		// Keeps track of the position of the main character
-		pos = transform.position.y;
-		Debug.Log ("position is " + pos);
-
+		updateScore ();
 	}
 
 	void OnDestroy(){
 		Debug.Log ("saving to playerprefs");
 		playerStatus.saveDataToPersistence ();
+		achievementManager.saveAchievementsToPersistence ();
+		achievementManager.checkAchievements ();
 	}
 
 	private void failIfBelowScreen(){
 		if (transform.position.y < -4.5) {
-			Application.LoadLevel ("ExitFailed");	
-
-				}
+			Application.LoadLevel ("ExitFailed");
 		}
-
+	}
 
 	private void updateMaxHeight(){
+		// Platform count
 		playerStatus.MaxHeight = playerStatus.MaxHeight + 1.0f;
+		// Position count
+	//	Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
+	}
 
-		Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
-		}
-
+	void updateScore(){
+		score = (int)playerStatus.MaxHeight;
+		scoreText.text = "Score : " + score;
+	//	Debug.Log ("Score is : " + score);
+	}
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
 	}
@@ -90,26 +94,23 @@ public class PlayerController : MonoBehaviour {
 
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
-			
-			
-			jumpForce = new Vector2(0, 400 * playerStatus.FitnessLevel);
-			
+
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+
 			factory.generateTick();
-			screenShifter.ShiftScreen();
-			
+
 			visitedPlatforms.Add(coll.gameObject);
-			
-			rigidbody2D.velocity = Vector2.zero;
+
 			rigidbody2D.AddForce (jumpForce);
-			achievementManager.incrementPlatformCount();
+			PlatformAchievement.incrementPlatformCount();
 
 			updateMaxHeight ();
 		}
 		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
-			jumpForceBounce = new Vector2(0, 300 * playerStatus.FitnessLevel);
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
-			rigidbody2D.AddForce (jumpForceBounce);
+			rigidbody2D.AddForce (jumpForce);
 		}
 	}
 
@@ -117,33 +118,41 @@ public class PlayerController : MonoBehaviour {
 
 				if (coll.gameObject.tag == Tags.TAG_ENEMY) {
 						if (coll.gameObject.name == "pref_basic_enemy") {
-				Debug.Log("collided with a basic enemy");
-								Application.LoadLevel ("ExitFailed");		
+							Debug.Log("collided with a basic enemy");
+							//	Application.LoadLevel ("ExitFailed");
+							handleDeath();
 						} else if (coll.gameObject.name == "pref_falling_enemy") {
-								Application.LoadLevel ("ExitFailed");
+							//	Application.LoadLevel ("ExitFailed");
+							handleDeath();
 						} else if (coll.gameObject.name == "pref_stationary_enemy") {
-								Application.LoadLevel ("ExitFailed");
+							//	Application.LoadLevel ("ExitFailed");
+							handleDeath();
 						}
 				}
 		}
+
+	private void handleDeath() {
+		death = true;
+		Physics2D.IgnoreLayerCollision (10,9);
+	}
 
 	private void handleObstacleCollision(Collision2D coll){
 		//todo
 		}
 
 	private void handleItemCollision(Collider2D other){
-		if (other.gameObject.name == "pref_healthyfood") {
+		if (other.gameObject.tag == Tags.TAG_VEGETABLE) {
 			other.gameObject.SetActive (false);
 			if(playerStatus.FitnessLevel<playerStatus.MaxFitnessLevel){
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
-				healthyFood.modifyFitnessLevel(playerStatus,0.1f);
+				healthyFood.modifyFitnessLevel(playerStatus,Constants.VEGETABLE_FITNESS_CHANGE);
 			}
 		}
-		if (other.gameObject.name == "pref_junkfood") {
-			other.gameObject.SetActive (false);
+		if (other.gameObject.tag == Tags.TAG_CANDY) {
+			Destroy (other.gameObject);
 			if(playerStatus.FitnessLevel>playerStatus.MinFitenessLevel){
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
-				junkfood.modifyFitnessLevel(playerStatus,-0.1f);
+				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
 		}
 	}
