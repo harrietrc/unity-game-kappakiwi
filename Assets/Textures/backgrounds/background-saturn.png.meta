@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 54e3aac739f7c814c925c34687723a12
-=======
-guid: 2d5558398fc8cd646b2bc9f19a68e6f4
->>>>>>> da69ff23686c0ee5f02becc4269a286ead4b68b3
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: background-saturn
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
