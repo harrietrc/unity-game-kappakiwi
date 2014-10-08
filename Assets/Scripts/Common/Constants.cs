@@ -16,6 +16,10 @@ public class Constants {
 
 	public static float SCREEN_SHIFT_THRESHHOLD = 0.2f;
 
+	public static float ITEM_DESTRY_THRESHHOLD = -10.0f;
+
+	public static float FAIL_THRESHHOLD = -7.5f;
+
 	private Constants(){
 		}
 

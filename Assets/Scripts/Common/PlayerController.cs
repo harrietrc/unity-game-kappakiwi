@@ -56,7 +56,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void failIfBelowScreen(){
-		if (transform.position.y < -4.5) {
+
+		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
+			Debug.Log ("failed because y was less than " + Constants.FAIL_THRESHHOLD);
 			Application.LoadLevel ("ExitFailed");
 		}
 	}
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 
 	void updateScore(){
 		score = (int)playerStatus.MaxHeight;
-		scoreText.text = "Score : " + score;
+		//scoreText.text = "Score : " + score;
 	//	Debug.Log ("Score is : " + score);
 	}
 	public void setFactoryDependency(GameObjectFactory dependency){
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void OnCollisionEnter2D(Collision2D coll) {
+	
 		handlePlatformCollision (coll);
 		handleEnemyCollision (coll);
 		handleObstacleCollision (coll);
@@ -115,7 +118,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void handleEnemyCollision(Collision2D coll){
-
 				if (coll.gameObject.tag == Tags.TAG_ENEMY) {
 						if (coll.gameObject.name == "pref_basic_enemy") {
 							Debug.Log("collided with a basic enemy");
