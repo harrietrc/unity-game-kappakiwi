@@ -15,7 +15,7 @@ public class Platform : MonoBehaviour {
 	}
 
 	public void destoryIfOffScreen(){
-		if (transform.position.y < -5.0f) {
+		if (transform.position.y < Constants.ITEM_DESTRY_THRESHHOLD) {
 			Destroy(this.gameObject);
 		}
 	}

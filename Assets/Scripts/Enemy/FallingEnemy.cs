@@ -10,13 +10,15 @@ public class FallingEnemy : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		destoryIfOffScreen ();
 	}
 
 	// Overiding the default method, called when it collides with another object
 	void OnCollisionEnter2D(Collision2D col) 
 	{
 		if (col.gameObject.tag == Tags.TAG_PLAYER) { // the colliding object is player, destroy the rocket.
-			Destroy(this.gameObject); 
+			//Destroy(this.gameObject); 
 		}
 	}
 }

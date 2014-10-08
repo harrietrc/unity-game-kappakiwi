@@ -3,13 +3,13 @@ using System.Collections;
 
 public class HardCodedRNGStateGenerator : RNGStateGenerator {
 
-	// Use this for initialization
-	void Start () {
-	
+	public RNGState currentRNGState { get; set; }
+	public RNGState previousRNGState { get; set; }
+
+
+	public HardCodedRNGStateGenerator(){
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void generateNextState(){
 	}
 }

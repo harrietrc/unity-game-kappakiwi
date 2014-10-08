@@ -8,6 +8,9 @@ public class Tags {
 	public static string TAG_OBSTACLE = "obstacle";
 	public static string TAG_ITEM = "item";
 	public static string TAG_PLAYER = "player";
+	public static string TAG_CANDY = "candy";
+	public static string TAG_VEGETABLE = "vegetable";
+	public static string TAG_FLAG = "flag";
 
 	private Tags (){}
 

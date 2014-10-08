@@ -3,13 +3,12 @@ using System.Collections;
 
 public class DefaultRNGStateGenerator : RNGStateGenerator {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public RNGState currentRNGState { get; set; }
+	public RNGState previousRNGState { get; set; }
+
+	public DefaultRNGStateGenerator(){
+		}
+
+	public void generateNextState(){
 	}
 }

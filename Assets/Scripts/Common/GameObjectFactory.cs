@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class GameObjectFactory : MonoBehaviour {
 
 	private GameObject newPlatform;
@@ -15,9 +16,17 @@ public class GameObjectFactory : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
-
-
+		switch (LevelSelection.CURRENT_THEME) {
+		case Theme.endless:
+			rng = new EndlessRNGStateGenerator();
+			break;
+		case Theme.story:
+			rng = new DefaultRNGStateGenerator();
+			break;
+		case Theme.xmas:
+			rng = new DefaultRNGStateGenerator();
+			break;
+				}
 	
 	}
 	
@@ -57,13 +66,13 @@ public class GameObjectFactory : MonoBehaviour {
 	private bool temp = true;
 	private void hardCodedGenerateTickHook(){	
 		if (temp) {
-
+			if (Application.loadedLevelName != "level_one" || Application.loadedLevelName != "level_two") {
 						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 						this.newPlatform.transform.position = new Vector3 (2, 9, 0);
 
 						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 						this.newPlatform.transform.position = new Vector3 (-2, 12, 0);
-
+			}
 				} else {
 					
 				}

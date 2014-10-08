@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+<<<<<<< HEAD
 
 	public AudioClip hitByEnemy;
 	public AudioClip eatSomething;
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 	private int speed = 5;
 	private GameObject currentPlatform;
 
+=======
+>>>>>>> origin/master
 	private ArrayList visitedPlatforms = new ArrayList();
 
 	private GameObjectFactory factory = new GameObjectFactory();
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	public GUIText scoreText;
 	private int score = 0;
 	private bool death = false;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.fixedAngle = true;
@@ -33,22 +37,24 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
-		vel = rigidbody2D.velocity;
+		Vector2 vel = rigidbody2D.velocity;
 		if (!death) {
 			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
 		}
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
-			transform.position += Vector3.left * speed * Time.deltaTime;
+			transform.position += Vector3.left * Constants.SPEED_MOVE * Time.deltaTime;
 		}
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			transform.position += Vector3.right * speed * Time.deltaTime;
+			transform.position += Vector3.right * Constants.SPEED_MOVE * Time.deltaTime;
 		}
 		transform.Translate(Input.acceleration.x/3, 0, 0);
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
-		screenShifter.Update ();
+		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
+			screenShifter.ShiftScreen (-.1f);
+				}
 
 		failIfBelowScreen ();
 
@@ -63,7 +69,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void failIfBelowScreen(){
-		if (transform.position.y < -4.5) {
+
+		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
+			Debug.Log ("failed because y was less than " + Constants.FAIL_THRESHHOLD);
 			Application.LoadLevel ("ExitFailed");
 		}
 	}
@@ -77,7 +85,7 @@ public class PlayerController : MonoBehaviour {
 
 	void updateScore(){
 		score = (int)playerStatus.MaxHeight;
-	//	scoreText.text = "Score : " + score;
+		//scoreText.text = "Score : " + score;
 	//	Debug.Log ("Score is : " + score);
 	}
 	public void setFactoryDependency(GameObjectFactory dependency){
@@ -99,17 +107,16 @@ public class PlayerController : MonoBehaviour {
 		handleItemCollision (other);
 	}
 
+
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
-			jumpForce = new Vector2(0, 450 * playerStatus.FitnessLevel);
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 
 			factory.generateTick();
-			screenShifter.ShiftScreen();
-			
+
 			visitedPlatforms.Add(coll.gameObject);
-			
-			rigidbody2D.velocity = Vector2.zero;
+
 			rigidbody2D.AddForce (jumpForce);
 			PlatformAchievement.incrementPlatformCount();
 
@@ -117,14 +124,13 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
-			jumpForceBounce = new Vector2(0, 850 * playerStatus.FitnessLevel);
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
-			rigidbody2D.AddForce (jumpForceBounce);
+			rigidbody2D.AddForce (jumpForce);
 		}
 	}
 
 	private void handleEnemyCollision(Collision2D coll){
-
 				if (coll.gameObject.tag == Tags.TAG_ENEMY) {
 						if (coll.gameObject.name == "pref_basic_enemy") {
 							Debug.Log("collided with a basic enemy");
@@ -143,6 +149,10 @@ public class PlayerController : MonoBehaviour {
 	private void handleDeath() {
 		death = true;
 		Physics2D.IgnoreLayerCollision (10,9);
+
+		AudioSource deathSound = gameObject.AddComponent<AudioSource>();
+		deathSound.clip = Resources.Load("Audio/Pacman-Die") as AudioClip;
+		deathSound.Play();
 	}
 
 	private void handleObstacleCollision(Collision2D coll){
@@ -150,23 +160,31 @@ public class PlayerController : MonoBehaviour {
 		}
 
 	private void handleItemCollision(Collider2D other){
-		if (other.gameObject.tag == "vegetable") {
+		if (other.gameObject.tag == Tags.TAG_VEGETABLE) {
 			other.gameObject.SetActive (false);
 			if(playerStatus.FitnessLevel<playerStatus.MaxFitnessLevel){
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
-				healthyFood.modifyFitnessLevel(playerStatus,0.1f);
+				healthyFood.modifyFitnessLevel(playerStatus,Constants.VEGETABLE_FITNESS_CHANGE);
 			}
+			
+			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
+			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
+			vegetableSound.Play();
 		}
-		if (other.gameObject.tag == "candy") {
+		if (other.gameObject.tag == Tags.TAG_CANDY) {
 			Destroy (other.gameObject);
 			if(playerStatus.FitnessLevel>playerStatus.MinFitenessLevel){
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
-				junkfood.modifyFitnessLevel(playerStatus,-0.1f);
+				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
+			}
+			AudioSource candySound = gameObject.AddComponent<AudioSource>();
+			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
+			candySound.Play();
+		}
+		if (other.gameObject.tag == Tags.TAG_FLAG) {
+			Application.LoadLevel ("ExitSuccess");
 			}
 		}
 	}
 
 	
-
-
-}

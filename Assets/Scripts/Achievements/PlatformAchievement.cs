@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//Achievement subclass which is unlocked by bouncing on a certain number of platfors
+//Achievement subclass which is unlocked by bouncing on a certain number of platforms
 public class PlatformAchievement : Achievement {
 
 	//Number of platforms bounced on in order to unlock this achievement
@@ -9,7 +9,7 @@ public class PlatformAchievement : Achievement {
 	//Static variable shared by all PlatformAchievements representing current number of platforms bounced on
 	private static int count;
 
-
+	//Constructor: All platform achievements are initially locked
 	public	PlatformAchievement(string key, int countToUnlock) {
 		this.isUnlocked = false;
 		count = 0;
