@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
 
 	void updateScore(){
 		score = (int)playerStatus.MaxHeight;
-		scoreText.text = "Score : " + score;
+		//scoreText.text = "Score : " + score;
 	//	Debug.Log ("Score is : " + score);
 	}
 	public void setFactoryDependency(GameObjectFactory dependency){
