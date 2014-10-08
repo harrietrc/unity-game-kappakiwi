@@ -56,7 +56,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void failIfBelowScreen(){
-		if (transform.position.y < -4.5) {
+
+		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
+			Debug.Log ("failed because y was less than " + Constants.FAIL_THRESHHOLD);
 			Application.LoadLevel ("ExitFailed");
 		}
 	}
@@ -83,7 +85,6 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void OnCollisionEnter2D(Collision2D coll) {
-	
 		handlePlatformCollision (coll);
 		handleEnemyCollision (coll);
 		handleObstacleCollision (coll);
