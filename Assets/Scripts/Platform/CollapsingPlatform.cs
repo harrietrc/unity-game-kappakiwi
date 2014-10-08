@@ -15,7 +15,7 @@ public class CollapsingPlatform : Platform {
 
 	void OnCollisionExit2D(Collision2D col) {
 		if (col.gameObject.tag == Tags.TAG_PLAYER) {
-			Destroy(gameObject);
+			rigidbody2D.velocity = new Vector2(0,-1);
 		}
 
 	}
