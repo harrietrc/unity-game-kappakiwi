@@ -66,16 +66,18 @@ public class ScreenShifter : MonoBehaviour {
 					vegetables[i].transform.Translate(new Vector3(0,speed,0));
 				}
 			}
-//			player.transform.Translate(new Vector3(0,speed,0));
-			if(frames == 5){
-				shifting = false;
-			}
+			player.transform.Translate(new Vector3(0,speed,0));
+//			if(frames == 5){
+//				shifting = false;
+//			}
 			frames++;
 		}
 	}
 	
 
-	public void ShiftScreen(){
+	public void ShiftScreen(float shiftAmount){
+
+		speed = shiftAmount;
 		platforms = GameObject.FindGameObjectsWithTag(Tags.TAG_PLATFORM);
 		items = GameObject.FindGameObjectsWithTag(Tags.TAG_ITEM);
 		enemies = GameObject.FindGameObjectsWithTag(Tags.TAG_ENEMY);
@@ -86,7 +88,8 @@ public class ScreenShifter : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
 		shifting = true;
 		frames = 0;
-		
+
+		shiftElements ();
 	}
 	
 }
