@@ -164,6 +164,9 @@ public class PlayerController : MonoBehaviour {
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
 				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
+			AudioSource candySound = gameObject.AddComponent<AudioSource>();
+			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
+			candySound.Play();
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
 			Application.LoadLevel ("ExitSuccess");
