@@ -18,6 +18,8 @@ public class Constants {
 
 	public static float ITEM_DESTRY_THRESHHOLD = -10.0f;
 
+	public static float FAIL_THRESHHOLD = -7.5f;
+
 	private Constants(){
 		}
 
