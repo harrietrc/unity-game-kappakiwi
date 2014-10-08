@@ -4,16 +4,6 @@ using System.Collections.Generic;
 
 public class AchievementScreen : MonoBehaviour {
 	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
 	void OnGUI(){
 
 		AchievementManager am = new AchievementManager ();
