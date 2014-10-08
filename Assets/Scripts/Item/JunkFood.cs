@@ -12,7 +12,7 @@ public class JunkFood : Item {
 	void Start () {
 
 		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-		int var = 25; // Random.Range (0, 40);
+		int var = Random.Range (0, 40);
 
 		if (var < 10) {
 			renderer.sprite = burger;
