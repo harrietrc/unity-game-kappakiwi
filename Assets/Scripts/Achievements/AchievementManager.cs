@@ -20,6 +20,9 @@ public class AchievementManager : MonoBehaviour {
 
 	//Build list of achievements, with the key being a string of the goal
 	public void makeAchievements() {
+		PlatformAchievement plat = new PlatformAchievement ("Bounced on 1 platform!", 1);
+		achievementList.Add (plat);
+
 		for (int i = 20; i <= 100; i = i + 20 ) {
 			string tempkey = "Bounced on " + i + " platforms!";
 			PlatformAchievement temp = new PlatformAchievement(tempkey, i);
