@@ -32,7 +32,9 @@ public class levelSelection : MonoBehaviour {
 
 		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.65f, Screen.width * 0.25f, Screen.height * 0.2f), "Xmas", style);
 
-		GUI.Button (new Rect(Screen.width * 0.35f, Screen.height * 0.35f, Screen.width * 0.1f, Screen.height * 0.2f), "1", style);
+		if (GUI.Button (new Rect (Screen.width * 0.35f, Screen.height * 0.35f, Screen.width * 0.1f, Screen.height * 0.2f), "1", style)) {
+			Application.LoadLevel("level_one");	
+		}
 
 		GUI.Button (new Rect(Screen.width * 0.55f, Screen.height * 0.35f, Screen.width * 0.1f, Screen.height * 0.2f), "2", style);
 
