@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-<<<<<<< HEAD
-
 	public AudioClip hitByEnemy;
 	public AudioClip eatSomething;
 
@@ -14,8 +12,6 @@ public class PlayerController : MonoBehaviour {
 	private int speed = 5;
 	private GameObject currentPlatform;
 
-=======
->>>>>>> origin/master
 	private ArrayList visitedPlatforms = new ArrayList();
 
 	private GameObjectFactory factory = new GameObjectFactory();
