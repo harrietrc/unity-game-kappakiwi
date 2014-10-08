@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerStatus {
 
 	public float FitnessLevel{ get; set; }
-	public float MaxFitnessLevel = 210.0f;
+	public float MaxFitnessLevel = 150.0f;
 	public float MinFitenessLevel = -210.0f;
 
 	public float MaxHeight{ get; set; }

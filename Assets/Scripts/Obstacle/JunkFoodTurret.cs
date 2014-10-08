@@ -18,7 +18,7 @@ public class JunkFoodTurret : Obstacle {
 				temp = 1;
 			}
 			count = 0;
-			var	currentPos = (GameObject) Instantiate(Resources.Load ("Prefabs/Items/" + "pref_junkfood"), gameObject.transform.position,Quaternion.identity);
+			var	currentPos = (GameObject) Instantiate(Resources.Load ("Prefabs/Items/" + "pref_healthyfood"), gameObject.transform.position,Quaternion.identity);
 			currentPos.rigidbody2D.velocity = new Vector2(temp * 1,0);
 		}
 		destoryIfOffScreen ();

@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 		transform.Translate(Input.acceleration.x/3, 0, 0);
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
-		if (transform.position.y > 0.0) {
+		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
 				}
 
@@ -141,18 +141,18 @@ public class PlayerController : MonoBehaviour {
 		}
 
 	private void handleItemCollision(Collider2D other){
-		if (other.gameObject.tag == "vegetable") {
+		if (other.gameObject.tag == Tags.TAG_VEGETABLE) {
 			other.gameObject.SetActive (false);
 			if(playerStatus.FitnessLevel<playerStatus.MaxFitnessLevel){
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
-				healthyFood.modifyFitnessLevel(playerStatus,30);
+				healthyFood.modifyFitnessLevel(playerStatus,Constants.VEGETABLE_FITNESS_CHANGE);
 			}
 		}
-		if (other.gameObject.tag == "candy") {
+		if (other.gameObject.tag == Tags.TAG_CANDY) {
 			Destroy (other.gameObject);
 			if(playerStatus.FitnessLevel>playerStatus.MinFitenessLevel){
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
-				junkfood.modifyFitnessLevel(playerStatus,-30);
+				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
 		}
 	}
