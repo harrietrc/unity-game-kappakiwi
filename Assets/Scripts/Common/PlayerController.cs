@@ -165,6 +165,9 @@ public class PlayerController : MonoBehaviour {
 			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
 			vegetableSound.Play();
+
+			playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
+			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_CANDY) {
 			Destroy (other.gameObject);
@@ -175,6 +178,9 @@ public class PlayerController : MonoBehaviour {
 			AudioSource candySound = gameObject.AddComponent<AudioSource>();
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
+
+			playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
+			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
 			Application.LoadLevel ("ExitSuccess");

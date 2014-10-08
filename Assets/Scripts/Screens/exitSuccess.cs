@@ -14,21 +14,23 @@ public class exitSuccess : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		GUI.skin.label.fontSize = 30;
+		GUIStyle style = new GUIStyle (GUI.skin.label);
 		
-		GUI.skin.label.alignment = TextAnchor.LowerCenter;
+		style.font = (Font)Resources.Load ("font/Animated");
+		style.fontSize = 30;
+		style.normal.textColor = Color.black;
 		
-		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Congratulations, you have passed this level!");
+		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Congratulations, you have passed this level!", style);
 		
-		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ");
+		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ", style);
 		
-		if (GUI.Button (new Rect (Screen.width * 0.15f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Play again")) {
+		if (GUI.Button (new Rect (Screen.width * 0.15f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Play again", style )) {
 			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME );
 				};
 		
-		GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Next level");
+		GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Next level", style);
 
-		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu")) {
+		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu", style)) {
 			Application.LoadLevel("WelcomeScreen");		
 		}
 
