@@ -60,7 +60,9 @@ public class ScreenShifter : MonoBehaviour {
 			}
 		}
 		player.transform.Translate(new Vector3(0,speed,0));
-		flag.transform.Translate(new Vector3(0,speed,0));
+		if (flag != null) {
+						flag.transform.Translate (new Vector3 (0, speed, 0));
+				}
 	}
 	
 }
