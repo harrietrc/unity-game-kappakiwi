@@ -82,8 +82,8 @@ public class ScreenShifter : MonoBehaviour {
 		items = GameObject.FindGameObjectsWithTag(Tags.TAG_ITEM);
 		enemies = GameObject.FindGameObjectsWithTag(Tags.TAG_ENEMY);
 		obstacles = GameObject.FindGameObjectsWithTag(Tags.TAG_OBSTACLE);
-		candy = GameObject.FindGameObjectsWithTag("candy");
-		vegetables = GameObject.FindGameObjectsWithTag("vegetable");
+		candy = GameObject.FindGameObjectsWithTag(Tags.TAG_CANDY);
+		vegetables = GameObject.FindGameObjectsWithTag(Tags.TAG_VEGETABLE);
 
 		player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
 		shifting = true;
