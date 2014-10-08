@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		Debug.Log ("saving to playerprefs");
 		playerStatus.saveDataToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
 		achievementManager.checkAchievements ();
