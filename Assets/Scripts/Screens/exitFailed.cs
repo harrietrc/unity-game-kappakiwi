@@ -23,7 +23,7 @@ public class exitFailed : MonoBehaviour {
 		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Game Over", style);
 
 		float highscore = PlayerPrefs.GetFloat ("HighScore");
-//		Debug.Log ("highscore from playerprefs was " + highscore);
+		//Debug.Log ("highscore from playerprefs was " + highscore);
 
 		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "High score: " + highscore, style);
 

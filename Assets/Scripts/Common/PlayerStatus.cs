@@ -31,7 +31,10 @@ public class PlayerStatus {
 				PlayerPrefs.SetFloat (highScoreKey, highscore);
 			}
 			Debug.Log ("just saved to max height: " + MaxHeight);
-			PlayerPrefs.Save ();
+		
+		} else {
+			PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
 		}
+		PlayerPrefs.Save ();
 	}
 }
