@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Constants {
+public enum Theme {endless, xmas, story}
 
-	public static float SMALL_SHIFT = -.4f;
-	public static float MEDIUM_SHIFT = -.6f;
-	public static float LARGE_SHIFT = -.8f;
+public class LevelSelection{
 
-	private Constants(){
+	public static Theme CURRENT_THEME = Theme.endless;
+	public static int LEVEL = 1;
+
+	private LevelSelection(){
 		}
 
 }
