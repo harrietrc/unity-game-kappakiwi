@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: f9d1f44450d394b3bbdf197179fc11be
+TextureImporter:
+  fileIDToRecycleName: {}
+=======
 guid: 79a3b71259c6b403dbbc5cc7c4b11aa2
 TextureImporter:
   fileIDToRecycleName:
     21300000: KiwiBirdFlipped
+>>>>>>> de228cf0dcaf1e55fabaf158b068d98933128f8d
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
