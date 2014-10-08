@@ -85,7 +85,6 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void OnCollisionEnter2D(Collision2D coll) {
-	
 		handlePlatformCollision (coll);
 		handleEnemyCollision (coll);
 		handleObstacleCollision (coll);
