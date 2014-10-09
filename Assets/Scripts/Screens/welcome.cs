@@ -9,11 +9,11 @@ public class welcome : MonoBehaviour {
 
 	void OnGUI(){
 		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (225, 210, 62, 25), "", invisible)) {
+		if (GUI.Button (new Rect (397, 360, 100, 50), "", invisible)) {
 			Application.LoadLevel("levelSelection");
 		}
 		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (225, 240, 85, 23), "", invisible)) {
+		if (GUI.Button (new Rect (392, 580, 250, 33), "", invisible)) {
 			Application.LoadLevel("scn_achievements");
 		}
 	}
