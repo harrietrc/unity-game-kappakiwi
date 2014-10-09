@@ -28,7 +28,11 @@ public class exitSuccess : MonoBehaviour {
 			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME );
 				};
 		
-		GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Next level", style);
+		if(GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Next level", style)){
+			LevelSelection.LEVEL = LevelSelection.LEVEL + 1;
+			LevelSelection.CURRENT_THEME = Theme.story;
+			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME);
+		};
 
 		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu", style)) {
 			Application.LoadLevel("WelcomeScreen");		
