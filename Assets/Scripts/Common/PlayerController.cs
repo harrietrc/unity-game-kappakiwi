@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		playerStatus.saveDataToPersistence ();
+		playerStatus.saveScoreToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
 		achievementManager.checkAchievements ();
 	}
@@ -83,8 +83,7 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		handleItemCollision (other);
 	}
-
-
+	
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
@@ -148,8 +147,7 @@ public class PlayerController : MonoBehaviour {
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
 			vegetableSound.Play();
 
-			playerStatus.score.increaseScoreByHealthyFood();
-			playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
+			playerStatus.handleVegetableCollision();
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_CANDY) {
@@ -162,8 +160,7 @@ public class PlayerController : MonoBehaviour {
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
 
-			playerStatus.score.decreaseScoreByJunkFood();
-			playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
+			playerStatus.handleJunkFoodCollision();
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {

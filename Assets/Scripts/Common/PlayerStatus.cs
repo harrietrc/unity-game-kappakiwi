@@ -19,12 +19,10 @@ public class PlayerStatus {
 		weight = .15f;
 		}
 
-	public void loadDataFromPersistence(){
-	}
-
 	private string highScoreKey = "HighScore";
 
-	public void saveDataToPersistence(){
+	//Save highscore to PlayerPrefs
+	public void saveScoreToPersistence(){
 
 		bool haskey = PlayerPrefs.HasKey (highScoreKey);
 		float highscore;
@@ -40,6 +38,18 @@ public class PlayerStatus {
 			PlayerPrefs.SetFloat (highScoreKey, score.getScore ());
 		}
 		PlayerPrefs.Save ();
+	}
+
+	//Handle the player's status when kiwi picks up a vegetable
+	public void handleVegetableCollision() {
+		this.score.increaseScoreByHealthyFood();
+		this.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
+	}
+
+	//Handle the player's status when kiwi picks up a junk food
+	public void handleJunkFoodCollision() {
+		this.score.decreaseScoreByJunkFood();
+		this.weight += Constants.CANDY_WEIGHT_CHANGE;
 	}
 	
 }

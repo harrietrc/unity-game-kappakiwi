@@ -23,7 +23,10 @@ public class Constants {
 	public static float VEGETABLE_WEIGHT_CHANGE = -.01f;
 	public static float CANDY_WEIGHT_CHANGE = .01f;
 
+	public static int MAX_MULTIPLIER = 5;
+
 	private Constants(){
-		}
+	
+	}
 
 }
