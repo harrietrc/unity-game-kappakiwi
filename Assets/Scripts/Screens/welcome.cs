@@ -29,7 +29,7 @@ public class welcome : MonoBehaviour {
 			}
 			if (hit.collider.gameObject.name == "settingsButton"){
 				Debug.Log ("Settings Clicked");
-				Application.LoadLevel ("scn_settings");
+				//Application.LoadLevel ("scn_settings");
 			}
 		}
 	}
