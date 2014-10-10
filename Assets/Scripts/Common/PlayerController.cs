@@ -102,16 +102,17 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
+	// method to make player jump
+	public void boostPlayer() {
+		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+		factory.generateTick();
+		rigidbody2D.AddForce (jumpForce);
+	}
 	private void handlePlatformCollision(Collision2D coll){
 		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
-			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+			boostPlayer();
 
-			factory.generateTick();
-
-			visitedPlatforms.Add(coll.gameObject);
-
-			rigidbody2D.AddForce (jumpForce);
 			PlatformAchievement.incrementPlatformCount();
 
 			updateMaxHeight ();
@@ -129,7 +130,7 @@ public class PlayerController : MonoBehaviour {
 						if (coll.gameObject.name == "pref_basic_enemy") {
 							Debug.Log("collided with a basic enemy");
 							//	Application.LoadLevel ("ExitFailed");
-							handleDeath();
+						//	handleDeath();
 						} else if (coll.gameObject.name == "pref_falling_enemy") {
 							handleDeath();
 
