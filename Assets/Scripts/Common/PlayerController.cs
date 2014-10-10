@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 
 	private ArrayList visitedPlatforms = new ArrayList();
 
-	private GameObjectFactory factory = new GameObjectFactory();
+	private GameObjectFactory factory = new NullGameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
 
@@ -26,9 +26,18 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (LevelSelection.CURRENT_THEME == Theme.endless) {
+			Debug.Log("theme was endless");
+			factory = new EndlessGameObjectFactory();
+		} else {
+			factory = new NullGameObjectFactory();
+		}
+
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
 		updateScore ();
+
+
 	}
 
 	void Update ()
