@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameObjectFactory : MonoBehaviour{
 
-	public virtual void generateLevelStart() {}
-	public virtual void generateTick(){}
-	
+		public virtual void generateLevelStart() {}
+		public virtual void generateTick(){}
+		
 }
