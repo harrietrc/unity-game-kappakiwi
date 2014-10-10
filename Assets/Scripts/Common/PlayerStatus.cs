@@ -11,11 +11,11 @@ public class PlayerStatus {
 	public float MaxWeight = .3f;
 	public float minWeight = .1f;
 
-	public float MaxHeight{ get; set; }
+	public Score score;
 
 	public PlayerStatus(){
 		FitnessLevel = 0.0f;
-		MaxHeight = 0.0f;
+		score = new Score ();
 		weight = .15f;
 		}
 
@@ -30,16 +30,16 @@ public class PlayerStatus {
 		float highscore;
 		if (haskey) {
 			highscore = PlayerPrefs.GetFloat (highScoreKey);
-			if (highscore < MaxHeight) {
-				PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
+			if (highscore < score.getScore ()) {
+				PlayerPrefs.SetFloat (highScoreKey, score.getScore ());
 			} else {
 				PlayerPrefs.SetFloat (highScoreKey, highscore);
 			}
-			Debug.Log ("just saved to max height: " + MaxHeight);
 		
 		} else {
-			PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
+			PlayerPrefs.SetFloat (highScoreKey, score.getScore ());
 		}
 		PlayerPrefs.Save ();
 	}
+	
 }

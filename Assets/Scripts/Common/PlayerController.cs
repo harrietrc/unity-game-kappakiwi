@@ -17,18 +17,14 @@ public class PlayerController : MonoBehaviour {
 	private GameObjectFactory factory = new GameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
-
 	private PlayerStatus playerStatus = new PlayerStatus();
 
-	public GUIText scoreText;
-	private int score = 0;
 	private bool death = false;
 
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
-		updateScore ();
 	}
 
 	void Update ()
@@ -53,8 +49,6 @@ public class PlayerController : MonoBehaviour {
 				}
 
 		failIfBelowScreen ();
-
-		updateScore ();
 	}
 
 	void OnDestroy(){
@@ -71,18 +65,6 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void updateMaxHeight(){
-		// Platform count
-		playerStatus.MaxHeight = playerStatus.MaxHeight + 1.0f;
-		// Position count
-	//	Debug.Log ("updated max height to be " + playerStatus.MaxHeight);
-	}
-
-	void updateScore(){
-		score = (int)playerStatus.MaxHeight;
-		//scoreText.text = "Score : " + score;
-	//	Debug.Log ("Score is : " + score);
-	}
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
 	}
@@ -115,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 			rigidbody2D.AddForce (jumpForce);
 			PlatformAchievement.incrementPlatformCount();
 
-			updateMaxHeight ();
+			playerStatus.score.increaseScoreByPlatform ();
 		}
 		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
@@ -166,6 +148,7 @@ public class PlayerController : MonoBehaviour {
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
 			vegetableSound.Play();
 
+			playerStatus.score.increaseScoreByHealthyFood();
 			playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
@@ -179,6 +162,7 @@ public class PlayerController : MonoBehaviour {
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
 
+			playerStatus.score.decreaseScoreByJunkFood();
 			playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
