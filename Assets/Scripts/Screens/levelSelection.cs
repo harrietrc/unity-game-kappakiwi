@@ -8,7 +8,11 @@ public class levelSelection : MonoBehaviour {
 
 	// Create empty GUIStyle i.e. no characteristics
 	private GUIStyle invisible = new GUIStyle();
+	public GameObject playButton;
+	// Attach objects on start of script
+	void Start(){
 	
+	}
 	void OnGUI(){
 		// Create an invisible button and handle activity
 		if (GUI.Button (new Rect (548, 140, 50, 50), "", invisible)) {
