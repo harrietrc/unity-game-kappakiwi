@@ -1,0 +1,10 @@
+* Need to do
+Create new enemy
+Create new platforms
+Made death of enemys more subtle
+Made reaction to players smoother
+Create obstaicles
+
+
+**before Merging 
+Uncomment lines 70 to 74 in gameObjectFactory
