@@ -109,8 +109,9 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2D.AddForce (jumpForce);
 	}
 	private void handlePlatformCollision(Collision2D coll){
-		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
+			print ("here");
 			boostPlayer();
 
 			PlatformAchievement.incrementPlatformCount();
