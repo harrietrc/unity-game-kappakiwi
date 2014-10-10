@@ -20,13 +20,22 @@ public class AchievementManager : MonoBehaviour {
 
 	//Build list of achievements, with the key being a string of the goal
 	public void makeAchievements() {
-		PlatformAchievement plat = new PlatformAchievement ("Bounced on 1 platform!", 1);
-		achievementList.Add (plat);
-
 		for (int i = 20; i <= 100; i = i + 20 ) {
-			string tempkey = "Bounced on " + i + " platforms!";
-			PlatformAchievement temp = new PlatformAchievement(tempkey, i);
-			achievementList.Add(temp);
+			string tempPlatformKey = "Bounced on " + i + " platforms!";
+			PlatformAchievement tempPlatform = new PlatformAchievement(tempPlatformKey, i);
+			achievementList.Add(tempPlatform);
+		}
+
+		for (int j = 5; j <= 20; j = j + 5) { 
+			string tempItemKey = "Picked up " + j + " items in 1 level!";
+			ItemAchievement tempItem = new ItemAchievement(tempItemKey, j);
+			achievementList.Add (tempItem);
+		}
+
+		for (int k = 10; k <= 50; k = k + 10) { 
+			string tempPlayKey = "Played " + k + " times!";
+			PlayAchievement tempPlay = new PlayAchievement(tempPlayKey, k);
+			achievementList.Add (tempPlay);
 		}
 	}
 

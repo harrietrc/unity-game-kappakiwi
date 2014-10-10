@@ -49,11 +49,13 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		failIfBelowScreen ();
-
-		Debug.Log ("Score: " + playerStatus.score.getScore ());
 	}
 
 	void OnDestroy(){
+		PlayAchievement temp = new PlayAchievement ("",0);
+		temp.makeTotalPlaysPersistence();
+		temp.incrementPlayCount ();
+
 		playerStatus.saveScoreToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
 		achievementManager.checkAchievements ();
