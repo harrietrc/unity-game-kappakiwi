@@ -46,9 +46,11 @@ public class PlayerController : MonoBehaviour {
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
-				}
+		}
 
 		failIfBelowScreen ();
+
+		Debug.Log ("Score: " + playerStatus.score.getScore ());
 	}
 
 	void OnDestroy(){
@@ -107,20 +109,20 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void handleEnemyCollision(Collision2D coll){
-				if (coll.gameObject.tag == Tags.TAG_ENEMY) {
-						if (coll.gameObject.name == "pref_basic_enemy") {
-							Debug.Log("collided with a basic enemy");
-							//	Application.LoadLevel ("ExitFailed");
-							handleDeath();
-						} else if (coll.gameObject.name == "pref_falling_enemy") {
-							//	Application.LoadLevel ("ExitFailed");
-							handleDeath();
-						} else if (coll.gameObject.name == "pref_stationary_enemy") {
-							//	Application.LoadLevel ("ExitFailed");
-							handleDeath();
-						}
-				}
+		if (coll.gameObject.tag == Tags.TAG_ENEMY) {
+			if (coll.gameObject.name == "pref_basic_enemy") {
+				Debug.Log("collided with a basic enemy");
+				//	Application.LoadLevel ("ExitFailed");
+				handleDeath();
+			} else if (coll.gameObject.name == "pref_falling_enemy") {
+				//	Application.LoadLevel ("ExitFailed");
+				handleDeath();
+			} else if (coll.gameObject.name == "pref_stationary_enemy") {
+				//	Application.LoadLevel ("ExitFailed");
+				handleDeath();
+			}
 		}
+	}
 
 	private void handleDeath() {
 		death = true;
@@ -132,8 +134,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void handleObstacleCollision(Collision2D coll){
-		//todo
-		}
+	//todo
+	}
 
 	private void handleItemCollision(Collider2D other){
 		if (other.gameObject.tag == Tags.TAG_VEGETABLE) {

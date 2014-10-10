@@ -19,7 +19,7 @@ public class Score {
 	//Increase score by 5 when picking up healthy food
 	public void increaseScoreByHealthyFood() {
 		this.score = score + (5 * multiplier);
-		if (multiplier < Constants.MAX_MULTIPLIER) {
+		if (multiplier < Constants.MAX_MULTIPLIER) { //Max multiplier = 5
 			multiplier++;
 		}
 	}

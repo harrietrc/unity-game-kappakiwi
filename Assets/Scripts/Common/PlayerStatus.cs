@@ -20,6 +20,7 @@ public class PlayerStatus {
 		}
 
 	private string highScoreKey = "HighScore";
+	private string lastScoreKey = "LastScore";
 
 	//Save highscore to PlayerPrefs
 	public void saveScoreToPersistence(){
@@ -37,6 +38,8 @@ public class PlayerStatus {
 		} else {
 			PlayerPrefs.SetFloat (highScoreKey, score.getScore ());
 		}
+
+		PlayerPrefs.SetFloat (lastScoreKey, score.getScore ());
 		PlayerPrefs.Save ();
 	}
 
