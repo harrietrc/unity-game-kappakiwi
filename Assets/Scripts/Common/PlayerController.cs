@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.fixedAngle = true;
-		factory.generateLevelStart ();
+		//factory.generateLevelStart ();
 		updateScore ();
 	}
 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
-			screenShifter.ShiftScreen (-.1f);
+		//	screenShifter.ShiftScreen (-.1f);
 				}
 
 		failIfBelowScreen ();
