@@ -11,12 +11,12 @@ public class levelSelection : MonoBehaviour {
 	
 	void OnGUI(){
 		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (548, 140, 50, 50), "test", invisible)) {
+		if (GUI.Button (new Rect (548, 140, 50, 50), "", invisible)) {
 			LevelSelection.LEVEL = 1;
 			Application.LoadLevel("level_one");
 		}
 		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (655, 140, 50, 50), "test2", invisible)) {
+		if (GUI.Button (new Rect (655, 140, 50, 50), "", invisible)) {
 			LevelSelection.LEVEL = 2;
 			Application.LoadLevel("level_two");
 		}
