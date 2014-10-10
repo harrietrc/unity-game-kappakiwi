@@ -67,6 +67,7 @@ public class GameObjectFactory : MonoBehaviour {
 	private void hardCodedGenerateTickHook(){	
 		if (temp) {
 			if (Application.loadedLevelName != "level_one" && Application.loadedLevelName != "level_two") {
+					// only commented out for testing. 
 					//	this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 					//	this.newPlatform.transform.position = new Vector3 (2, 9, 0);
 

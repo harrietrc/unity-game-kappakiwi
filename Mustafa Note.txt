@@ -7,4 +7,5 @@ Create obstaicles
 
 
 **before Merging 
-Uncomment lines 70 to 74 in gameObjectFactory
+Uncomment in gameObjectFactory line 70 to 74
+uncomment screen shiftliner in playController  line 52

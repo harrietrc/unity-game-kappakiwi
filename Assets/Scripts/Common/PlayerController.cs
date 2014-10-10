@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.saveAchievementsToPersistence ();
 		achievementManager.checkAchievements ();
 	}
-
 	private void failIfBelowScreen(){
 
 		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
@@ -132,8 +131,8 @@ public class PlayerController : MonoBehaviour {
 							//	Application.LoadLevel ("ExitFailed");
 							handleDeath();
 						} else if (coll.gameObject.name == "pref_falling_enemy") {
-							//	Application.LoadLevel ("ExitFailed");
 							handleDeath();
+
 						} else if (coll.gameObject.name == "pref_stationary_enemy") {
 							//	Application.LoadLevel ("ExitFailed");
 							handleDeath();
