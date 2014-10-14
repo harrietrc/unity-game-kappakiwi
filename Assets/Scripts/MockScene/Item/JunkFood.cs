@@ -3,26 +3,31 @@ using System.Collections;
 
 public class JunkFood : Item {
 
-	public Sprite burger;
-	public Sprite candy;
-	public Sprite chocolate;
-	public Sprite cupcake;
+	public Sprite[] burger;
+	public Sprite[] candy;
+	public Sprite[] chocolate;
+	public Sprite[] cupcake;
+	public Sprite[] cake;
+	public Sprite[] icecream;
 
 	// Use this for initialization
-	void Start () {
-
-		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-		int var = Random.Range (0, 40);
+	void Start () { 
+		
+		int var = Random.Range (0, 60);
 
 		if (var < 10) {
-			renderer.sprite = burger;
-				} else if (var < 20) {
-			renderer.sprite =  candy;
-				} else if (var < 30) {
-			renderer.sprite =  chocolate;
-				} else if (var <= 40) {
-			renderer.sprite =  cupcake;
-				}
+			sprites = burger;
+		} else if (var < 20) {
+			sprites = candy;
+		} else if (var < 30) {
+			sprites = chocolate;
+		} else if (var < 40) {
+			sprites = cupcake;
+		} else if (var < 50) {
+			sprites = cake;
+		} else if (var <= 60) {
+			sprites = icecream;
+		}
 	}
 	
 	// Update is called once per frame

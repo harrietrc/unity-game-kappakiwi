@@ -3,37 +3,36 @@ using System.Collections;
 
 public class HealthyFood : Item {
 
-	public Sprite apple;
-	public Sprite banana;
-	public Sprite carrot;
-	public Sprite eggplant;
-	public Sprite orange;
-	public Sprite pear;
-	public Sprite tomato;
-	public Sprite watermelon;
+	public Sprite[] apple;
+	public Sprite[] banana;
+	public Sprite[] carrot;
+	public Sprite[] eggplant;
+	public Sprite[] orange;
+	public Sprite[] pear;
+	public Sprite[] tomato;
+	public Sprite[] watermelon;
 
 	// Use this for initialization
 	void Start () {
-
-		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+		
 		int var = Random.Range (0, 80);
 		
 		if (var < 10) {
-			renderer.sprite = apple;
+			sprites = apple;
 		} else if (var < 20) {
-			renderer.sprite =  banana;
+			sprites =  banana;
 		} else if (var < 30) {
-			renderer.sprite =  carrot;
+			sprites =  carrot;
 		} else if (var < 40) {
-			renderer.sprite =  eggplant;
+			sprites =  eggplant;
 		} else if (var < 50) {
-			renderer.sprite =  orange;
+			sprites =  orange;
 		} else if (var < 60) {
-			renderer.sprite =  pear;
+			sprites =  pear;
 		} else if (var < 70) {
-			renderer.sprite =  tomato;
+			sprites =  tomato;
 		} else if (var <= 80) {
-			renderer.sprite =  watermelon;
+			sprites =  watermelon;
 		} 
 	
 	}
