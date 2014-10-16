@@ -11,6 +11,8 @@ public class ScreenShifter : MonoBehaviour {
 	private GameObject[] candy;
 	private GameObject player;
 	private GameObject flag;	
+	private GameObject backgroundOne; // At most two backgrounds will be shown on screen at once, as 
+	private GameObject backgroundTwo; // the height of each background is the same as the screen height.
 	private float speed;
 
 	public ScreenShifter() {
@@ -26,7 +28,8 @@ public class ScreenShifter : MonoBehaviour {
 		candy = GameObject.FindGameObjectsWithTag(Tags.TAG_CANDY);
 		vegetables = GameObject.FindGameObjectsWithTag(Tags.TAG_VEGETABLE);
 		flag = GameObject.FindGameObjectWithTag(Tags.TAG_FLAG);
-
+		backgroundOne = GameObject.FindGameObjectWithTag (Tags.TAG_BACKGROUND_ONE);
+		backgroundTwo = GameObject.FindGameObjectWithTag (Tags.TAG_BACKGROUND_TWO);
 		player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
 
 		for (int i = 0; i < platforms.Length; i++) {
@@ -63,6 +66,8 @@ public class ScreenShifter : MonoBehaviour {
 		if (flag != null) {
 						flag.transform.Translate (new Vector3 (0, speed, 0));
 				}
+
+		/* Code for background scrolling. See BackgroundScroller class. */
 	}
 	
 }
