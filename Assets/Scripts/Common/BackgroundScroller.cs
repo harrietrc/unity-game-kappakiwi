@@ -67,11 +67,16 @@ public class BackgroundScroller : MonoBehaviour {
 	// Ideally this wouldn't be called from outside this script but OnBecameInvisible() isn't working for me.
 	public void nextBackground () {
 		spriteIndex ++;
-		spriteRenderer.sprite = backgroundList [spriteIndex];
+		if (spriteIndex < backgroundList.Count) {
+			spriteRenderer.sprite = backgroundList [spriteIndex];
+		} else { // Endless space
+			spriteRenderer.sprite = space[spriteIndex % space.Count];
+		}
 	}
 
 	// Changes the sprite of the GameObject to the one two up on the list
 	// Not currenty used, as ScreenShifter only shifts things downwards.
+	// Incomplete anyway
 	public void previousBackground () {
 		spriteIndex--;
 		spriteRenderer.sprite = backgroundList [spriteIndex];
