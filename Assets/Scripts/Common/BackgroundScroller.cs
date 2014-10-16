@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq; // For Enumerable.Repeat()
 
 /**
- * Class with methods and data to help with making the backgrounds in a game scene scroll 
- * and load in the correct order. Will be called by ScreenShifter and should be attached
- * to background prefabs.
+ * Class with methods and data to help with making the backgrounds in a game scene load in
+ * the correct order. Should be attached to background prefab. Does not deal with shifting
+ * the prefabs - that's ScreenShifter's job.
  */
 public class BackgroundScroller : MonoBehaviour {
 
@@ -46,33 +46,39 @@ public class BackgroundScroller : MonoBehaviour {
 	private int spriteIndex; // Keeps track of which background to use from the background list
 	private SpriteRenderer spriteRenderer;	
 
+	private bool isVisible; // True if the background prefab is visible. OnBecomeInvisible doesn't seem to work.
+
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		backgroundList = new List<Sprite> ();
 		initialiseBackgroundList ();
 		spriteRenderer = renderer as SpriteRenderer;
 		spriteIndex = 0;
+		isVisible = spriteRenderer.isVisible;
+		spriteRenderer.sprite = backgroundList [0];
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		// Not really appropriate here
+	private void Update () {
+
 	}
 
 	// Changes the sprite of the GameObject this script is attached to to the one two down on the list
-	void nextBackground () {
-		spriteIndex++;
+	// Ideally this wouldn't be called from outside this script but OnBecameInvisible() isn't working for me.
+	public void nextBackground () {
+		spriteIndex ++;
 		spriteRenderer.sprite = backgroundList [spriteIndex];
 	}
 
 	// Changes the sprite of the GameObject to the one two up on the list
-	void previousBackground () {
+	// Not currenty used, as ScreenShifter only shifts things downwards.
+	public void previousBackground () {
 		spriteIndex--;
 		spriteRenderer.sprite = backgroundList [spriteIndex];
 	}
 
 	// Populates the array of backgrounds for the level. Stops at the Kuiper Belt (need to infinitely generate space separately)
-	void initialiseBackgroundList () {
+	private void initialiseBackgroundList () {
 
 		// Add everything from ground to the beginning of space
 		backgroundList.Add(ground); 
@@ -98,7 +104,7 @@ public class BackgroundScroller : MonoBehaviour {
 	}
 
 	// Takes an array of sprites and loops/repeats it until the specified length is reached.
-	List<Sprite> loopArray (List<Sprite> sprites, int length) {
+	private List<Sprite> loopArray (List<Sprite> sprites, int length) {
 		int numSprites = sprites.Count;
 		List<Sprite> looped = new List<Sprite>();
 		int repetitions = numSprites / length;
