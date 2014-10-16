@@ -43,10 +43,15 @@ public class BackgroundScroller : MonoBehaviour {
 	private List<Sprite> backgroundList; // Populated with all the backgrounds in the correct order
 									 	 // and with the correct number of repetitions based on fields.
 
+	private int spriteIndex; // Keeps track of which background to use from the background list
+	private SpriteRenderer spriteRenderer;	
+
 	// Use this for initialization
 	void Start () {
 		backgroundList = new List<Sprite> ();
 		initialiseBackgroundList ();
+		spriteRenderer = renderer as SpriteRenderer;
+		spriteIndex = 0;
 	}
 	
 	// Update is called once per frame
@@ -56,7 +61,14 @@ public class BackgroundScroller : MonoBehaviour {
 
 	// Changes the sprite of the GameObject this script is attached to to the one two down on the list
 	void nextBackground () {
+		spriteIndex++;
+		spriteRenderer.sprite = backgroundList [spriteIndex];
+	}
 
+	// Changes the sprite of the GameObject to the one two up on the list
+	void previousBackground () {
+		spriteIndex--;
+		spriteRenderer.sprite = backgroundList [spriteIndex];
 	}
 
 	// Populates the array of backgrounds for the level. Stops at the Kuiper Belt (need to infinitely generate space separately)
@@ -75,6 +87,14 @@ public class BackgroundScroller : MonoBehaviour {
 			backgroundList.AddRange (loopArray (space, spaceRepetitions));
 			backgroundList.Add(cObj);
 		}
+
+		// Take alternate backgrounds based on which of the 2 gameobjects this is attached to
+		if (gameObject.tag == Tags.TAG_BACKGROUND_ONE) {
+			backgroundList = backgroundList.Where ((s, i) => i%2 ==  0).ToList();
+		} else {
+			backgroundList = backgroundList.Where ((s, i) => i%2 ==  1).ToList();
+		}
+
 	}
 
 	// Takes an array of sprites and loops/repeats it until the specified length is reached.
