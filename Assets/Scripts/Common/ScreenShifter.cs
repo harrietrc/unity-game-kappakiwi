@@ -33,6 +33,8 @@ public class ScreenShifter : MonoBehaviour {
 		vegetables = GameObject.FindGameObjectsWithTag(Tags.TAG_VEGETABLE);
 		flag = GameObject.FindGameObjectWithTag(Tags.TAG_FLAG);
 		player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
+		backgroundOne = GameObject.FindGameObjectWithTag (Tags.TAG_BACKGROUND_ONE);
+		backgroundTwo = GameObject.FindGameObjectWithTag (Tags.TAG_BACKGROUND_TWO);
 		
 		initBackground ();
 		
