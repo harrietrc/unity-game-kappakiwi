@@ -170,12 +170,14 @@ public class PlayerController : MonoBehaviour {
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
 				healthyFood.modifyFitnessLevel(playerStatus,Constants.VEGETABLE_FITNESS_CHANGE);
 			}
+			if(playerStatus.weight > playerStatus.minWeight){
+				playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
+			}
 			
 			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
 			vegetableSound.Play();
 
-			playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_CANDY) {
@@ -184,11 +186,14 @@ public class PlayerController : MonoBehaviour {
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
 				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
+			if(playerStatus.weight < playerStatus.MaxWeight){
+				playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
+			}
+
 			AudioSource candySound = gameObject.AddComponent<AudioSource>();
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
 
-			playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
