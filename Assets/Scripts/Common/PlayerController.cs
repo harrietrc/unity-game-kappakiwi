@@ -138,6 +138,8 @@ public class PlayerController : MonoBehaviour {
 						} else if (coll.gameObject.name == "pref_stationary_enemy") {
 							//	Application.LoadLevel ("ExitFailed");
 							handleDeath();
+						} else if (coll.gameObject.name == "Shooting_enemy") {
+								handleDeath();
 						}
 				}
 		}
