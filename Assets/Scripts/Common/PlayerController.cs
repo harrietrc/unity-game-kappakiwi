@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 						if (coll.gameObject.name == "pref_basic_enemy") {
 							Debug.Log("collided with a basic enemy");
 							//	Application.LoadLevel ("ExitFailed");
-						//	handleDeath();
+							handleDeath();
 						} else if (coll.gameObject.name == "pref_falling_enemy") {
 							handleDeath();
 
