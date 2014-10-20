@@ -40,4 +40,8 @@ public class PlatformAchievement : Achievement {
 		return this.countToUnlock;
 	}
 
+	public static int getCount() {
+		return PlatformAchievement.count;
+	}
+
 }

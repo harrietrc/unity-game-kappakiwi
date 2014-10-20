@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
 	private PlayerStatus playerStatus = new PlayerStatus();
+	private GameObject scoreText;
 
 	private bool death = false;
 
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
-		//updateScore ();
+		initializeScore ();
 	}
 
 	void Update ()
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 			screenShifter.ShiftScreen (-.1f);
 		}
 
+		updateScore ();
 		failIfBelowScreen ();
 	}
 
@@ -103,14 +105,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void handlePlatformCollision(Collision2D coll){
-		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) 
+		    && !visitedPlatforms.Contains(coll.gameObject) && 
+		    this.transform.position.y > coll.gameObject.transform.position.y) {
 
-			print ("here");
 			boostPlayer();
-
 			PlatformAchievement.incrementPlatformCount();
-
 			playerStatus.score.increaseScoreByPlatform ();
+			visitedPlatforms.Add(coll.gameObject);
 		}
 		else if (coll.gameObject.tag == Tags.TAG_PLATFORM && this.transform.position.y > coll.gameObject.transform.position.y) {
 			
@@ -189,8 +191,19 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
 			Application.LoadLevel ("ExitSuccess");
-			}
 		}
 	}
+	private void initializeScore() {
+		scoreText = new GameObject ();
+		scoreText.AddComponent<GUIText> ();
+		scoreText.transform.position = new Vector3 (0.1f, 0.9f, 0);
+		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
+		scoreText.guiText.material.color = Color.white;
+	}
+
+	private void updateScore() {
+		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
+	}
+}
 
 	
