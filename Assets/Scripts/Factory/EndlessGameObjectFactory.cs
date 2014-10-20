@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class GameObjectFactory : MonoBehaviour {
+public class EndlessGameObjectFactory : GameObjectFactory {
 
 	private GameObject newPlatform;
 	private int ypos = -2;
@@ -13,9 +13,8 @@ public class GameObjectFactory : MonoBehaviour {
 	
 	GameObject currentPlatform;
 
-	// Use this for initialization
-	void Start () {
-
+	public EndlessGameObjectFactory(){
+		
 		switch (LevelSelection.CURRENT_THEME) {
 		case Theme.endless:
 			rng = new EndlessRNGStateGenerator();
@@ -26,20 +25,14 @@ public class GameObjectFactory : MonoBehaviour {
 		case Theme.xmas:
 			rng = new DefaultRNGStateGenerator();
 			break;
-				}
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+		}
 	}
 
 	public void setRNGDependency(RNGStateGenerator dependency){
 		this.rng = dependency;
 		}
 
-	public void generateLevelStart(){
+	public override void generateLevelStart(){
 
 		hardCodedLevelStartHook ();
 		}
@@ -58,7 +51,7 @@ public class GameObjectFactory : MonoBehaviour {
 	
 		}
 
-	public void generateTick(){
+	public override void generateTick(){
 			hardCodedGenerateTickHook ();
 
 		}
@@ -66,20 +59,14 @@ public class GameObjectFactory : MonoBehaviour {
 	private bool temp = true;
 	private void hardCodedGenerateTickHook(){	
 		if (temp) {
-			if (Application.loadedLevelName != "level_one" && Application.loadedLevelName != "level_two") {
-				print (Application.loadedLevelName);
 						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 						this.newPlatform.transform.position = new Vector3 (2, 9, 0);
 
 						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 						this.newPlatform.transform.position = new Vector3 (-2, 12, 0);
-			}
-				} else {
-					
-				}
+			} else {}
 		temp = !temp;
 		}
 
-	public GameObjectFactory(){
-		}
+
 }

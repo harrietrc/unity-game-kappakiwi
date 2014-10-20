@@ -3,18 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class welcome : MonoBehaviour {
+	
+	// Attach the gameobject in the inspector
+	public GameObject playBtn, settingsButn;
 
-	// Create empty GUIStyle i.e. no characteristics
-	private GUIStyle invisible = new GUIStyle();
-
-	void OnGUI(){
-		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (397, 360, 100, 50), "", invisible)) {
-			Application.LoadLevel("levelSelection");
+	void Update(){
+		// Handle mouseclick
+		if (Input.GetMouseButtonDown (0)) {
+			CastRay ();
 		}
-		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (392, 580, 250, 33), "", invisible)) {
-			Application.LoadLevel("scn_achievements");
+	}
+
+	void CastRay() {
+		// Get the ray casted by the mouse (Current position) when the mouse is clicked
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		// Figure out what object the ray collided with
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, Mathf.Infinity);
+
+
+		if (hit) {
+			if (hit.collider.gameObject.name == "playButton"){
+				Debug.Log ("Play Clicked");
+				Application.LoadLevel ("LevelSelection");
+			}
+			if (hit.collider.gameObject.name == "settingsButton"){
+				Debug.Log ("Settings Clicked");
+				Application.LoadLevel ("scn_settings");
+			}
 		}
 	}
 }

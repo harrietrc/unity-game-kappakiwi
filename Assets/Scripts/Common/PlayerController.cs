@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 
 	private ArrayList visitedPlatforms = new ArrayList();
 
-	private GameObjectFactory factory = new GameObjectFactory();
+	private GameObjectFactory factory = new NullGameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
 	private PlayerStatus playerStatus = new PlayerStatus();
@@ -23,8 +23,17 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (LevelSelection.CURRENT_THEME == Theme.endless) {
+			Debug.Log("theme was endless");
+			factory = new EndlessGameObjectFactory();
+		} else {
+			factory = new NullGameObjectFactory();
+		}
+
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
+		updateScore ();
+
 	}
 
 	void Update ()
@@ -146,6 +155,9 @@ public class PlayerController : MonoBehaviour {
 				HealthyFood healthyFood = other.gameObject.GetComponent<HealthyFood>();
 				healthyFood.modifyFitnessLevel(playerStatus,Constants.VEGETABLE_FITNESS_CHANGE);
 			}
+			if(playerStatus.weight > playerStatus.minWeight){
+				playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
+			}
 			
 			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
@@ -160,6 +172,10 @@ public class PlayerController : MonoBehaviour {
 				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
 				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
+			if(playerStatus.weight < playerStatus.MaxWeight){
+				playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
+			}
+
 			AudioSource candySound = gameObject.AddComponent<AudioSource>();
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
