@@ -59,11 +59,11 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 	private bool temp = true;
 	private void hardCodedGenerateTickHook(){	
 		if (temp) {
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (2, 9, 0);
+			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+			this.newPlatform.transform.position = new Vector3 (2, 9, 0);
 
-						this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-						this.newPlatform.transform.position = new Vector3 (-2, 12, 0);
+			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+			this.newPlatform.transform.position = new Vector3 (-2, 12, 0);
 			} else {}
 		temp = !temp;
 		}

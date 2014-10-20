@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
 		//updateScore ();
-
 	}
 
 	void Update ()
@@ -69,7 +68,6 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.saveAchievementsToPersistence ();
 		achievementManager.checkAchievements ();
 	}
-
 	private void failIfBelowScreen(){
 
 		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
@@ -96,17 +94,20 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		handleItemCollision (other);
 	}
-	
+
+	// method to make player jump
+	public void boostPlayer() {
+		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+		factory.generateTick();
+		rigidbody2D.AddForce (jumpForce);
+	}
+
 	private void handlePlatformCollision(Collision2D coll){
-		if (coll.gameObject.tag == Tags.TAG_PLATFORM && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
+		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) && !visitedPlatforms.Contains(coll.gameObject) && this.transform.position.y > coll.gameObject.transform.position.y) {
 
-			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+			print ("here");
+			boostPlayer();
 
-			factory.generateTick();
-
-			visitedPlatforms.Add(coll.gameObject);
-
-			rigidbody2D.AddForce (jumpForce);
 			PlatformAchievement.incrementPlatformCount();
 
 			playerStatus.score.increaseScoreByPlatform ();
@@ -120,22 +121,25 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void handleEnemyCollision(Collision2D coll){
+
 		if (coll.gameObject.tag == Tags.TAG_ENEMY) {
 			if (coll.gameObject.name == "pref_basic_enemy") {
-				Debug.Log("collided with a basic enemy");
-				//	Application.LoadLevel ("ExitFailed");
-				handleDeath();
+					Debug.Log ("collided with a basic enemy");
+					//	Application.LoadLevel ("ExitFailed");
+					//handleDeath();
 			} else if (coll.gameObject.name == "pref_falling_enemy") {
-				//	Application.LoadLevel ("ExitFailed");
-				handleDeath();
+					handleDeath ();
+
 			} else if (coll.gameObject.name == "pref_stationary_enemy") {
-				//	Application.LoadLevel ("ExitFailed");
-				handleDeath();
+					//	Application.LoadLevel ("ExitFailed");
+					handleDeath ();
+			} else if (coll.gameObject.name == "Shooting_enemy") {
+					handleDeath ();
 			}
 		}
 	}
 
-	private void handleDeath() {
+	public void handleDeath() {
 		death = true;
 		Physics2D.IgnoreLayerCollision (10,9);
 
@@ -169,8 +173,8 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == Tags.TAG_CANDY) {
 			Destroy (other.gameObject);
 			if(playerStatus.FitnessLevel>playerStatus.MinFitenessLevel){
-				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
-				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
+				//JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
+				//junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
 			if(playerStatus.weight < playerStatus.MaxWeight){
 				playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
