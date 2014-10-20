@@ -62,9 +62,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		PlayAchievement temp = new PlayAchievement ("",0);
-		temp.makeTotalPlaysPersistence();
-		temp.incrementPlayCount ();
+		PlayAchievement.incrementPlayCount ();
+
+		Debug.Log (PlayerPrefs.GetInt ("TotalPlays"));
+		Debug.Log (PlayerPrefs.GetInt ("TotalPlatforms"));
+		Debug.Log (PlayerPrefs.GetInt ("TotalItems"));
 
 		playerStatus.saveScoreToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviour {
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
 			vegetableSound.Play();
 
+			ItemAchievement.incrementItemCount();
 			playerStatus.handleVegetableCollision();
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
@@ -186,6 +189,7 @@ public class PlayerController : MonoBehaviour {
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
 
+			ItemAchievement.incrementItemCount();
 			playerStatus.handleJunkFoodCollision();
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
