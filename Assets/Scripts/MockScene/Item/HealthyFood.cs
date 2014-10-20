@@ -22,17 +22,13 @@ public class HealthyFood : Item {
 	public Sprite[] pinkPresent;
 	public Sprite[] orangePresent;
 
-	// Sets whether to use the Christmas reskin - temporary solution? Could set some other way - e.g. a separate script
-	public enum Theme {endless, xmas, story}
-	public static Theme CURRENT_THEME = Theme.story; // Should be set from another script
-
 	// Use this for initialization
 	void Start () {
 		
 		int var = Random.Range (0, 80);
 
 		// Using the standard theme
-		if (CURRENT_THEME == Theme.story) {
+		if (LevelSelection.CURRENT_THEME == Theme.story) {
 			if (var < 10) {
 				sprites = apple;
 			} else if (var < 20) {
@@ -52,7 +48,7 @@ public class HealthyFood : Item {
 			} 
 
 		// Using the christmas theme
-		} else if (CURRENT_THEME == Theme.xmas) { 
+		} else if (LevelSelection.CURRENT_THEME == Theme.xmas) { 
 			if (var < 10) {
 				sprites = redPresent;
 			} else if (var < 20) {
