@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
-		updateScore ();
+		//updateScore ();
 
 	}
 
