@@ -33,6 +33,9 @@ public class BackgroundScroller : MonoBehaviour {
 	public Sprite kuiperBelt;
 	// And then endless space - backgroundsComplete will stop here, and we can switch into a space loop.
 
+	// Christmas reskin... fairly limited at the moment.
+	public Sprite xmasGround;
+
 	/* Set how many repetitions of each of the repeatable backgrounds there should be. E.g. setting
 	   cloudRepetitions to 5 will mean there will be 5 cloud backgrounds total, not 5 of each of the
 	   different cloud backgrounds. */
@@ -85,8 +88,11 @@ public class BackgroundScroller : MonoBehaviour {
 	// Populates the array of backgrounds for the level. Stops at the Kuiper Belt (need to infinitely generate space separately)
 	private void initialiseBackgroundList () {
 
+		// Change the sprites if a non-standard theme has been set - not a big fan of how this operates differently to the item scripts
+		reskin ();
+
 		// Add everything from ground to the beginning of space
-		backgroundList.Add(ground); 
+		backgroundList.Add (ground); 
 		backgroundList.AddRange (loopArray (day, dayRepetitions));
 		backgroundList.AddRange (loopArray (clouds, cloudsRepetitions));
 		backgroundList.AddRange (new List<Sprite> () {dayTransition, nightTransition, night, moon, night, spaceTransition});
@@ -124,5 +130,12 @@ public class BackgroundScroller : MonoBehaviour {
 		looped.AddRange(new List<Sprite>(sprites.Take(extraElements)));
 
 		return looped;               
+	}
+
+	// Sets the sprites according to the theme
+	public void reskin() {
+		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
+			ground = xmasGround;
+		}
 	}
 }
