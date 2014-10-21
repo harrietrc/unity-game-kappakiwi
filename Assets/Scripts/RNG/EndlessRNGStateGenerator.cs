@@ -7,8 +7,8 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 	public RNGState previousRNGState { get; set; }
 	public RNGState beginRNGState { get; set; }
 
-	private float minXVariance = -1.0f;
-	private float maxXVariance = 1.0f;
+	private float minXVariance = -.75f;
+	private float maxXVariance = .75f;
 
 	private float minYVariance = -2.0f;
 	private float maxYVariance = 2.0f;
@@ -52,6 +52,11 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 		currentRNGState.obstacleXVariance = new float[currentRNGState.obstacleCount];
 		currentRNGState.obstacleYVariance = new float[currentRNGState.obstacleCount];
 
+		currentRNGState.platformTypes = new RNGState.platformType[currentRNGState.platformCount];
+		currentRNGState.enemyTypes = new RNGState.enemyType[currentRNGState.enemyCount];
+		currentRNGState.itemTypes = new RNGState.itemType[currentRNGState.itemCount];
+		currentRNGState.obstacleTypes = new RNGState.obstacleType[currentRNGState.obstacleCount];
+
 		for(int i = 0; i < currentRNGState.platformCount; i++){
 
 			if(currentRNGState.platformCount < 4){
@@ -61,19 +66,39 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			}
 			try{
 				if(Mathf.Max(previousRNGState.platformYVariance) > 1.5f){
-					minYVariance = -1.0f;
+					minYVariance = -.5f;
 				} else {
 					minYVariance = -2.0f;
 				}
 
 				if(Mathf.Max(previousRNGState.platformYVariance) < -1.5f){
-					maxYVariance = 1.0f;
+					maxYVariance = .5f;
 				} else {
 					maxYVariance = 2.0f;
 				}
 			} catch (System.Exception e){}
 
 			currentRNGState.platformYVariance[i] = Random.Range(minYVariance, maxYVariance);
+
+			int index = 0;
+			index = Random.Range(0,6);
+			switch(index){
+			case 0:
+				currentRNGState.platformTypes[i] = RNGState.platformType.collapsing;
+				break;
+			case 1:
+				currentRNGState.platformTypes[i] = RNGState.platformType.moving;
+				break;
+			case 3:
+				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
+				break;
+			case 4:
+				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
+				break;
+			case 5:
+				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
+				break;
+			}
 			if(i < currentRNGState.itemCount){
 //				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
 //				currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];

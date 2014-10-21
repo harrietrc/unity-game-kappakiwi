@@ -64,7 +64,17 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			break;
 		}
 		for (int j = 0; j < rng.currentRNGState.platformCount; j++) {
-			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+			switch(rng.currentRNGState.platformTypes[j]){
+			case RNGState.platformType.standard:
+				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+				break;
+			case RNGState.platformType.collapsing:
+				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_collapsing_platform"));
+				break;
+			case RNGState.platformType.moving:
+				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_moving_platform"));
+				break;
+			}
 			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], y + rng.currentRNGState.platformYVariance[j], 0.0f);
 			currentX += 4.0f;
 		}
