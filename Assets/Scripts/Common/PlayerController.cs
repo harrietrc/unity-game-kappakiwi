@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 			//transform.position.x,transform.position.y;
 		} else if ( transform.position.x >= (horzExtent)) 
 		{
-			transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);  
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);  
 		}
 	}
 
