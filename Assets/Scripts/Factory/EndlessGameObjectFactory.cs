@@ -73,7 +73,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 
 	public override void generateTick(){
 		rng.generateNextState ();
-		int currentX = 0;
+		float currentX = 0.0f;
 		switch (rng.currentRNGState.platformCount) {
 		case(1):
 			currentX = 0;
@@ -93,7 +93,8 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 				}
 		for (int j = 0; j < rng.currentRNGState.platformCount; j++) {
 			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], 18 + rng.currentRNGState.platformYVariance[j], 0);
+			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], 18.0f + rng.currentRNGState.platformYVariance[j], 0.0f);
+			currentX += 4.0f;
 				}
 
 			//hardCodedGenerateTickHook ();
