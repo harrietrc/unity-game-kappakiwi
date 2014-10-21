@@ -26,7 +26,6 @@ public class Score {
 
 	//Decrease score by 5 when picking up junk food
 	public void decreaseScoreByJunkFood() {
-		this.score = score - (5 * multiplier);
 		multiplier = 1;
 	}
 
