@@ -6,6 +6,9 @@ public class settings : MonoBehaviour {
 	private Vector2 scrollViewVector = Vector2.zero;
 	public static string[] list = {"Standard", "Christmas"};
 	public Texture2D backToMenu;
+	public Texture2D title;
+	public Texture2D themeLabel;
+	public Texture2D[] dropdownImages;
 
 	int indexNumber;
 	bool show = false;
@@ -18,9 +21,9 @@ public class settings : MonoBehaviour {
 				style.fontSize = 30;
 				style.normal.textColor = Color.black;
 		
-				GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Game settings", style);
+				GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), title);
 		
-				GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Current theme:", style);
+				GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), themeLabel);
 
 				if (GUI.Button (new Rect (Screen.width * 0.3f, Screen.height * 0.85f, Screen.width * 0.4f, Screen.height * 0.2f), backToMenu)) {
 						Application.LoadLevel ("WelcomeScreen");		
@@ -59,13 +62,13 @@ public class settings : MonoBehaviour {
 										indexNumber = index;
 								}
 				
-								GUI.Label (new Rect (5, (index * height), dropDownRect.height, height), list [index], style);
+								GUI.Label (new Rect (5, (index * height), dropDownRect.height, height), dropdownImages [index], style);
 				
 						}
 			
 						GUI.EndScrollView ();   
 				} else {
-						GUI.Label (new Rect ((dropDownRect.x - 95), dropDownRect.y, 300, height), list [indexNumber], style);
+						GUI.Label (new Rect ((dropDownRect.x - 95), dropDownRect.y, 300, height), dropdownImages [indexNumber], style);
 				}
 
 				if (indexNumber == 0) {
