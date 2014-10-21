@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 	// sprite changes
 	public Sprite spriteFlipped;
 	public Sprite spriteNormal;
-	private SpriteRenderer spriteRenderer;
+	private SpriteRenderer spriteRenderer; 
 	
 	// Xmas reskin
 	public Sprite xmasSpriteFlipped;
@@ -50,12 +50,13 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
-			Debug.Log("theme was endless");
 			factory = new EndlessGameObjectFactory();
 		} else {
+			Debug.Log("factory is nullobjectfactory");
 			factory = new NullGameObjectFactory();
 		}
 
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		// Apply Xmas theme if relevant
 		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
 			spriteFlipped = xmasSpriteFlipped;
