@@ -13,19 +13,6 @@ public class NullGameObjectFactory : GameObjectFactory {
 
 
 	public NullGameObjectFactory(){
-		
-		
-		switch (LevelSelection.CURRENT_THEME) {
-		case Theme.endless:
-			rng = new EndlessRNGStateGenerator();
-			break;
-		case Theme.story:
-			rng = new DefaultRNGStateGenerator();
-			break;
-		case Theme.xmas:
-			rng = new DefaultRNGStateGenerator();
-			break;
-		}
 	}
 
 	public void setRNGDependency(RNGStateGenerator dependency){

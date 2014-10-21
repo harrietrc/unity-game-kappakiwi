@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (LevelSelection.CURRENT_THEME == Theme.endless) {
+		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
 			Debug.Log("theme was endless");
 			factory = new EndlessGameObjectFactory();
 		} else {

@@ -22,7 +22,7 @@ public class ScreenTransitionManager {
 
 	public void loadLevel(int level, Theme theme){
 
-		if (LevelSelection.CURRENT_THEME == Theme.endless) {
+		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
 			Application.LoadLevel("scn_mock");
 			return;
 				}
