@@ -46,13 +46,11 @@ public class PlayerStatus {
 	//Handle the player's status when kiwi picks up a vegetable
 	public void handleVegetableCollision() {
 		this.score.increaseScoreByHealthyFood();
-		this.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
 	}
 
 	//Handle the player's status when kiwi picks up a junk food
 	public void handleJunkFoodCollision() {
 		this.score.decreaseScoreByJunkFood();
-		this.weight += Constants.CANDY_WEIGHT_CHANGE;
 	}
 	
 }

@@ -172,11 +172,6 @@ public class PlayerController : MonoBehaviour {
 		death = true;
 		Physics2D.IgnoreLayerCollision (10,9);
 		PlayDeathSound();
-		/*
-		AudioSource deathSound = gameObject.AddComponent<AudioSource>();
-		deathSound.clip = Resources.Load("Audio/Pacman-Die") as AudioClip;
-		deathSound.Play();
-		*/
 	}
 
 	private void handleObstacleCollision(Collision2D coll){
@@ -195,11 +190,6 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			PlayEatAppleSound();
-			/*
-			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
-			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
-			vegetableSound.Play();
-			*/
 
 			ItemAchievement.incrementItemCount();
 			playerStatus.handleVegetableCollision();
@@ -208,21 +198,14 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == Tags.TAG_CANDY) {
 			Destroy (other.gameObject);
 			if(playerStatus.FitnessLevel>playerStatus.MinFitenessLevel){
-				//JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
-				//junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
+				JunkFood junkfood = other.gameObject.GetComponent<JunkFood>();
+				junkfood.modifyFitnessLevel(playerStatus,Constants.CANDY_FITNESS_CHANGE);
 			}
 			if(playerStatus.weight < playerStatus.MaxWeight){
 				playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
 			}
 
 			PlayEatCandySound();
-
-			/*
-			AudioSource candySound = gameObject.AddComponent<AudioSource>();
-			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
-			candySound.Play();
-			*/
-
 
 			ItemAchievement.incrementItemCount();
 			playerStatus.handleJunkFoodCollision();
