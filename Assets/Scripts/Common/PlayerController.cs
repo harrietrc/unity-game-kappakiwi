@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 	private AchievementManager achievementManager = new AchievementManager();
 	private PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
+	private GameObject multiplierText;
 
 	// Audio variables
 	public AudioClip deathSound; 
@@ -79,12 +80,6 @@ public class PlayerController : MonoBehaviour {
 
 	void OnDestroy(){
 		PlayAchievement.incrementPlayCount ();
-
-		Debug.Log (PlayerPrefs.GetInt ("TotalPlays"));
-		Debug.Log (PlayerPrefs.GetInt ("TotalPlatforms"));
-		Debug.Log (PlayerPrefs.GetInt ("TotalItems"));
-		Debug.Log (PlayerPrefs.GetInt ("TotalEnemies"));
-
 		playerStatus.saveScoreToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
 	}
@@ -243,10 +238,17 @@ public class PlayerController : MonoBehaviour {
 		scoreText.transform.position = new Vector3 (0.1f, 0.9f, 0);
 		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
 		scoreText.guiText.material.color = Color.white;
+
+		multiplierText = new GameObject ();
+		multiplierText.AddComponent<GUIText> ();
+		multiplierText.transform.position = new Vector3 (0.1f, 0.85f, 0);
+		multiplierText.guiText.text = "Multiplier: " + playerStatus.score.getMultiplier ().ToString() + "x";
+		multiplierText.guiText.material.color = Color.white;
 	}
 
 	private void updateScore() {
 		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
+		multiplierText.guiText.text = "Mutiplier: " + playerStatus.score.getMultiplier ().ToString() + "x";
 	}
 
 	// Sound functions are here
