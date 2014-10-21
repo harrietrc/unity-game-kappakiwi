@@ -20,6 +20,20 @@ public class PlayerController : MonoBehaviour {
 	private PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 
+	// Audio variables
+	public AudioClip deathSound; 
+	public AudioClip eatChocolateSound;
+	public AudioClip eatAppleSound;
+	public AudioClip eatCandySound;
+	public AudioClip thudSound; //if necessary it'll be added.
+	public AudioClip eatChipsSound;
+
+	// Enemy collision sounds
+	public AudioClip enemyRocketSound;
+	public AudioClip enemyAlienSound;
+
+
+
 	private bool death = false;
 
 	// Use this for initialization
@@ -146,10 +160,12 @@ public class PlayerController : MonoBehaviour {
 	public void handleDeath() {
 		death = true;
 		Physics2D.IgnoreLayerCollision (10,9);
-
+		PlayDeathSound();
+		/*
 		AudioSource deathSound = gameObject.AddComponent<AudioSource>();
 		deathSound.clip = Resources.Load("Audio/Pacman-Die") as AudioClip;
 		deathSound.Play();
+		*/
 	}
 
 	private void handleObstacleCollision(Collision2D coll){
@@ -166,10 +182,13 @@ public class PlayerController : MonoBehaviour {
 			if(playerStatus.weight > playerStatus.minWeight){
 				playerStatus.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
 			}
-			
+
+			PlayEatAppleSound();
+			/*
 			AudioSource vegetableSound = gameObject.AddComponent<AudioSource>();
 			vegetableSound.clip = Resources.Load("Audio/vegetable") as AudioClip;
 			vegetableSound.Play();
+			*/
 
 			ItemAchievement.incrementItemCount();
 			playerStatus.handleVegetableCollision();
@@ -185,9 +204,14 @@ public class PlayerController : MonoBehaviour {
 				playerStatus.weight += Constants.CANDY_WEIGHT_CHANGE;
 			}
 
+			PlayEatCandySound();
+
+			/*
 			AudioSource candySound = gameObject.AddComponent<AudioSource>();
 			candySound.clip = Resources.Load("Audio/candy") as AudioClip;
 			candySound.Play();
+			*/
+
 
 			ItemAchievement.incrementItemCount();
 			playerStatus.handleJunkFoodCollision();
@@ -208,6 +232,56 @@ public class PlayerController : MonoBehaviour {
 	private void updateScore() {
 		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
 	}
+
+	// Sound functions are here
+	private void PlayDeathSound() {
+		if (deathSound){
+			AudioSource.PlayClipAtPoint(deathSound, transform.position);
+		}
+	}
+
+	private void PlayEatChocolateSound () {
+		if (eatChocolateSound){
+			AudioSource.PlayClipAtPoint(eatChocolateSound, transform.position);
+		}
+	}
+
+	private void PlayEatCandySound () {
+		if (eatCandySound){
+			AudioSource.PlayClipAtPoint(eatCandySound, transform.position);
+		}
+	}
+
+	private void PlayEatAppleSound () {
+		if (eatAppleSound){
+			AudioSource.PlayClipAtPoint(eatAppleSound, transform.position);
+		}
+	}
+
+	private void PlayThudSound(){
+		if (thudSound) {
+			AudioSource.PlayClipAtPoint(thudSound, transform.position);
+		}
+	}
+	//if necessary it'll be added.
+	private void PlayEatChipsSound(){
+		if (eatChipsSound) {
+			AudioSource.PlayClipAtPoint(eatChipsSound, transform.position);
+		}
+	}
+	
+	// Enemy collision sounds
+	private void PlayEnemyRocketSound(){
+		if (enemyRocketSound) {
+			AudioSource.PlayClipAtPoint(enemyRocketSound, transform.position);
+		}
+	}
+	private void PlayEnemyAlienSound(){
+		if (enemyAlienSound) {
+			AudioSource.PlayClipAtPoint(enemyAlienSound, transform.position);
+		}
+	}
+
 }
 
 	
