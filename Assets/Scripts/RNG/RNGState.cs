@@ -6,11 +6,11 @@ public class RNGState {
 	public enum Bias {left, right, center}
 
 	public int ticks { get; set; }
-	public Bias bias { get; set; }
+	public float bias;
 
-	public int leftBias = -4;
-	public int centerBias = 0;
-	public int rightBias = 4;
+	public float leftBias = -1.5f;
+	public float centerBias = 0.0f;
+	public float rightBias = 1.5f;
 
 	public int platformCount { get; set; }
 	public int enemyCount { get; set; }

@@ -19,17 +19,20 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 
 		switch (temp) {
 		case 1:
-			currentRNGState.bias = RNGState.Bias.left;
+			currentRNGState.bias = currentRNGState.leftBias;
 			break;
 		case 2:
-			currentRNGState.bias = RNGState.Bias.center;
+			currentRNGState.bias = currentRNGState.centerBias;
 			break;
 		case 3:
-			currentRNGState.bias = RNGState.Bias.right;
+			currentRNGState.bias = currentRNGState.rightBias;
 			break;
 				}
-		
+
 		currentRNGState.platformCount = Random.Range (1, 6);
+		while (currentRNGState.platformCount == previousRNGState.platformCount) {
+			currentRNGState.platformCount = Random.Range (1, 6);
+				}
 		currentRNGState.enemyCount = Random.Range (0, 3);
 		currentRNGState.itemCount = Random.Range (0, currentRNGState.platformCount + 1);
 		currentRNGState.obstacleCount = Random.Range (0, currentRNGState.platformCount - currentRNGState.itemCount + 1);
@@ -45,7 +48,11 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 
 		for(int i = 0; i < currentRNGState.platformCount; i++){
 
-			currentRNGState.platformXVariance[i] = Random.Range(-2.0f, 0.2f);
+			if(currentRNGState.platformCount < 4){
+				currentRNGState.platformXVariance[i] = Random.Range(-2.0f, 0.2f) + currentRNGState.bias;
+			} else {
+				currentRNGState.platformXVariance[i] = Random.Range(-2.0f, 0.2f);
+			}
 			currentRNGState.platformYVariance[i] = Random.Range(-2.0f, 0.2f);
 			if(i < currentRNGState.itemCount){
 //				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
