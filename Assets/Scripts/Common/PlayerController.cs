@@ -74,8 +74,28 @@ public class PlayerController : MonoBehaviour {
 
 		achievementManager.checkAchievements ();
 		updateScore ();
+		handleTeleport();
 		failIfBelowScreen ();
 		horizontalTeleport ();
+	}
+
+	void handleTeleport() {
+
+		var vertExtent = Camera.main.camera.orthographicSize;
+		var horzExtent = vertExtent * Screen.width / Screen.height; 
+
+		var width = renderer.bounds.size.x / 2 + 0.5f; 
+		var height = renderer.bounds.size.y / 2 + 0.5f;
+
+		if (transform.position.x <= (horzExtent * -1 + width)) 
+		{
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);      
+				//transform.position.x,transform.position.y;
+		} else if ( transform.position.x >= (horzExtent - width)) 
+		{
+			transform.position.Set(-transform.position.x,transform.position.y,transform.position.z);       
+
+		}
 	}
 
 	void OnDestroy(){
