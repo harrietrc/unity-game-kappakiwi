@@ -57,19 +57,7 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 		currentRNGState.itemTypes = new RNGState.itemType[currentRNGState.itemCount];
 		currentRNGState.obstacleTypes = new RNGState.obstacleType[currentRNGState.obstacleCount];
 
-		try{
-			if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
-				minYVariance = -1.25f;
-			} else {
-				minYVariance = -2.0f;
-			}
-			
-			if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
-				maxYVariance = 1.25f;
-			} else {
-				maxYVariance = 2.0f;
-			}
-		} catch (System.Exception e){}
+
 
 		for(int i = 0; i < currentRNGState.platformCount; i++){
 
@@ -78,6 +66,21 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			} else {
 				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			}
+
+			try{
+				if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
+					minYVariance = -1.25f;
+				} else {
+					minYVariance = -2.0f;
+				}
+				
+				if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
+					maxYVariance = 1.25f;
+				} else {
+					maxYVariance = 2.0f;
+				}
+			} catch (System.Exception e){}
+
 			currentRNGState.platformYVariance[i] = Random.Range(minYVariance, maxYVariance);
 
 			int index = 0;
