@@ -4,8 +4,9 @@ using System.Collections;
 public class RNGState {
 
 	public enum platformType {standard, collapsing, moving}
-	public enum itemTyp {healthy, junk}
+	public enum itemType {healthy, junk}
 	public enum obstacleType {turret, spike}
+	public enum enemyType {falling, patrol, shooting, stationary}
 
 	public int ticks { get; set; }
 	public float bias;
@@ -30,6 +31,11 @@ public class RNGState {
 
 	public float[] obstacleXVariance { get; set; }
 	public float[] obstacleYVariance{ get; set; }
+
+	public platformType[] platformTypes { get; set; }
+	public itemType[] itemTypes { get; set; }
+	public obstacleType[] obstacleTypes { get; set; }
+	public enemyType[] enemyTypes { get; set; }
 
 	public RNGState(){
 	}
