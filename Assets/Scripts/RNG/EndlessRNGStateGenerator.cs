@@ -59,6 +59,20 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			} else {
 				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			}
+			try{
+				if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
+					minYVariance = -1.0f;
+				} else {
+					minYVariance = -2.0f;
+				}
+
+				if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
+					maxYVariance = 1.0f;
+				} else {
+					maxYVariance = 2.0f;
+				}
+			} catch (System.Exception e){}
+
 			currentRNGState.platformYVariance[i] = Random.Range(minYVariance, maxYVariance);
 			if(i < currentRNGState.itemCount){
 //				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
