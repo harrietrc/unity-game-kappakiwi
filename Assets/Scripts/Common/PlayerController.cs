@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector2 jumpForceBounce = new Vector2(0, 850);
 	private Vector2 jumpForce = new Vector2(0, 530);
 	private int speed = 5;
-	private GameObject currentPlatform;
+	private GameObject currentPlatform; 
 
 	private ArrayList visitedPlatforms = new ArrayList();
 

@@ -11,12 +11,12 @@ public class Score {
 		multiplier = 1;
 	}
 
-	//Increase score by 10 after jumping on a platform
+	//Increase score by 100 after jumping on a platform
 	public void increaseScoreByPlatform() {
 		this.score = score + (100 * multiplier);
 	}
 
-	//Increase score by 5 when picking up healthy food
+	//Increase score by 50 when picking up healthy food
 	public void increaseScoreByHealthyFood() {
 		this.score = score + (50 * multiplier);
 		if (multiplier < Constants.MAX_MULTIPLIER) { //Max multiplier = 5
@@ -24,7 +24,7 @@ public class Score {
 		}
 	}
 
-	//Decrease score by 5 when picking up junk food
+	//Reset multiplier when junk food is picked up
 	public void decreaseScoreByJunkFood() {
 		multiplier = 1;
 	}

@@ -16,6 +16,8 @@ public abstract class Achievement {
 		return this.key;
 	}
 
+	//This method will display the achievement if it is the first time that it was unlocked
+	//Does nothing if achievement has been unlocked previously or achievement has not been unlocked
 	public void displayAchievement() {
 
 		if (PlayerPrefs.GetInt (this.key) == 0 && this.isUnlocked && !isDisplayed) {
@@ -26,6 +28,7 @@ public abstract class Achievement {
 			achieveText.guiText.material.color = Color.white;
 			isDisplayed = true;
 
+			//Destro the congratulatory text after 5 seconds
 			GameObject.Destroy(achieveText,5);
 		} 
 	}

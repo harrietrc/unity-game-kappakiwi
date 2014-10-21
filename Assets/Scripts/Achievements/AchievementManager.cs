@@ -10,8 +10,8 @@ public class AchievementManager : MonoBehaviour {
 		makeAchievements ();
 	}
 
-	//Go through achievements and output the key and its corresponding value (int type which determines if achievement
-	//is locked or unlocked.
+	//Go through all the achievements and display them if they are unlocked for the first time.
+	//Called repeatedly in Update() method 
 	public void checkAchievements() {
 		foreach (Achievement a in achievementList) {
 			//Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
