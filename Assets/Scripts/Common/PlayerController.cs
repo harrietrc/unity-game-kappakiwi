@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
 	public void boostPlayer() {
 		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 		factory.generateTick();
+		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.AddForce (jumpForce);
 	}
 
