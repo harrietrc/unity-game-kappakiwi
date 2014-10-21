@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private GameObjectFactory factory = new NullGameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
-	private PlayerStatus playerStatus = new PlayerStatus();
+	public PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 	private GameObject multiplierText;
 
