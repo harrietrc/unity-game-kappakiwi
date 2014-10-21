@@ -37,7 +37,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			}
 			generateOneTickItems (y+.75f);
 			generateOneTickEnemies (y,(i==0));
-			generateOneTickObstacles (y);
+		//	generateOneTickObstacles (y);
 			y += 4.0f;
 		}
 	}
@@ -50,7 +50,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 		generateOneTickPlatforms (height, false);
 		generateOneTickItems (height+.75f);
 		generateOneTickEnemies (height,false);
-		generateOneTickObstacles (height);
+	//	generateOneTickObstacles (height);
 
 	}
 
