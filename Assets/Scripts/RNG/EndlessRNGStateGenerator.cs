@@ -40,7 +40,7 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			currentRNGState.platformCount = Random.Range (2, 6);
 				}
 		currentRNGState.enemyCount = Random.Range (0, 3);
-		currentRNGState.itemCount = Random.Range (0, currentRNGState.platformCount + 1);
+		currentRNGState.itemCount = currentRNGState.platformCount;
 		currentRNGState.obstacleCount = Random.Range (0, 2);
 		
 		currentRNGState.platformXVariance = new float[currentRNGState.platformCount];
@@ -57,6 +57,20 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 		currentRNGState.itemTypes = new RNGState.itemType[currentRNGState.itemCount];
 		currentRNGState.obstacleTypes = new RNGState.obstacleType[currentRNGState.obstacleCount];
 
+		try{
+			if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
+				minYVariance = -1.25f;
+			} else {
+				minYVariance = -2.0f;
+			}
+			
+			if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
+				maxYVariance = 1.25f;
+			} else {
+				maxYVariance = 2.0f;
+			}
+		} catch (System.Exception e){}
+
 		for(int i = 0; i < currentRNGState.platformCount; i++){
 
 			if(currentRNGState.platformCount < 4){
@@ -64,20 +78,6 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			} else {
 				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			}
-			try{
-				if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
-					minYVariance = -1.25f;
-				} else {
-					minYVariance = -2.0f;
-				}
-
-				if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
-					maxYVariance = 1.25f;
-				} else {
-					maxYVariance = 2.0f;
-				}
-			} catch (System.Exception e){}
-
 			currentRNGState.platformYVariance[i] = Random.Range(minYVariance, maxYVariance);
 
 			int index = 0;
@@ -101,7 +101,12 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			}
 		}
 		for(int i = 0; i < currentRNGState.itemCount; i++){ 
-			currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
+
+			if(currentRNGState.platformCount < 4){
+				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i] + currentRNGState.bias;
+			} else {
+				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
+			}
 			currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];
 
 			int index = 0;

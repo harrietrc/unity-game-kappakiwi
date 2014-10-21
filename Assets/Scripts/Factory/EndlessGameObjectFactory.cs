@@ -31,7 +31,9 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 				Vector3 temp = new Vector3(lastX + rng.currentRNGState.platformXVariance[rng.currentRNGState.platformCount-1],rng.currentRNGState.platformYVariance[rng.currentRNGState.platformCount-1],0.0f);
 				player.transform.Translate(temp);
 			}
-
+			generateOneTickItems (y+.75f);
+			generateOneTickEnemies (y);
+			generateOneTickObstacles (y);
 			y += 3.5f;
 		}
 	}
@@ -39,7 +41,12 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 
 	public override void generateTick(){
 		rng.generateNextState ();
-		generateOneTickPlatforms (17.0f);
+
+		float height = 17.0f;
+		generateOneTickPlatforms (height);
+		generateOneTickItems (height+.75f);
+		generateOneTickEnemies (height);
+		generateOneTickObstacles (height);
 
 	}
 
@@ -83,6 +90,52 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 		}
 
 		return currentX - 4.0f;
+	}
+
+	private void generateOneTickItems(float y){
+
+		float currentX = 0.0f;
+		switch (rng.currentRNGState.itemCount) {
+		case(1):
+			currentX = 0.0f;
+			break;
+		case(2):
+			currentX = -2.0f;
+			break;
+		case(3):
+			currentX = -4.0f;
+			break;
+		case(4):
+			currentX = -6.0f;
+			break;
+		case(5):
+			currentX = -8.0f;
+			break;
+		}
+		for (int j = 0; j < rng.currentRNGState.itemCount; j++) {
+			switch(rng.currentRNGState.itemTypes[j]){
+			case RNGState.itemType.healthy:
+				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Items/" + "pref_healthyfood"));
+				break;
+			case RNGState.itemType.junk:
+				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Items/" + "pref_junkfood"));
+				break;
+			case RNGState.itemType.none:
+				var temp = 0;
+				break;
+			}
+			try{
+				this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.itemXVariance[j], y + rng.currentRNGState.itemYVariance[j], 0.0f);
+			}catch (System.Exception e) {}
+			currentX += 4.0f;
+		}
+
+	}
+
+	private void generateOneTickEnemies(float y){
+	}
+
+	private void generateOneTickObstacles(float y){
 	}
 
 
