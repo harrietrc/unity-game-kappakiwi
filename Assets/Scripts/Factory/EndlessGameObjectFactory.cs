@@ -36,7 +36,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 				player.transform.Translate(temp);
 			}
 			generateOneTickItems (y+.75f);
-			generateOneTickEnemies (y);
+			generateOneTickEnemies (y,(i==0));
 			generateOneTickObstacles (y);
 			y += 4.0f;
 		}
@@ -49,7 +49,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 		float height = 17.0f;
 		generateOneTickPlatforms (height, false);
 		generateOneTickItems (height+.75f);
-		generateOneTickEnemies (height);
+		generateOneTickEnemies (height,false);
 		generateOneTickObstacles (height);
 
 	}
@@ -141,7 +141,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 
 	}
 
-	private void generateOneTickEnemies(float y){
+	private void generateOneTickEnemies(float y, bool firstTick){
 		float currentX = 0.0f;
 		switch (rng.currentRNGState.enemyCount) {
 		case(1):
@@ -161,24 +161,26 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			break;
 		}
 		for (int j = 0; j < rng.currentRNGState.enemyCount; j++) {
-			switch(rng.currentRNGState.enemyTypes[j]){
-			case RNGState.enemyType.patrol:
-				this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_basic_enemy"));
-				break;
-			case RNGState.enemyType.falling:
-				this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_falling_enemy"));
-				break;
-			case RNGState.enemyType.shooting:
-				this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
-				break;
-			case RNGState.enemyType.stationary:
-				this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
-				break;
-			case RNGState.enemyType.none:
-				this.newEnemy = null;
-				var temp = 0;
-				break;
-			}
+			if(!firstTick){
+				switch(rng.currentRNGState.enemyTypes[j]){
+				case RNGState.enemyType.patrol:
+					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_basic_enemy"));
+					break;
+				case RNGState.enemyType.falling:
+					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_falling_enemy"));
+					break;
+				case RNGState.enemyType.shooting:
+					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
+					break;
+				case RNGState.enemyType.stationary:
+					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
+					break;
+				case RNGState.enemyType.none:
+					this.newEnemy = null;
+					var temp = 0;
+					break;
+				}
+			} 
 			try{
 				this.newEnemy.transform.position = new Vector3 (currentX + rng.currentRNGState.enemyXVariance[j], y + rng.currentRNGState.enemyYVariance[j], 0.0f);
 			}catch (System.Exception e) {}
