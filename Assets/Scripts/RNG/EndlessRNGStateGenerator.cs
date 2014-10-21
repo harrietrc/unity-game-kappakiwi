@@ -7,6 +7,12 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 	public RNGState previousRNGState { get; set; }
 	public RNGState beginRNGState { get; set; }
 
+	private float minXVariance = -1.0f;
+	private float maxXVariance = 1.0f;
+
+	private float minYVariance = -2.0f;
+	private float maxYVariance = 2.0f;
+
 	public EndlessRNGStateGenerator(){
 		currentRNGState = new RNGState ();
 	}
@@ -49,11 +55,11 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 		for(int i = 0; i < currentRNGState.platformCount; i++){
 
 			if(currentRNGState.platformCount < 4){
-				currentRNGState.platformXVariance[i] = Random.Range(-2.0f, 0.2f) + currentRNGState.bias;
+				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance) + currentRNGState.bias;
 			} else {
-				currentRNGState.platformXVariance[i] = Random.Range(-2.0f, 0.2f);
+				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			}
-			currentRNGState.platformYVariance[i] = Random.Range(-2.0f, 0.2f);
+			currentRNGState.platformYVariance[i] = Random.Range(minYVariance, maxYVariance);
 			if(i < currentRNGState.itemCount){
 //				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
 //				currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];
