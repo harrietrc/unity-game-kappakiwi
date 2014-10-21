@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MovingPlatform : MonoBehaviour {
 
-	int moveSpeed = 2;
+	int moveSpeed = 5;
 	int touches = 0;
 	
 	float vertExtent;

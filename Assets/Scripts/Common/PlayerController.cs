@@ -35,6 +35,15 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip enemyAlienSound;
 
 
+	// sprite changes
+	public Sprite spriteFlipped;
+	public Sprite spriteNormal;
+	private SpriteRenderer spriteRenderer;
+	
+	// Xmas reskin
+	public Sprite xmasSpriteFlipped;
+	public Sprite xmasSpriteNormal;
+
 
 	private bool death = false;
 
@@ -47,9 +56,17 @@ public class PlayerController : MonoBehaviour {
 			factory = new NullGameObjectFactory();
 		}
 
+		// Apply Xmas theme if relevant
+		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
+			spriteFlipped = xmasSpriteFlipped;
+			spriteNormal = xmasSpriteNormal;
+			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
+		}
+
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
 		initializeScore ();
+		playerStatus.makeHighScoreList ();
 	}
 
 	void Update ()
@@ -81,11 +98,32 @@ public class PlayerController : MonoBehaviour {
 		updateScore ();
 		failIfBelowScreen ();
 		horizontalTeleport ();
+		handleTeleport();
+	}
+
+	void handleTeleport() {
+		
+		var vertExtent = Camera.main.camera.orthographicSize;
+		var horzExtent = vertExtent * Screen.width / Screen.height; 
+		
+		var width = renderer.bounds.size.x / 2 + 0.5f; 
+		var height = renderer.bounds.size.y / 2 + 0.5f;
+		
+		if (transform.position.x <= (horzExtent * -1)) 
+		{
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);      
+			//transform.position.x,transform.position.y;
+		} else if ( transform.position.x >= (horzExtent)) 
+		{
+			transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);  
+		}
 	}
 
 	void OnDestroy(){
 		PlayAchievement.incrementPlayCount ();
-		playerStatus.saveScoreToPersistence ();
+		playerStatus.updateHighScoreList ();
+		playerStatus.saveHighScoresToPersistence();
+		playerStatus.displayPersistentHighScores ();
 		achievementManager.saveAchievementsToPersistence ();
 	}
 	private void failIfBelowScreen(){
@@ -245,6 +283,8 @@ public class PlayerController : MonoBehaviour {
 				}
 	}
 
+
+
 	// Sound functions are here
 	private void PlayDeathSound() {
 		if (deathSound){
@@ -296,4 +336,3 @@ public class PlayerController : MonoBehaviour {
 
 }
 
-	
