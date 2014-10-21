@@ -91,7 +91,7 @@ public class PlayerStatus {
  		}
 	}
 
-	public void displayPlayerPrefs() {
+	public void displayPersistentHighScores() {
 		for (int i = 1; i <= 5; i++) {
 			string tempKey = highScoreKey + i;
 			Debug.Log ("PLAYERPREFS >> " + PlayerPrefs.GetString (tempKey) + ": " + PlayerPrefs.GetInt (PlayerPrefs.GetString (tempKey) ));

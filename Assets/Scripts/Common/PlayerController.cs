@@ -130,8 +130,8 @@ public class PlayerController : MonoBehaviour {
 	void OnDestroy(){
 		PlayAchievement.incrementPlayCount ();
 		playerStatus.updateHighScoreList ();
-		playerStatus.displayPlayerPrefs ();
 		playerStatus.saveHighScoresToPersistence();
+		playerStatus.displayPersistentHighScores ();
 		achievementManager.saveAchievementsToPersistence ();
 	}
 	private void failIfBelowScreen(){
