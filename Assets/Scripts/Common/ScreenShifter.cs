@@ -17,7 +17,7 @@ public class ScreenShifter : MonoBehaviour {
 	private BackgroundScroller backgroundOneScroller;
 	private BackgroundScroller backgroundTwoScroller;
 	private float speed;
-	private int shiftDistance;
+	public int shiftDistance;
 
 	public ScreenShifter() {
 

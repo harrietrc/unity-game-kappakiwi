@@ -70,6 +70,10 @@ public class PlayerController : MonoBehaviour {
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
+			if(screenShifter.shiftDistance  % 40 == 0){
+				Debug.Log("generating");
+				factory.generateTick();
+			}
 		}
 
 		achievementManager.checkAchievements ();
@@ -126,7 +130,6 @@ public class PlayerController : MonoBehaviour {
 	// method to make player jump
 	public void boostPlayer() {
 		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
-		factory.generateTick();
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.AddForce (jumpForce);
 	}
