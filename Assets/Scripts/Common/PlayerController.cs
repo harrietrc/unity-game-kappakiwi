@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log (PlayerPrefs.GetInt ("TotalPlays"));
 		Debug.Log (PlayerPrefs.GetInt ("TotalPlatforms"));
 		Debug.Log (PlayerPrefs.GetInt ("TotalItems"));
+		Debug.Log (PlayerPrefs.GetInt ("TotalEnemies"));
 
 		playerStatus.saveScoreToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
