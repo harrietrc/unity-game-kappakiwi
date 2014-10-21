@@ -54,10 +54,11 @@ public class PlayerController : MonoBehaviour {
 
 		spriteRenderer = renderer as SpriteRenderer;
 
-
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
 		initializeScore ();
+		playerStatus.makeHighScoreList ();
+
 	}
 
 	void Update ()
@@ -119,7 +120,9 @@ public class PlayerController : MonoBehaviour {
 
 	void OnDestroy(){
 		PlayAchievement.incrementPlayCount ();
-		playerStatus.saveScoreToPersistence ();
+		playerStatus.updateHighScoreList ();
+		playerStatus.displayPlayerPrefs ();
+		playerStatus.saveHighScoresToPersistence();
 		achievementManager.saveAchievementsToPersistence ();
 	}
 	private void failIfBelowScreen(){
