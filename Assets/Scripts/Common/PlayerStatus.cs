@@ -11,11 +11,10 @@ public class PlayerStatus {
 	public float MaxWeight = .3f;
 	public float minWeight = .1f;
 
-	public Score score;
+	public Score score = new Score();
 
 	public PlayerStatus(){
 		FitnessLevel = 0.0f;
-		score = new Score ();
 		weight = .15f;
 		}
 

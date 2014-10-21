@@ -22,11 +22,24 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 		}
 
 	public override void generateLevelStart(){
+		float y = -1.0f;
+		for (int i = 0; i < 7; i ++) {
+			rng.generateNextState();
+			float lastX = generateOneTickPlatforms(y);
+			if(i == 0){
+				GameObject player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
+				Vector3 temp = new Vector3(lastX + rng.currentRNGState.platformXVariance[rng.currentRNGState.platformCount-1],rng.currentRNGState.platformYVariance[rng.currentRNGState.platformCount-1],0.0f);
+				player.transform.Translate(temp);
+			}
 
-		hardCodedLevelStartHook ();
+			y += 3f;
+		}
+
+//		hardCodedLevelStartHook ();
 		}
 
 	private void hardCodedLevelStartHook(){
+
 
 		currentPlatform = (GameObject) Instantiate(Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 		Vector3 temp = new Vector3(2,2,0);
@@ -73,29 +86,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 
 	public override void generateTick(){
 		rng.generateNextState ();
-		float currentX = 0.0f;
-		switch (rng.currentRNGState.platformCount) {
-		case(1):
-			currentX = 0;
-			break;
-		case(2):
-			currentX = -2;
-			break;
-		case(3):
-			currentX = -4;
-			break;
-		case(4):
-			currentX = -6;
-			break;
-		case(5):
-			currentX = -8;
-			break;
-				}
-		for (int j = 0; j < rng.currentRNGState.platformCount; j++) {
-			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
-			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], 18.0f + rng.currentRNGState.platformYVariance[j], 0.0f);
-			currentX += 4.0f;
-				}
+		generateOneTickPlatforms (18.0f);
 
 			//hardCodedGenerateTickHook ();
 		}
@@ -107,6 +98,34 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 			this.newPlatform.transform.position = new Vector3 (-2, 20, 0);
 			}
+
+	private float generateOneTickPlatforms(float y){
+		float currentX = 0.0f;
+		switch (rng.currentRNGState.platformCount) {
+		case(1):
+			currentX = 0.0f;
+			break;
+		case(2):
+			currentX = -2.0f;
+			break;
+		case(3):
+			currentX = -4.0f;
+			break;
+		case(4):
+			currentX = -6.0f;
+			break;
+		case(5):
+			currentX = -8.0f;
+			break;
+		}
+		for (int j = 0; j < rng.currentRNGState.platformCount; j++) {
+			this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
+			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], y + rng.currentRNGState.platformYVariance[j], 0.0f);
+			currentX += 4.0f;
+		}
+
+		return currentX - 4.0f;
+	}
 
 
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour {
 
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
-			if(screenShifter.shiftDistance  %40 == 0){
+			if(screenShifter.shiftDistance  %35 == 0){
 				Debug.Log("generating");
 				factory.generateTick();
 			}
@@ -233,8 +234,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void updateScore() {
+		try{
+
 		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
 		multiplierText.guiText.text = "Mutiplier: " + playerStatus.score.getMultiplier ().ToString() + "x";
+
+		} catch (UnityException e) {
+				} 
+			catch (Exception e) {
+				}
 	}
 
 	// Sound functions are here
