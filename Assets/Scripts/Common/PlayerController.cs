@@ -34,6 +34,12 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip enemyAlienSound;
 
 
+	// sprite changes
+	public Sprite spriteFlipped;
+	public Sprite spriteNormal;
+	private SpriteRenderer spriteRenderer;
+
+
 
 	private bool death = false;
 
@@ -45,6 +51,9 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			factory = new NullGameObjectFactory();
 		}
+
+		spriteRenderer = renderer as SpriteRenderer;
+
 
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
@@ -60,12 +69,23 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			transform.position += Vector3.left * Constants.SPEED_MOVE * Time.deltaTime;
+			spriteRenderer.sprite = spriteNormal;
+
 		}
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
 			transform.position += Vector3.right * Constants.SPEED_MOVE * Time.deltaTime;
+			spriteRenderer.sprite = spriteFlipped;
 		}
 		transform.Translate(Input.acceleration.x/3, 0, 0);
+
+		if (Input.acceleration.x >0) {
+			spriteRenderer.sprite = spriteFlipped;
+		} else if (Input.acceleration.y < 0) {
+			spriteRenderer.sprite = spriteNormal;
+
+
+		}
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
@@ -93,8 +113,7 @@ public class PlayerController : MonoBehaviour {
 				//transform.position.x,transform.position.y;
 		} else if ( transform.position.x >= (horzExtent - width)) 
 		{
-			transform.position.Set(-transform.position.x,transform.position.y,transform.position.z);       
-
+			transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);  
 		}
 	}
 
