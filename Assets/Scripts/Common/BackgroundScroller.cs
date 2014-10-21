@@ -15,8 +15,8 @@ public class BackgroundScroller : MonoBehaviour {
 	   arrays do not make sense to repeat. These ones could have been set by using the name of the texture file, 
 	   but creating fields instead means that the textures can be swapped out later without touching this code. */
 
-	public Sprite ground; 
-	public List<Sprite> day;
+//	public Sprite ground; 
+//	public List<Sprite> day;
 	public List<Sprite> clouds;
 	public Sprite dayTransition; 
 	public Sprite nightTransition;
@@ -92,8 +92,6 @@ public class BackgroundScroller : MonoBehaviour {
 		reskin ();
 
 		// Add everything from ground to the beginning of space
-		backgroundList.Add (ground); 
-		backgroundList.AddRange (loopArray (day, dayRepetitions));
 		backgroundList.AddRange (loopArray (clouds, cloudsRepetitions));
 		backgroundList.AddRange (new List<Sprite> () {dayTransition, nightTransition, night, moon, night, spaceTransition});
 
@@ -135,7 +133,7 @@ public class BackgroundScroller : MonoBehaviour {
 	// Sets the sprites according to the theme
 	public void reskin() {
 		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
-			ground = xmasGround;
+			backgroundList.Add(xmasGround);
 		}
 	}
 }
