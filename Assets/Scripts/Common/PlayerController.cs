@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour {
 	public Sprite spriteNormal;
 	private SpriteRenderer spriteRenderer;
 
-
+	// Xmas reskin
+	public Sprite xmasSpriteFlipped;
+	public Sprite xmasSpriteNormal;
 
 	private bool death = false;
 
@@ -53,6 +55,13 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		spriteRenderer = renderer as SpriteRenderer;
+		
+		// Apply Xmas theme if relevant
+		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
+			spriteFlipped = xmasSpriteFlipped;
+			spriteNormal = xmasSpriteNormal;
+			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
+		}
 
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
@@ -108,11 +117,11 @@ public class PlayerController : MonoBehaviour {
 		var width = renderer.bounds.size.x / 2 + 0.5f; 
 		var height = renderer.bounds.size.y / 2 + 0.5f;
 
-		if (transform.position.x <= (horzExtent * -1 + width)) 
+		if (transform.position.x <= (horzExtent * -1)) 
 		{
 			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);      
 				//transform.position.x,transform.position.y;
-		} else if ( transform.position.x >= (horzExtent - width)) 
+		} else if ( transform.position.x >= (horzExtent)) 
 		{
 			transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);  
 		}
