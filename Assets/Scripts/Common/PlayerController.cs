@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 			screenShifter.ShiftScreen (-.1f);
 		}
 
+		achievementManager.checkAchievements ();
 		updateScore ();
 		failIfBelowScreen ();
 	}
@@ -70,7 +71,6 @@ public class PlayerController : MonoBehaviour {
 
 		playerStatus.saveScoreToPersistence ();
 		achievementManager.saveAchievementsToPersistence ();
-		achievementManager.checkAchievements ();
 	}
 	private void failIfBelowScreen(){
 

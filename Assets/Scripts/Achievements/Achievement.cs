@@ -10,9 +10,24 @@ public abstract class Achievement {
 
 	//Unique key which determines an Achievement's identity
 	protected string key;
-	
+	private bool isDisplayed = false;
+
 	public string getKey() {
 		return this.key;
+	}
+
+	public void displayAchievement() {
+
+		if (PlayerPrefs.GetInt (this.key) == 0 && this.isUnlocked && !isDisplayed) {
+			GameObject achieveText = new GameObject ();
+			achieveText.AddComponent<GUIText> ();
+			achieveText.transform.position = new Vector3 (0.3f, 0.9f, 0);
+			achieveText.guiText.text = "New Achievement: " + this.key;
+			achieveText.guiText.material.color = Color.white;
+			isDisplayed = true;
+
+			GameObject.Destroy(achieveText,5);
+		} 
 	}
 
 	//Abstract method to be implemented by classes which subclass Achievement

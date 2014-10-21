@@ -14,24 +14,36 @@ public class AchievementManager : MonoBehaviour {
 	//is locked or unlocked.
 	public void checkAchievements() {
 		foreach (Achievement a in achievementList) {
-			Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
+			//Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
+			//Debug.Log (a.isAchievementUnlocked());
+			a.displayAchievement();
 		}
 	}
 
 	//Build list of achievements, with the key being a string of the goal
 	public void makeAchievements() {
-			string tempPlatformKey = "Bounced on 100 platforms!";
-			PlatformAchievement tempPlatform = new PlatformAchievement(tempPlatformKey, 100);
-			achievementList.Add(tempPlatform);
 
-			string tempItemKey = "Picked up 50 items!";
-			ItemAchievement tempItem = new ItemAchievement(tempItemKey, 100);
-			achievementList.Add (tempItem);
+		string tempPlatformKey = "Bounced on 100 platforms!";
+		PlatformAchievement tempPlatform = new PlatformAchievement(tempPlatformKey, 100);
+		tempPlatform.makeTotalPlatformsPersistence (); //Initialize the platform counter in PlayerPrefs if needed
+		achievementList.Add(tempPlatform);
+
+		string tempItemKey = "Picked up 50 items!";
+		ItemAchievement tempItem = new ItemAchievement(tempItemKey, 50);
+		tempItem.makeTotalItemsPersistence ();
+		achievementList.Add (tempItem);
 
 
-			string tempPlayKey = "Played 10 times!";
-			PlayAchievement tempPlay = new PlayAchievement(tempPlayKey, 10);
-			achievementList.Add (tempPlay);
+		string tempPlayKey = "Played 10 times!";
+		PlayAchievement tempPlay = new PlayAchievement(tempPlayKey, 10);
+		tempPlay.makeTotalPlaysPersistence ();
+		achievementList.Add (tempPlay);
+
+		string tempEnemyKey = "Defeat 20 enemies!";
+		EnemyAchievement tempEnemy = new EnemyAchievement (tempEnemyKey, 20);
+		tempEnemy.makeTotalEnemiesPersistence ();
+		achievementList.Add (tempEnemy);
+
 	}
 
 	public List<Achievement> getAchievements() {
