@@ -7,7 +7,7 @@ public enum GameMode {endless, story}
 public class LevelSelection{
 
 	public static Theme CURRENT_THEME = Theme.story;
-	public static GameMode CURRENT_GAMEMODE = GameMode.endless;
+	public static GameMode CURRENT_GAMEMODE = GameMode.story;
 	public static int LEVEL = 1;
 
 	private LevelSelection(){

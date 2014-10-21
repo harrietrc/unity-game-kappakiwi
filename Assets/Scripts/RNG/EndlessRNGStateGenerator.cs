@@ -14,9 +14,49 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 	public void generateNextState(){
 		previousRNGState = currentRNGState;
 		currentRNGState = new RNGState ();
+
+		int temp = Random.Range (1, 4);
+
+		switch (temp) {
+		case 1:
+			currentRNGState.bias = RNGState.Bias.left;
+			break;
+		case 2:
+			currentRNGState.bias = RNGState.Bias.center;
+			break;
+		case 3:
+			currentRNGState.bias = RNGState.Bias.right;
+			break;
+				}
+		
+		currentRNGState.platformCount = Random.Range (1, 4);
+		currentRNGState.enemyCount = Random.Range (0, 3);
+		currentRNGState.itemCount = Random.Range (0, currentRNGState.platformCount + 1);
+		currentRNGState.obstacleCount = Random.Range (0, currentRNGState.platformCount - currentRNGState.itemCount + 1);
+
+		for(int i = 0; i < currentRNGState.platformCount; i++){
+			currentRNGState.platformXVariance[i] = Random.Range(-2.0f, 0.2f);
+			currentRNGState.platformYVariance[i] = Random.Range(-2.0f, 0.2f);
+			if(i < currentRNGState.itemCount){
+				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
+				currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];
+			} else if (currentRNGState.obstacleCount > 0) {
+				currentRNGState.obstacleXVariance[i] = currentRNGState.platformXVariance[i];
+				currentRNGState.obstacleYVariance[i] = currentRNGState.platformYVariance[i];
+			}
+		}
+		for(int i = 0; i < currentRNGState.enemyCount; i++){ 
+			currentRNGState.enemyXVariance[i] = Random.Range(-2.0f, 0.2f);
+			currentRNGState.enemyYVariance[i] = Mathf.Max(currentRNGState.platformYVariance) + Random.Range(0.0f, 0.2f);
+		}
 	}
 
 	public void generateBeginState(){
+
+		beginRNGState = new RNGState ();
+
+		beginRNGState.ticks = 20;
+
 	}
 	
 }
