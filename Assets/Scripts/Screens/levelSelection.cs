@@ -15,7 +15,7 @@ public class levelSelection : MonoBehaviour {
 	}
 	void OnGUI(){
 		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (400, 30, 100, 50), "ENDLESS")) {
+		if (GUI.Button (new Rect (450, 5, 300, 50), "", invisible)) {
 			LevelSelection.CURRENT_GAMEMODE = GameMode.endless;
 			Application.LoadLevel("scn_endless");
 		}
