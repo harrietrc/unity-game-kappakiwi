@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.checkAchievements ();
 		updateScore ();
 		failIfBelowScreen ();
+		horizontalTeleport ();
 	}
 
 	void OnDestroy(){
@@ -78,6 +79,19 @@ public class PlayerController : MonoBehaviour {
 		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
 			Debug.Log ("failed because y was less than " + Constants.FAIL_THRESHHOLD);
 			Application.LoadLevel ("ExitFailed");
+		}
+	}
+
+	private void horizontalTeleport() {
+		Vector2 playerPosScreenPoint = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x, transform.position.y));
+		Vector2 screenBounds = new  Vector2 (Screen.width, Screen.height);
+
+		if (playerPosScreenPoint.x > screenBounds.x) {
+			//TODO Teleport to the left
+			// may need to convert screen bounds to world point
+		}
+		else if (playerPosScreenPoint.x < 0) {
+			//TODO Teleport to the right
 		}
 	}
 
