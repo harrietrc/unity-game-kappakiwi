@@ -13,12 +13,12 @@ public class Score {
 
 	//Increase score by 10 after jumping on a platform
 	public void increaseScoreByPlatform() {
-		this.score = score + (10 * multiplier);
+		this.score = score + (100 * multiplier);
 	}
 
 	//Increase score by 5 when picking up healthy food
 	public void increaseScoreByHealthyFood() {
-		this.score = score + (5 * multiplier);
+		this.score = score + (50 * multiplier);
 		if (multiplier < Constants.MAX_MULTIPLIER) { //Max multiplier = 5
 			multiplier++;
 		}
