@@ -108,13 +108,15 @@ public class PlayerController : MonoBehaviour {
 		handleTeleport();
 	}
 	void OnBecameInvisible() {
-		Application.LoadLevel ("ExitFailed");
+		if (transform.position.y <= Camera.main.camera.orthographicSize) {
+			Application.LoadLevel ("ExitFailed");
+		}
+
 	}
 	void handleTeleport() {
 		
 		var vertExtent = Camera.main.camera.orthographicSize;
 		var horzExtent = vertExtent * Screen.width / Screen.height; 
-		print (vertExtent);
 		var width = renderer.bounds.size.x / 2 + 0.5f; 
 		var height = renderer.bounds.size.y / 2 + 0.5f;
 		
