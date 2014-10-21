@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: d8333ba932d00624cab74d355eec9936
+guid: 8f539bc7064b64c94894367af5937ea1
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: speaker_icon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

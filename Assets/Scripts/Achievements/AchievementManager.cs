@@ -16,6 +16,7 @@ public class AchievementManager : MonoBehaviour {
 		foreach (Achievement a in achievementList) {
 			//Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
 			//Debug.Log (a.isAchievementUnlocked());
+			a.isAchievementUnlocked();
 			a.displayAchievement();
 		}
 	}
@@ -30,8 +31,7 @@ public class AchievementManager : MonoBehaviour {
 		string tempItemKey = "Picked up 50 items!";
 		ItemAchievement tempItem = new ItemAchievement(tempItemKey, 50);
 		achievementList.Add (tempItem);
-
-
+		
 		string tempPlayKey = "Played 10 times!";
 		PlayAchievement tempPlay = new PlayAchievement(tempPlayKey, 10);
 		achievementList.Add (tempPlay);

@@ -24,6 +24,7 @@ public class PlatformAchievement : Achievement {
 		if (currentPlatforms >= this.countToUnlock && !this.isUnlocked) {
 			this.isUnlocked = true;
 		}
+
 		return this.isUnlocked;
 	}
 
