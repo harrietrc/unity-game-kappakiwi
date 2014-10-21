@@ -3,7 +3,9 @@ using System.Collections;
 
 public class RNGState {
 
-	public enum Bias {left, right, center}
+	public enum platformType {standard, collapsing, moving}
+	public enum itemTyp {healthy, junk}
+	public enum obstacleType {turret, spike}
 
 	public int ticks { get; set; }
 	public float bias;

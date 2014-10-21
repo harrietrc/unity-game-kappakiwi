@@ -35,7 +35,7 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 			break;
 				}
 
-		currentRNGState.platformCount = Random.Range (1, 6);
+		currentRNGState.platformCount = Random.Range (2, 6);
 		while (currentRNGState.platformCount == previousRNGState.platformCount) {
 			currentRNGState.platformCount = Random.Range (1, 6);
 				}
@@ -60,13 +60,13 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			}
 			try{
-				if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
+				if(Mathf.Max(previousRNGState.platformYVariance) > 1.5f){
 					minYVariance = -1.0f;
 				} else {
 					minYVariance = -2.0f;
 				}
 
-				if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
+				if(Mathf.Max(previousRNGState.platformYVariance) < -1.5f){
 					maxYVariance = 1.0f;
 				} else {
 					maxYVariance = 2.0f;
