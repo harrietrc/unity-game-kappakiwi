@@ -6,6 +6,11 @@ public class welcome : MonoBehaviour {
 	
 	// Attach the gameobject in the inspector
 	public GameObject playBtn, settingsButn;
+	public bool canMute;
+
+	void Start(){
+		canMute = true;
+	}
 
 	void Update(){
 		// Handle mouseclick
@@ -27,9 +32,20 @@ public class welcome : MonoBehaviour {
 				Debug.Log ("Play Clicked");
 				Application.LoadLevel ("LevelSelection");
 			}
+
 			if (hit.collider.gameObject.name == "settingsButton"){
 				Debug.Log ("Settings Clicked");
 				Application.LoadLevel ("scn_settings");
+			}
+
+			if (hit.collider.gameObject.name == "soundButton"){
+				if (canMute){
+					AudioListener.pause = true;
+					canMute = false;
+				} else {
+					AudioListener.pause = false;
+					canMute = true;
+				}
 			}
 		}
 	}
