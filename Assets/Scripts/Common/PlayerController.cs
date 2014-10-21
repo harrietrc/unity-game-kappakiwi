@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour {
 		handleTeleport();
 	}
 	void OnBecameInvisible() {
-		if (transform.position.y <= Camera.main.camera.orthographicSize) {
+		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
 			Application.LoadLevel ("ExitFailed");
 		}
 
