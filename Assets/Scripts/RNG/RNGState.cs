@@ -4,16 +4,16 @@ using System.Collections;
 public class RNGState {
 
 	public enum platformType {standard, collapsing, moving}
-	public enum itemType {healthy, junk}
-	public enum obstacleType {turret, spike}
-	public enum enemyType {falling, patrol, shooting, stationary}
+	public enum itemType {healthy, junk, none}
+	public enum obstacleType {turret, spike, none}
+	public enum enemyType {falling, patrol, shooting, stationary, none}
 
 	public int ticks { get; set; }
 	public float bias;
 
-	public float leftBias = -1.5f;
+	public float leftBias = -2.5f;
 	public float centerBias = 0.0f;
-	public float rightBias = 1.5f;
+	public float rightBias = 2.5f;
 
 	public int platformCount { get; set; }
 	public int enemyCount { get; set; }

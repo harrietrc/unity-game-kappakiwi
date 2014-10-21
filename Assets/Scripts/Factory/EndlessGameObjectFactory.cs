@@ -32,14 +32,14 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 				player.transform.Translate(temp);
 			}
 
-			y += 3f;
+			y += 3.5f;
 		}
 	}
 
 
 	public override void generateTick(){
 		rng.generateNextState ();
-		generateOneTickPlatforms (18.0f);
+		generateOneTickPlatforms (17.0f);
 
 	}
 
@@ -63,6 +63,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			currentX = -8.0f;
 			break;
 		}
+		
 		for (int j = 0; j < rng.currentRNGState.platformCount; j++) {
 			switch(rng.currentRNGState.platformTypes[j]){
 			case RNGState.platformType.standard:
@@ -75,7 +76,9 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_moving_platform"));
 				break;
 			}
-			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], y + rng.currentRNGState.platformYVariance[j], 0.0f);
+			try{
+				this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], y + rng.currentRNGState.platformYVariance[j], 0.0f);
+			}catch (System.Exception e) {}
 			currentX += 4.0f;
 		}
 

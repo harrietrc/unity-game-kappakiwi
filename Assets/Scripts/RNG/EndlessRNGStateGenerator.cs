@@ -37,11 +37,11 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 
 		currentRNGState.platformCount = Random.Range (2, 6);
 		while (currentRNGState.platformCount == previousRNGState.platformCount) {
-			currentRNGState.platformCount = Random.Range (1, 6);
+			currentRNGState.platformCount = Random.Range (2, 6);
 				}
 		currentRNGState.enemyCount = Random.Range (0, 3);
 		currentRNGState.itemCount = Random.Range (0, currentRNGState.platformCount + 1);
-		currentRNGState.obstacleCount = Random.Range (0, currentRNGState.platformCount - currentRNGState.itemCount + 1);
+		currentRNGState.obstacleCount = Random.Range (0, 2);
 		
 		currentRNGState.platformXVariance = new float[currentRNGState.platformCount];
 		currentRNGState.platformYVariance = new float[currentRNGState.platformCount];
@@ -65,14 +65,14 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 				currentRNGState.platformXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			}
 			try{
-				if(Mathf.Max(previousRNGState.platformYVariance) > 1.5f){
-					minYVariance = -.5f;
+				if(Mathf.Max(previousRNGState.platformYVariance) > 1.25f){
+					minYVariance = -1.25f;
 				} else {
 					minYVariance = -2.0f;
 				}
 
-				if(Mathf.Max(previousRNGState.platformYVariance) < -1.5f){
-					maxYVariance = .5f;
+				if(Mathf.Max(previousRNGState.platformYVariance) < -1.25f){
+					maxYVariance = 1.25f;
 				} else {
 					maxYVariance = 2.0f;
 				}
@@ -99,17 +99,96 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
 				break;
 			}
-			if(i < currentRNGState.itemCount){
-//				currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
-//				currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];
-			} else if (currentRNGState.obstacleCount > 0) {
-//				currentRNGState.obstacleXVariance[i - currentRNGState.itemCount + 1] = currentRNGState.platformXVariance[i];
-//				currentRNGState.obstacleYVariance[i - currentRNGState.itemCount + 1] = currentRNGState.platformYVariance[i];
+		}
+		for(int i = 0; i < currentRNGState.itemCount; i++){ 
+			currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
+			currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];
+
+			int index = 0;
+			index = Random.Range(0,5);
+			switch(index){
+			case 0:
+				currentRNGState.itemTypes[i] = RNGState.itemType.healthy;
+				break;
+			case 1:
+				currentRNGState.itemTypes[i] = RNGState.itemType.junk;
+				break;
+			case 2:
+				currentRNGState.itemTypes[i] = RNGState.itemType.none;
+				break;
+			case 3:
+				currentRNGState.itemTypes[i] = RNGState.itemType.none;
+				break;
+			
 			}
 		}
+		for(int i = 0; i < currentRNGState.obstacleCount; i++){ 
+			currentRNGState.obstacleXVariance[i] = Random.Range(minXVariance, maxXVariance);
+			currentRNGState.obstacleYVariance[i] = Mathf.Max(currentRNGState.platformYVariance) + Random.Range(minYVariance, maxYVariance);
+
+			int index = 0;
+			index = Random.Range(0,8);
+			switch(index){
+			case 0:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.turret;
+				break;
+			case 1:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			case 2:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			case 3:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			case 4:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			case 5:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			case 6:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			case 7:
+				currentRNGState.obstacleTypes[i] = RNGState.obstacleType.none;
+				break;
+			}
+		}
+
 		for(int i = 0; i < currentRNGState.enemyCount; i++){ 
-			currentRNGState.enemyXVariance[i] = Random.Range(-2.0f, 0.2f);
-			currentRNGState.enemyYVariance[i] = Mathf.Max(currentRNGState.platformYVariance) + Random.Range(0.0f, 0.2f);
+			currentRNGState.enemyXVariance[i] = Random.Range(minXVariance, maxXVariance);
+			currentRNGState.enemyYVariance[i] = Mathf.Max(currentRNGState.platformYVariance) + Random.Range(minYVariance, maxYVariance);
+		
+			int index = 0;
+			index = Random.Range(0,8);
+			switch(index){
+			case 0:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.falling;
+				break;
+			case 1:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.patrol;
+				break;
+			case 2:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.shooting;
+				break;
+			case 3:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.stationary;
+				break;
+			case 4:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+			case 5:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+			case 6:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+			case 7:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+
+			}
 		}
 	}
 
