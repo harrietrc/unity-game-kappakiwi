@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayAchievement : Achievement {
 
 	//Key for player preferences containing total number of games played
-	private string totalPlays = "TotalPlays";
+	private static string totalPlays = "TotalPlays";
 	private int countToUnlock;
 
 	public	PlayAchievement(string key, int countToUnlock) {
@@ -14,7 +14,7 @@ public class PlayAchievement : Achievement {
 	}
 
 	//Increment the number of times played total
-	public void incrementPlayCount() {
+	public static void incrementPlayCount() {
 		int currentPlays = PlayerPrefs.GetInt (totalPlays);
 		currentPlays++;
 		PlayerPrefs.SetInt (totalPlays, currentPlays);
