@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
+	public Sprite[] sprites;  // Array of sprites (frames for the animation)
+
 	// Use this for initialization
 	void Start () {
 	

@@ -11,35 +11,48 @@ public class PlayerStatus {
 	public float MaxWeight = .3f;
 	public float minWeight = .1f;
 
-	public float MaxHeight{ get; set; }
+	public Score score;
 
 	public PlayerStatus(){
 		FitnessLevel = 0.0f;
-		MaxHeight = 0.0f;
+		score = new Score ();
 		weight = .15f;
 		}
 
-	public void loadDataFromPersistence(){
-	}
-
 	private string highScoreKey = "HighScore";
+	private string lastScoreKey = "LastScore";
 
-	public void saveDataToPersistence(){
+	//Save highscore to PlayerPrefs
+	public void saveScoreToPersistence(){
 
 		bool haskey = PlayerPrefs.HasKey (highScoreKey);
 		float highscore;
 		if (haskey) {
 			highscore = PlayerPrefs.GetFloat (highScoreKey);
-			if (highscore < MaxHeight) {
-				PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
+			if (highscore < score.getScore ()) {
+				PlayerPrefs.SetFloat (highScoreKey, score.getScore ());
 			} else {
 				PlayerPrefs.SetFloat (highScoreKey, highscore);
 			}
-			Debug.Log ("just saved to max height: " + MaxHeight);
 		
 		} else {
-			PlayerPrefs.SetFloat (highScoreKey, MaxHeight);
+			PlayerPrefs.SetFloat (highScoreKey, score.getScore ());
 		}
+
+		PlayerPrefs.SetFloat (lastScoreKey, score.getScore ());
 		PlayerPrefs.Save ();
 	}
+
+	//Handle the player's status when kiwi picks up a vegetable
+	public void handleVegetableCollision() {
+		this.score.increaseScoreByHealthyFood();
+		this.weight += Constants.VEGETABLE_WEIGHT_CHANGE;
+	}
+
+	//Handle the player's status when kiwi picks up a junk food
+	public void handleJunkFoodCollision() {
+		this.score.decreaseScoreByJunkFood();
+		this.weight += Constants.CANDY_WEIGHT_CHANGE;
+	}
+	
 }
