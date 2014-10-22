@@ -58,7 +58,14 @@ public class PlayerStatus {
 		//Construct a new temporary dictionary which is an exact copy of highScoreDict
 		Dictionary<string,Highscore> newDict = new Dictionary<string,Highscore>(highScoreDict);
 
-		Highscore temp = new Highscore (this.score.getScore (), name);
+		string duplicateName = name;
+		int dupIndex = 1;
+		while(PlayerPrefs.HasKey(duplicateName)) { 
+			duplicateName = name + " (" + dupIndex + ")";
+			dupIndex++;
+		}
+
+		Highscore temp = new Highscore (this.score.getScore (), duplicateName);
 
 		//Add a temporary key called "HighScoreNew" with the score of the last game played
 		newDict.Add (highScoreKey + "New", temp);
