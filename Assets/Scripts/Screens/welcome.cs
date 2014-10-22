@@ -74,7 +74,9 @@ public class welcome : MonoBehaviour {
 
 			if (hit.collider.gameObject.name == "settingsButton"){
 				Debug.Log ("Settings Clicked");
-				Application.LoadLevel ("scn_settings");
+				sceneEnding = true;
+				destination = "Settings";
+				//Application.LoadLevel ("scn_settings");
 			}
 
 			if (hit.collider.gameObject.name == "soundButton"){
@@ -133,6 +135,8 @@ public class welcome : MonoBehaviour {
 			sceneEnding = false;
 			if(destination == "Play"){
 				Application.LoadLevel ("LevelSelection");
+			}else if(destination == "Settings"){
+				Application.LoadLevel ("scn_settings");
 			}
 		}
 	}

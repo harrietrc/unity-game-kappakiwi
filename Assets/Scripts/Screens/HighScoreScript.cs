@@ -33,7 +33,7 @@ public class HighScoreScript : MonoBehaviour {
 
 		Debug.Log (PlayerPrefs.GetString ("NewName"));
 
-		if (GUI.Button (new Rect (300, 150, 300, 50), "Continue")) {
+		if (GUI.Button (new Rect (Screen.width * 0.35f, Screen.height * 0.5f, Screen.width * 0.3f, Screen.height * 0.1f), "Continue")) {
 
 
 			if (PlayerPrefs.GetInt ("Finished") == 0) {

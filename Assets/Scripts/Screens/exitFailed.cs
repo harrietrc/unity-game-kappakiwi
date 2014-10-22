@@ -20,6 +20,7 @@ public class exitFailed : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		if (PlayerPrefs.GetString ("LoadedLevel") == "scn_endless") {
 			currentKey = "EndlessHigh";
 		} else {
@@ -75,6 +76,18 @@ public class exitFailed : MonoBehaviour {
 
 	void OnGUI(){
 		GUIStyle style = new GUIStyle (GUI.skin.label);
+
+		int styleFontSize = 50;
+		int titleFontSize = 60;
+		float pixWidth = Camera.main.pixelWidth;
+		
+		if (Camera.main.pixelWidth < 720) {
+			styleFontSize = (int)((float)50 * (float)pixWidth/(float)720);
+			titleFontSize = (int)((float)60 * (float)pixWidth/(float)720);
+		} else if (Camera.main.pixelHeight < 1024) {
+			styleFontSize = (int)((float)50 * (float)pixWidth/(float)1024);
+			titleFontSize = (int)((float)60 * (float)pixWidth/(float)1024);
+		}
 
 		style.font = (Font)Resources.Load ("font/Animated");
 		style.fontSize = 50;
