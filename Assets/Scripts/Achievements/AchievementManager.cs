@@ -14,7 +14,7 @@ public class AchievementManager : MonoBehaviour {
 	//Called repeatedly in Update() method 
 	public void checkAchievements() {
 		foreach (Achievement a in achievementList) {
-			Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
+			//Debug.Log (a.getKey() + " " + PlayerPrefs.GetInt (a.getKey ()));
 			a.isAchievementUnlocked();
 			a.displayAchievement();
 		}
