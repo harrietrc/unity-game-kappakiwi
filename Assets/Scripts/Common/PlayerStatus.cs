@@ -19,10 +19,12 @@ public class PlayerStatus {
 		FitnessLevel = 0.0f;
 		score = new Score ();
 		weight = .15f;
-		}
+	}
 
 	private string highScoreKey = "HighScore";
+	private string endlessKey = "EndlessHigh";
 
+	private string currentKey;
 	//This is a dictionary containing the top 5 high scores locally
 	//The key is Highscore1 - Highscore5, which return a Highscore object (containing player name and highscore)
 	private Dictionary<string,Highscore> highScoreDict;
@@ -36,8 +38,15 @@ public class PlayerStatus {
 	//Make temporary copy of highscore leaderboards and store in highScoreDict
 	public void makeHighScoreList() {
 		highScoreDict = new Dictionary<string,Highscore> ();
+
+		if (PlayerPrefs.GetString ("LoadedLevel") == "scn_endless") {
+			currentKey = endlessKey;
+		} else {
+			currentKey = highScoreKey;
+		}
+
 		for (int i = 1; i <= 5; i++) {
-			string tempKey = highScoreKey + i;
+			string tempKey = currentKey + i;
 			bool hasKey = PlayerPrefs.HasKey(tempKey);
 			//If the key exists, get it from persistence
 			if(hasKey) {
@@ -68,7 +77,7 @@ public class PlayerStatus {
 		Highscore temp = new Highscore (this.score.getScore (), duplicateName);
 
 		//Add a temporary key called "HighScoreNew" with the score of the last game played
-		newDict.Add (highScoreKey + "New", temp);
+		newDict.Add (currentKey + "New", temp);
 		int x = 1;
 
 		//Loops through newDict in descending order of the highscores
@@ -78,19 +87,19 @@ public class PlayerStatus {
 			switch(x)
 			{
 				case 1:
-					highScoreDict["HighScore1"] = newDict[item.Key];
+					highScoreDict[currentKey + "1"] = newDict[item.Key];
 					break;
 				case 2:
-					highScoreDict["HighScore2"] = newDict[item.Key];
+					highScoreDict[currentKey + "2"] = newDict[item.Key];
 					break;
 				case 3:
-					highScoreDict["HighScore3"] = newDict[item.Key];
+					highScoreDict[currentKey + "3"] = newDict[item.Key];
 					break;
 				case 4:
-					highScoreDict["HighScore4"] = newDict[item.Key];
+					highScoreDict[currentKey + "4"] = newDict[item.Key];
 					break;
 				case 5:
-					highScoreDict["HighScore5"] = newDict[item.Key];
+					highScoreDict[currentKey + "5"] = newDict[item.Key];
 					break;
 			}
 
@@ -102,7 +111,7 @@ public class PlayerStatus {
 	//Save the high scores to PlayerPrefs
 	public void saveHighScoresToPersistence() {
 		for (int i = 1; i <= 5; i++) {
-			string tempKey = highScoreKey + i;
+			string tempKey = currentKey + i;
 	
 			//Save the string of the persons who owns the highscore with HighScorei as the key (1 <= i <= 5)
 			PlayerPrefs.SetString (tempKey, highScoreDict[tempKey].getName ());
@@ -114,14 +123,14 @@ public class PlayerStatus {
 	//Display local copy of high scores for debugging
 	public void displayHighScoreList() {
 		for (int i = 1; i <= 5; i++) {
-			Debug.Log (highScoreDict[highScoreKey + i].getName() + ": " + highScoreDict[highScoreKey + i].getHighscore());
+			Debug.Log (highScoreDict[currentKey + i].getName() + ": " + highScoreDict[currentKey + i].getHighscore());
  		}
 	}
 
 	//Display high scores stored in PlayerPrefs for debugging
 	public void displayPersistentHighScores() {
 		for (int i = 1; i <= 5; i++) {
-			string tempKey = highScoreKey + i;
+			string tempKey = currentKey + i;
 			Debug.Log ("PLAYERPREFS >> " + PlayerPrefs.GetString (tempKey) + ": " + PlayerPrefs.GetInt (PlayerPrefs.GetString (tempKey) ));
 		}
 	}

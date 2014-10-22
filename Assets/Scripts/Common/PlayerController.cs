@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour {
 			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
 		}
 
+		PlayerPrefs.SetString ("LoadedLevel", Application.loadedLevelName);
 		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
