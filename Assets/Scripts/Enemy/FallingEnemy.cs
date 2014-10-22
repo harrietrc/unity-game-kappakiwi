@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class FallingEnemy : Enemy {
-	
+
+	public AudioClip rocketExplosion;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,9 @@ public class FallingEnemy : Enemy {
 
 		if (col.gameObject.tag == Tags.TAG_PLAYER) { // the colliding object is player, destroy the rocket.
 			// spawning the explosion prefab
+			if (rocketExplosion) {
+				AudioSource.PlayClipAtPoint(rocketExplosion, transform.position);
+			}
 			var particle = Instantiate(Resources.Load ("Prefabs/effects/" + "Explosion"), gameObject.transform.position,Quaternion.identity);
 			Destroy(col.gameObject); // destroying the rocket
 			Destroy (gameObject); // destroying the kiwibird
