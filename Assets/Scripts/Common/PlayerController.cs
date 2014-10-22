@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip enemyAlienSound;
 
 
+	// frame counter
+	private int frameCountWithoutVelChange = 0;
+
+
 	// sprite changes
 	public Sprite spriteFlipped;
 	public Sprite spriteNormal;
@@ -114,6 +118,17 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.checkAchievements ();
 		updateScore ();
 		handleTeleport();
+
+		if (rigidbody2D.velocity.y == 0.0f) {
+			frameCountWithoutVelChange += 1;
+			if (frameCountWithoutVelChange > 45) {
+				frameCountWithoutVelChange = 0;
+				boostPlayer();
+			}
+		} else {
+			frameCountWithoutVelChange = 0;
+		}
+
 	}
 
 
