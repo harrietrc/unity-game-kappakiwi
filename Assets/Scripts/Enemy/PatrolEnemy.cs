@@ -91,12 +91,12 @@ public class PatrolEnemy : Enemy {
 		if (col.gameObject.name == "KiwiBird" && isDead == false) {
 		// if player is above alien, kill alien and make player jump.
 			PlayerController other = (PlayerController) col.gameObject.GetComponent(typeof(PlayerController));
-
-			if (col.gameObject.transform.position.y - col.gameObject.renderer.bounds.size.y/1.5 > gameObject.transform.position.y) {
+			if ((col.gameObject.transform.position.y - col.gameObject.renderer.bounds.size.y/2) > (gameObject.transform.position.y)){
 				handleDeath();
 				other.boostPlayer(); // making the player jump
 				other.playerStatus.score.increaseScoreByEnemy();
 			} else {
+
 				rigidbody2D.velocity = new Vector2(moveSpeed, 0); // assigning the speed at the start
 				other.handleDeath(); // killing the player
 			}

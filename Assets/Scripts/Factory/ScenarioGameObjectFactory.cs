@@ -3,36 +3,36 @@ using System.Collections;
 
 
 public class ScenarioGameObjectFactory : GameObjectFactory {
-
+	
 	private GameObject newPlatform;
 	private GameObject newItem;
 	private GameObject newEnemy;
 	private GameObject newObstacle;
 	private GameObject flag;
-
+	
 	private int ypos = -2;
 	private int xpos = 2;
-
+	
 	private RNGStateGenerator rng = new EndlessRNGStateGenerator();
-
+	
 	private int length;
 	private int currentLength = 0;
-
+	
 	private bool generatedFlag = false;
 	
 	GameObject currentPlatform;
-
+	
 	public ScenarioGameObjectFactory(){
 		rng.generateNextState ();
-
+		
 		length = DifficultyManager.Instance.createLevelLength ();
 		Debug.Log ("level length is " + length);
 	}
-
+	
 	public void setRNGDependency(RNGStateGenerator dependency){
 		this.rng = dependency;
-		}
-
+	}
+	
 	public override void generateLevelStart(){
 		float y = -1.0f;
 		for (int i = 0; i < 8; i ++) {
@@ -45,12 +45,12 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 			}
 			generateOneTickItems (y+.75f);
 			generateOneTickEnemies (y,(i==0));
-		//	generateOneTickObstacles (y);
+			//	generateOneTickObstacles (y);
 			y += 2.75f;
 		}
 	}
-
-
+	
+	
 	public override void generateTick(){
 		if (currentLength == length) {
 			if(!generatedFlag){
@@ -62,16 +62,16 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 			return;
 		}
 		currentLength ++;
-
+		
 		rng.generateNextState ();
-			
+		
 		float height = 18.0f;
 		generateOneTickPlatforms (height, false);
 		generateOneTickItems (height+.75f);
 		generateOneTickEnemies (height,false);
 	}
-
-
+	
+	
 	private float generateOneTickPlatforms(float y, bool firstTick){
 		float currentX = 0.0f;
 		switch (rng.currentRNGState.platformCount) {
@@ -108,17 +108,17 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 			} else {
 				this.newPlatform = (GameObject)Instantiate (Resources.Load ("Prefabs/Platforms/" + "pref_standard_platform"));
 			}
-
-				this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], y + rng.currentRNGState.platformYVariance[j], 0.0f);
-
+			
+			this.newPlatform.transform.position = new Vector3 (currentX + rng.currentRNGState.platformXVariance[j], y + rng.currentRNGState.platformYVariance[j], 0.0f);
+			
 			currentX += 4.0f;
 		}
-
+		
 		return currentX - 4.0f;
 	}
-
+	
 	private void generateOneTickItems(float y){
-
+		
 		float currentX = 0.0f;
 		switch (rng.currentRNGState.itemCount) {
 		case(1):
@@ -157,9 +157,9 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 			}
 			currentX += 4.0f;
 		}
-
+		
 	}
-
+	
 	private void generateOneTickEnemies(float y, bool firstTick){
 		float currentX = 0.0f;
 		switch (rng.currentRNGState.enemyCount) {
@@ -191,9 +191,9 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 				case RNGState.enemyType.shooting:
 					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
 					break;
-//				case RNGState.enemyType.stationary:
-//					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
-//					break;
+					//				case RNGState.enemyType.stationary:
+					//					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
+					//					break;
 				case RNGState.enemyType.none:
 					this.newEnemy = null;
 					var temp = 0;
@@ -208,6 +208,6 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 			currentX += 4.0f;
 		}
 	}
-
-
+	
+	
 }

@@ -9,6 +9,17 @@ public class settings : MonoBehaviour
 		public Texture2D[] dropdownImages;
 		int indexNumber;
 		bool show = false;
+		
+		// GUI Texture used to fade in and out screen
+		public GUITexture screenFader;
+		// Fade in/out speed of scree
+		public float fadeSpeed = 0.8f;
+		// To determine fade from black to clear
+		private bool sceneStarting = true;
+		// To determine fade from clear to black
+		private bool sceneEnding = false;
+		// String to determine which playScreen to go
+		private string destination = "";
 
 		private void Update ()
 		{
@@ -16,6 +27,21 @@ public class settings : MonoBehaviour
 				if (Input.GetMouseButtonDown (0)) {
 						CastRay ();
 				}
+			// Fade to clear if scene is starting
+			if (sceneStarting) {
+				StartScene();		
+			}
+			// Fade to black if scene ending
+			if (sceneEnding) {
+				EndScene ();		
+			}
+		}
+
+		// Set up the gui texture
+		void Awake ()
+		{
+			// Set the texture so that it is the the size of the screen and covers it.
+			screenFader.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
 		}
 
 		private void CastRay ()
@@ -27,9 +53,10 @@ public class settings : MonoBehaviour
 				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, Mathf.Infinity);
 
 				if (hit) {
-						if (hit.collider.gameObject.name == "back-to-menu") {
-								Application.LoadLevel ("WelcomeScreen");
-						}
+					if (hit.collider.gameObject.name == "back-to-menu") {
+						sceneEnding=true;
+						destination = "Welcome";
+					}
 				}
 		}
 
@@ -94,4 +121,54 @@ public class settings : MonoBehaviour
 				}
 		
 		}
+
+	// Fading from black to clear
+	void FadeToClear ()
+	{
+		// Lerp the colour of the texture between itself and transparent.
+		screenFader.color = Color.Lerp(screenFader.color, Color.clear, fadeSpeed * Time.deltaTime);
+	}
+	
+	// Fading from clear to black
+	void FadeToBlack ()
+	{
+		// Lerp the colour of the texture between itself and black.
+		screenFader.color = Color.Lerp(screenFader.color, Color.black, fadeSpeed * Time.deltaTime);
+	}
+	
+	// Method to call fading from black to clear
+	void StartScene ()
+	{
+		// Fade the texture to clear.
+		FadeToClear();
+		// If the texture is almost clear...
+		if(screenFader.color.a <= 0.01f)
+		{
+			// ... set the colour to clear and disable the GUITexture.
+			screenFader.color = Color.clear;
+			screenFader.enabled = false;
+			
+			// The scene is no longer starting.
+			sceneStarting = false;
+		}
+	}
+	
+	//Method to call fading from clear to black
+	public void EndScene ()
+	{
+		// Make sure the texture is enabled.
+		screenFader.enabled = true;
+		
+		// Start fading towards black.
+		FadeToBlack();
+		// If the screen is almost black...
+		if (screenFader.color.a >= 0.45f) {
+			// ... reload the level.
+			sceneEnding = false;
+			if(destination == "Welcome"){
+				Application.LoadLevel ("WelcomeScreen");
+			}
+		}
+	}
+		
 }
