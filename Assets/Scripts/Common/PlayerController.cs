@@ -277,62 +277,53 @@ public class PlayerController : MonoBehaviour {
 		multiplierText.guiText.text = "Mutiplier: " + playerStatus.score.getMultiplier ().ToString() + "x";
 
 		} catch (UnityException e) {
-				} 
-			catch (Exception e) {
-				}
+		} catch (Exception e) { 
+		}
 	}
 
 
 
 	// Sound functions are here
 	private void PlayDeathSound() {
-		if (deathSound){
+		if (deathSound)
 			AudioSource.PlayClipAtPoint(deathSound, transform.position);
-		}
 	}
 
 	private void PlayEatChocolateSound () {
-		if (eatChocolateSound){
+		if (eatChocolateSound)
 			AudioSource.PlayClipAtPoint(eatChocolateSound, transform.position);
-		}
 	}
 
 	private void PlayEatCandySound () {
-		if (eatCandySound){
+		if (eatCandySound)
 			AudioSource.PlayClipAtPoint(eatCandySound, transform.position);
-		}
 	}
 
 	private void PlayEatAppleSound () {
-		if (eatAppleSound){
+		if (eatAppleSound)
 			AudioSource.PlayClipAtPoint(eatAppleSound, transform.position);
-		}
 	}
 
 	private void PlayThudSound(){
-		if (thudSound) {
+		if (thudSound)
 			AudioSource.PlayClipAtPoint(thudSound, transform.position);
-		}
 	}
 
 	//if necessary it'll be added.
 	private void PlayEatChipsSound(){
-		if (eatChipsSound) {
+		if (eatChipsSound)
 			AudioSource.PlayClipAtPoint(eatChipsSound, transform.position);
-		}
 	}
 	
 	// Enemy collision sounds
 	private void PlayEnemyRocketSound(){
-		if (enemyRocketSound) {
+		if (enemyRocketSound) 
 			AudioSource.PlayClipAtPoint(enemyRocketSound, transform.position);
-		}
 	}
 
 	private void PlayEnemyAlienSound(){
-		if (enemyAlienSound) {
+		if (enemyAlienSound)
 			AudioSource.PlayClipAtPoint(enemyAlienSound, transform.position);
-		}
 	}
 
 }
