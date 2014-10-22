@@ -34,19 +34,26 @@ public class levelSelection : MonoBehaviour {
 		
 		if (hit) {
 			if (hit.collider.gameObject.name == "1"){
+				LevelSelection.LEVEL = 1;
+				LevelSelection.CURRENT_GAMEMODE = GameMode.story;
 				Application.LoadLevel ("level_one");
 				Debug.Log("yes");
 			}
 			
 			if (hit.collider.gameObject.name == "2"){
+				LevelSelection.LEVEL = 2;
+				LevelSelection.CURRENT_GAMEMODE = GameMode.story;
 				Application.LoadLevel ("level_two");
 			}
 			
 			if (hit.collider.gameObject.name == "3"){
+				LevelSelection.LEVEL = 3;
+				LevelSelection.CURRENT_GAMEMODE = GameMode.story;
 				Application.LoadLevel ("level_three");
 			}
 
 			if (hit.collider.gameObject.name == "endless-label"){
+				LevelSelection.CURRENT_GAMEMODE = GameMode.endless;
 				Application.LoadLevel ("scn_endless");
 			}
 

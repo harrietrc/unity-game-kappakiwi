@@ -33,6 +33,9 @@ public class ScreenTransitionManager {
 		case 2:
 			Application.LoadLevel("level_two");
 			break;
+		case 3:
+			Application.LoadLevel("level_two");
+			break;
 		}
 
 		//DONT DELETE THIS
