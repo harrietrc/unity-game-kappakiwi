@@ -325,12 +325,19 @@ public class PlayerController : MonoBehaviour {
 		scoreText.transform.position = new Vector3 (0.1f, 0.9f, 0);
 		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
 		scoreText.guiText.material.color = Color.white;
+		//Font odin = (Font)Resources.Load ("font/odin");
+		//scoreText.guiText.font = odin; // Garbled
+		scoreText.guiText.fontSize = 28;
+		scoreText.guiText.fontStyle = FontStyle.Bold;
 
 		multiplierText = new GameObject ();
 		multiplierText.AddComponent<GUIText> ();
+		multiplierText.guiText.fontSize = 28;
+		multiplierText.guiText.fontStyle = FontStyle.Bold;
 		multiplierText.transform.position = new Vector3 (0.1f, 0.85f, 0);
 		multiplierText.guiText.text = "Multiplier: " + playerStatus.score.getMultiplier ().ToString() + "x";
 		multiplierText.guiText.material.color = Color.white;
+		multiplierText.guiText.lineSpacing = (float) 1.5;
 	}
 
 	private void updateScore() {
