@@ -57,12 +57,17 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
+		switch (LevelSelection.CURRENT_GAMEMODE) {
+		case GameMode.endless:
 			factory = new EndlessGameObjectFactory();
-		} else {
-			Debug.Log("factory is nullobjectfactory");
+			break;
+		case GameMode.scenario:
+			factory = new ScenarioGameObjectFactory();
+			break;
+		case GameMode.story:
 			factory = new NullGameObjectFactory();
-		}
+			break;
+				}
 
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		// Apply Xmas theme if relevant
@@ -110,7 +115,7 @@ public class PlayerController : MonoBehaviour {
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
-			if(screenShifter.shiftDistance  %40 == 0){
+			if(screenShifter.shiftDistance  %30 == 0){
 				Debug.Log("generating");
 				factory.generateTick();
 			}
