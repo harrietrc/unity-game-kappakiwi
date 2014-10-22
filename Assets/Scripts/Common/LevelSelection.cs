@@ -11,6 +11,7 @@ public class LevelSelection{
 	public static int LEVEL = 1;
 
 	private LevelSelection(){
-		}
+
+	}
 
 }
