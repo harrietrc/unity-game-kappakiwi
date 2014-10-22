@@ -28,7 +28,11 @@ public class PlayerStatus {
 	private Dictionary<string,Highscore> highScoreDict;
 
 	private string lastScoreKey = "LastScore";
-	
+
+	public void saveLastScore() {
+		PlayerPrefs.SetInt (lastScoreKey, this.score.getScore ());
+	}
+
 	//Make temporary copy of highscore leaderboards and store in highScoreDict
 	public void makeHighScoreList() {
 		highScoreDict = new Dictionary<string,Highscore> ();
@@ -50,11 +54,18 @@ public class PlayerStatus {
 	}
 
 	//Updates highScoreDict by adding the player score and see if it is in the top 5 
-	public void updateHighScoreList() {
+	public void updateHighScoreList(string name) {
 		//Construct a new temporary dictionary which is an exact copy of highScoreDict
 		Dictionary<string,Highscore> newDict = new Dictionary<string,Highscore>(highScoreDict);
 
-		Highscore temp = new Highscore (this.score.getScore (), "Kester" + Random.Range(-1000.0F, 1000.0F));
+		string duplicateName = name;
+		int dupIndex = 1;
+		while(PlayerPrefs.HasKey(duplicateName)) { 
+			duplicateName = name + " (" + dupIndex + ")";
+			dupIndex++;
+		}
+
+		Highscore temp = new Highscore (this.score.getScore (), duplicateName);
 
 		//Add a temporary key called "HighScoreNew" with the score of the last game played
 		newDict.Add (highScoreKey + "New", temp);
