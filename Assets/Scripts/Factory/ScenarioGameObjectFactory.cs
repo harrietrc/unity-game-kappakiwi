@@ -8,6 +8,7 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 	private GameObject newItem;
 	private GameObject newEnemy;
 	private GameObject newObstacle;
+	private GameObject flag;
 
 	private int ypos = -2;
 	private int xpos = 2;
@@ -53,9 +54,13 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 	public override void generateTick(){
 		if (currentLength == length) {
 			if(!generatedFlag){
+				Debug.Log("generating flag");
+				this.flag = (GameObject)Instantiate (Resources.Load ("Prefabs/Items/" + "Flag"));
+				this.flag.transform.position = new Vector3 (0.0f, 21.0f, 0.0f);
+				generatedFlag = true;
 			}
 			return;
-				}
+		}
 		currentLength ++;
 
 		rng.generateNextState ();
