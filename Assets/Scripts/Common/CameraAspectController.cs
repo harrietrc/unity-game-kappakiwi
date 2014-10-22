@@ -7,7 +7,7 @@ public class CameraAspectController : MonoBehaviour
 		private float height;
 		private float width;
 
-		private bool enabled = false;
+		private bool enabled = true;
 
 		// Use this for initialization
 		void Start ()
