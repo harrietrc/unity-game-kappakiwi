@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip enemyAlienSound;
 
 
+	// frame counter
+	private int frameCountWithoutVelChange = 0;
+
+
 	// sprite changes
 	public Sprite spriteFlipped;
 	public Sprite spriteNormal;
@@ -114,6 +118,17 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.checkAchievements ();
 		updateScore ();
 		handleTeleport();
+
+		if (rigidbody2D.velocity.y == 0.0f) {
+			frameCountWithoutVelChange += 1;
+			if (frameCountWithoutVelChange > 45) {
+				frameCountWithoutVelChange = 0;
+				boostPlayer();
+			}
+		} else {
+			frameCountWithoutVelChange = 0;
+		}
+
 	}
 
 
@@ -142,7 +157,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnBecameInvisible() {
-
+		PlayAchievement.incrementPlayCount ();
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
 				Application.LoadLevel ("highscore");
@@ -168,7 +183,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		PlayAchievement.incrementPlayCount ();
 		playerStatus.saveLastScore ();
 		//playerStatus.updateHighScoreList ();
 		//playerStatus.saveHighScoresToPersistence();
@@ -288,6 +302,7 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
+			PlayAchievement.incrementPlayCount ();
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
 				Application.LoadLevel ("highscore");
 			} else {
