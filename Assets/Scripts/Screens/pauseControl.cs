@@ -30,6 +30,22 @@ public class pauseControl : MonoBehaviour {
 		if (flag == false){
 			if (pause == true) {
 
+				Texture2D tex = new Texture2D(2,2);
+				for(int i = 0; i < tex.width; i++)
+				{
+					for(int j = 0; j < tex.height; j++)
+					{
+						tex.SetPixel(i, j, new Color(1f, 1f, 1f, 0.5f));
+					}
+				}
+				tex.Apply();
+				
+				GUIStyle tempstyle = new GUIStyle();
+				tempstyle.normal.background = tex;
+				GUILayout.BeginArea(new Rect(0,0,Screen.width,Screen.height),tempstyle);
+				GUILayout.EndArea();
+
+
 				GUIStyle style = new GUIStyle (GUI.skin.label);
 				
 				style.font = (Font)Resources.Load ("font/Animated");

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0cb3fdef1ff71d44ea055ff347ee9648
+=======
+guid: 5c1846895eacd5f47b65f9e861b4022a
+>>>>>>> aa5a438d9296c78e9d419edd9147141740ccdcc8
 TextureImporter:
   fileIDToRecycleName:
     21300000: kiwianim_0
