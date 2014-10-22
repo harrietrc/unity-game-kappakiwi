@@ -1,9 +1,8 @@
 using UnityEngine;
-﻿using UnityEngine;
 using System.Collections;
 
 public class HealthyFood : Item {
-
+	
 	public Sprite[] apple;
 	public Sprite[] banana;
 	public Sprite[] carrot;
@@ -12,7 +11,7 @@ public class HealthyFood : Item {
 	public Sprite[] pear;
 	public Sprite[] tomato;
 	public Sprite[] watermelon;
-
+	
 	// Christmas reskin
 	public Sprite[] redPresent;
 	public Sprite[] bluePresent;
@@ -22,7 +21,7 @@ public class HealthyFood : Item {
 	public Sprite[] purplePresent;
 	public Sprite[] pinkPresent;
 	public Sprite[] orangePresent;
-
+	
 	private AudioSource itemSound;
 	private string[] storySoundLocs = 
 	{"Resources/Audio/apple-crunch",
@@ -42,17 +41,17 @@ public class HealthyFood : Item {
 		"Resources/Audio/nom-bite",
 		"Resources/Audio/nom-bite",
 		"Resources/Audio/nom-bite",		
-        "Resources/Audio/nom-bite",
-        "Resources/Audio/nom-bite" };
+		"Resources/Audio/nom-bite",
+		"Resources/Audio/nom-bite" };
 	
 	private int rnd=0;
 	private int loc =0; 
-
+	
 	// Use this for initialization
 	void Start () {
 		
 		int rnd = Random.Range (0, 80);
-
+		
 		// Using the standard theme
 		if (LevelSelection.CURRENT_THEME == Theme.story) {
 			if (rnd < 10) {
@@ -72,8 +71,8 @@ public class HealthyFood : Item {
 			} else if (rnd <= 80) {
 				sprites = watermelon;
 			} 
-
-		// Using the christmas theme
+			
+			// Using the christmas theme
 		} else if (LevelSelection.CURRENT_THEME == Theme.xmas) { 
 			if (rnd < 10) {
 				sprites = redPresent;
@@ -99,7 +98,7 @@ public class HealthyFood : Item {
 	void Update () {
 		destoryIfOffScreen ();
 	}
-
+	
 	/* This function creates sound spcefic to the item is created when collides with player
 	 * Sound clip file locations are kept in xmasSoundLocs[], and storySoundLocs[] arrays
 	 * location of a sound file is related also with the random numbber created

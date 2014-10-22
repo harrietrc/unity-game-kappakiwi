@@ -135,7 +135,9 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			}
 			try{
 				this.newItem.transform.position = new Vector3 (currentX + rng.currentRNGState.itemXVariance[j], y + rng.currentRNGState.itemYVariance[j], 0.0f);
-			}catch (System.Exception e) {}
+			}catch (System.Exception e) {
+				Debug.Log("Exception " + e);
+			}
 			currentX += 4.0f;
 		}
 
@@ -183,7 +185,9 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			} 
 			try{
 				this.newEnemy.transform.position = new Vector3 (currentX + rng.currentRNGState.enemyXVariance[j], y + rng.currentRNGState.enemyYVariance[j], 0.0f);
-			}catch (System.Exception e) {}
+			}catch (System.Exception e) {
+				Debug.Log("Exception " + e);
+			}
 			currentX += 4.0f;
 		}
 	}
@@ -219,7 +223,9 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			}
 			try{
 				this.newObstacle.transform.position = new Vector3 (currentX + rng.currentRNGState.obstacleXVariance[j], y + rng.currentRNGState.obstacleYVariance[j], 0.0f);
-			}catch (System.Exception e) {}
+			}catch (System.Exception e) {
+				Debug.Log("Exception " + e);
+			}
 			currentX += 4.0f;
 		}
 	}
