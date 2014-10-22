@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
 		}
 
+		PlayerPrefs.DeleteAll ();
 		PlayerPrefs.SetString ("LoadedLevel", Application.loadedLevelName);
 		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
@@ -165,8 +166,9 @@ public class PlayerController : MonoBehaviour {
 	void OnBecameInvisible() {
 		PlayAchievement.incrementPlayCount ();
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
+			PlayerPrefs.SetInt ("Finished",0);
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
-				PlayerPrefs.SetInt ("Finished",0);
+				;
 				Application.LoadLevel ("highscore");
 			} else {
 				Application.LoadLevel ("Exitfailed");
@@ -310,8 +312,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
 			PlayAchievement.incrementPlayCount ();
+			PlayerPrefs.SetInt ("Finished",1);
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
-				PlayerPrefs.SetInt ("Finished",1);
 				Application.LoadLevel ("highscore");
 			} else {
 				Application.LoadLevel ("ExitSuccess");
