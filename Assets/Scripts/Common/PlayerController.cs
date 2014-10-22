@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour {
 			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
 		}
 
+		PlayerPrefs.SetString ("LoadedLevel", Application.loadedLevelName);
 		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnBecameInvisible() {
-
+		PlayAchievement.incrementPlayCount ();
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
 				Application.LoadLevel ("highscore");
@@ -183,7 +184,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		PlayAchievement.incrementPlayCount ();
 		playerStatus.saveLastScore ();
 		//playerStatus.updateHighScoreList ();
 		//playerStatus.saveHighScoresToPersistence();
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 
 	// method to make player jump
 	public void boostPlayer() {
-		if (!(gameObject.rigidbody2D.velocity.y > 0.0f)) {
+		if (!(gameObject.rigidbody2D.velocity.y > 0.5f)) {
 
 			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
@@ -303,6 +303,7 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
+			PlayAchievement.incrementPlayCount ();
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
 				Application.LoadLevel ("highscore");
 			} else {

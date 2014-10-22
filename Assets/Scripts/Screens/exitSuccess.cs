@@ -15,8 +15,17 @@ public class exitSuccess : MonoBehaviour {
 	private List<string> highScoreNames = new List<string>();
 	
 	private GameObject textfield;
+	private string currentKey;
+
 	// Use this for initialization
 	void Start () {
+
+		if (PlayerPrefs.GetString ("LoadedLevel") == "scn_endless") {
+			currentKey = "EndlessHigh";
+		} else {
+			currentKey = "HighScore";
+		}
+
 		playerStatus.score.setScore(PlayerPrefs.GetInt ("LastScore"));
 		name = PlayerPrefs.GetString ("NewName");
 		playerStatus.makeHighScoreList ();
@@ -31,11 +40,11 @@ public class exitSuccess : MonoBehaviour {
 		highScoreTextList.Add (highscoretext4);
 		highScoreTextList.Add (highscoretext5);
 		
-		highScoreNames.Add(PlayerPrefs.GetString ("HighScore1"));
-		highScoreNames.Add(PlayerPrefs.GetString ("HighScore2"));
-		highScoreNames.Add(PlayerPrefs.GetString ("HighScore3"));
-		highScoreNames.Add(PlayerPrefs.GetString ("HighScore4"));
-		highScoreNames.Add(PlayerPrefs.GetString ("HighScore5"));
+		highScoreNames.Add(PlayerPrefs.GetString (currentKey + "1"));
+		highScoreNames.Add(PlayerPrefs.GetString (currentKey + "2"));
+		highScoreNames.Add(PlayerPrefs.GetString (currentKey + "3"));
+		highScoreNames.Add(PlayerPrefs.GetString (currentKey + "4"));
+		highScoreNames.Add(PlayerPrefs.GetString (currentKey + "5"));
 		
 		highScores.Add(PlayerPrefs.GetInt (highScoreNames[0]));
 		highScores.Add(PlayerPrefs.GetInt (highScoreNames[1]));
