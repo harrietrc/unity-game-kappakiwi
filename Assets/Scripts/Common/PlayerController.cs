@@ -76,8 +76,7 @@ public class PlayerController : MonoBehaviour {
 			spriteNormal = xmasSpriteNormal;
 			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
 		}
-
-		PlayerPrefs.DeleteAll ();
+		
 		PlayerPrefs.SetString ("LoadedLevel", Application.loadedLevelName);
 		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
