@@ -10,7 +10,7 @@ public class welcome : MonoBehaviour {
 	// GUI Texture used to fade in and out screen
 	public GUITexture screenFader;
 	// Fade in/out speed of scree
-	public float fadeSpeed = 0.8f;
+	public float fadeSpeed = 1f;
 	// To determine fade from black to clear
 	private bool sceneStarting = true;
 	// To determine fade from clear to black
