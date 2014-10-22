@@ -18,6 +18,15 @@ public class exitFailed : MonoBehaviour {
 	private string name;
 	private string currentKey;
 
+	// GUI Texture used to fade in and out screen
+	public GUITexture screenFader;
+	// Fade in/out speed of scree
+	public float fadeSpeed = 1f;
+	// To determine fade from clear to black
+	private bool sceneEnding = false;
+	// String to determine which playScreen to go
+	private string destination = "";
+	public GameObject tryAgain, menu;
 	// Use this for initialization
 	void Start () {
 
@@ -53,69 +62,109 @@ public class exitFailed : MonoBehaviour {
 		highScores.Add(PlayerPrefs.GetInt (highScoreNames[3]));
 		highScores.Add(PlayerPrefs.GetInt (highScoreNames[4]));
 
-		float tempX = 0.5f;
-		float tempY = 0.6f;
 		GameObject h;
-	
+		float tempY = Screen.height * 0.25f;
+		GUIStyle style = new GUIStyle ();
+		GUI.color = Color.black;
+		style.alignment = TextAnchor.UpperCenter;
 		for (int i = 0; i < 5; i++) {
 			h = highScoreTextList[i];
 			h = new GameObject();
 			h.AddComponent<GUIText>();
-			h.transform.position = new Vector3(tempX,tempY,0);
-			h.guiText.text = (i+1) + ": " + highScoreNames[i] + " " + highScores[i];
-			h.guiText.material.color = Color.black;
-			h.guiText.fontSize = 30;
-			tempY -= 0.05f;
 		}
 	}
-	
+	// Set up the gui texture
+	void Awake ()
+	{
+		// Set the texture so that it is the the size of the screen and covers it.
+		screenFader.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
+		screenFader.color = Color.clear;
+		screenFader.enabled = false;
+	}
+
 	// Update is called once per frame
 	void Update () {
-
+		if (Input.GetMouseButtonDown (0)) {
+			CastRay ();
+		}
+		if (sceneEnding) {
+			EndScene ();		
+		}
 	}
 
 	void OnGUI(){
-		GUIStyle style = new GUIStyle (GUI.skin.label);
-
-		int styleFontSize = 50;
-		int titleFontSize = 60;
-		float pixWidth = Camera.main.pixelWidth;
-		
-		if (Camera.main.pixelWidth < 720) {
-			styleFontSize = (int)((float)50 * (float)pixWidth/(float)720);
-			titleFontSize = (int)((float)60 * (float)pixWidth/(float)720);
-		} else if (Camera.main.pixelHeight < 1024) {
-			styleFontSize = (int)((float)50 * (float)pixWidth/(float)1024);
-			titleFontSize = (int)((float)60 * (float)pixWidth/(float)1024);
-		}
-
-		style.font = (Font)Resources.Load ("font/Animated");
-		style.fontSize = 50;
-		style.normal.textColor = Color.black;
-
-		GUIStyle titleStyle = new GUIStyle (GUI.skin.label);
-
-		titleStyle.font = (Font)Resources.Load ("font/Animated");
-		titleStyle.fontSize = 60;
-		titleStyle.normal.textColor = Color.black;
-
-		GUI.Label (new Rect(Screen.width * 0.5f, Screen.height * 0.30f, Screen.width * 0.8f, Screen.height * 0.1f), "Highscores", style);
-
-		GUI.Label (new Rect(Screen.width * 0.30f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "GAME OVER", titleStyle);
 
 		float lastscore = PlayerPrefs.GetInt ("LastScore");
 
-		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.40f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: " + lastscore, style);
+		float tempY = Screen.height * 0.25f;
+		GUIStyle style = new GUIStyle ();
+		GUI.color = Color.black;
+		style.alignment = TextAnchor.UpperCenter;
+		style.fontSize = 52;
 
-		if (GUI.Button (new Rect (Screen.width * 0.25f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Try again", titleStyle)) {
-			Application.LoadLevel ("levelSelection");
+		for (int i = 0; i < 5; i++) {
+			GUI.Label (new Rect (Screen.width*0.2f, tempY, Screen.width*0.6f, 50), (i+1) + ":   " + highScoreNames[i] + "   " + highScores[i], style);
+			tempY += Screen.height*0.05f;
 		}
 
-		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Back to menu", titleStyle)) {
-			Application.LoadLevel("WelcomeScreen");		
+		GUI.Label (new Rect(Screen.width* 0.2f, Screen.height*0.8f, Screen.width*0.6f, 50), lastscore.ToString (), style);
+//		if (GUI.Button (new Rect (Screen.width * 0.25f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Try again", titleStyle)) {
+//			Application.LoadLevel ("levelSelection");
+//		}
+//
+//		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Back to menu", titleStyle)) {
+//			Application.LoadLevel("WelcomeScreen");		
+//		}
+
+	}
+	void CastRay(){
+		// Get the ray casted by the mouse (Current position) when the mouse is clicked
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		
+		// Figure out what object the ray collided with
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, Mathf.Infinity);
+		
+		
+		if (hit) {
+			if (hit.collider.gameObject.name == "try_again") {
+					Debug.Log ("Play Clicked");
+					//Application.LoadLevel ("LevelSelection");
+					sceneEnding = true;
+					destination = "levelSelect";
+			}
+	
+			if (hit.collider.gameObject.name == "Menu") {
+					Debug.Log ("Settings Clicked");
+					sceneEnding = true;
+					destination = "welcome";
+					//Application.LoadLevel ("scn_settings");
+			}
 		}
+	}
 
-
+	// Fading from clear to black
+	void FadeToBlack ()
+	{
+		// Lerp the colour of the texture between itself and black.
+		screenFader.color = Color.Lerp(screenFader.color, Color.black, fadeSpeed * Time.deltaTime);
+	}
+	//Method to call fading from clear to black
+	public void EndScene ()
+	{
+		// Make sure the texture is enabled.
+		screenFader.enabled = true;
+		// Start fading towards black.
+		FadeToBlack();
+		// If the screen is almost black...
+		if (screenFader.color.a >= 0.45f) {
+			// ... reload the level.
+			sceneEnding = false;
+			if(destination == "welcome"){
+				Application.LoadLevel ("WelComeScreen");
+			}else if(destination == "levelSelect"){
+				Application.LoadLevel ("levelSelection");
+			}
+		}
 	}
 
 }
