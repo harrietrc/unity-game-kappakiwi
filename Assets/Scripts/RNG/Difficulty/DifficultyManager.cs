@@ -93,6 +93,7 @@ public class DifficultyManager {
 				}
 			break;
 	}
+		return RNGState.itemType.none;
 
 	
 	}
@@ -142,7 +143,7 @@ public class DifficultyManager {
 				
 			}
 			break;
-		case ItemCount.medium:
+		case EnemyCount.medium:
 			index = 0;
 			index = Random.Range(0,8);
 			switch(index){
@@ -173,7 +174,7 @@ public class DifficultyManager {
 				
 			}
 			break;
-		case ItemCount.high:
+		case EnemyCount.high:
 			index = 0;
 			index = Random.Range(0,6);
 			switch(index){
@@ -198,108 +199,96 @@ public class DifficultyManager {
 			}
 			break;
 		}
+		return RNGState.enemyType.none;
+
 	}
 
 	public RNGState.platformType createPlatformType(){
-		switch (CURRENT_ENEMYCOUNT) {
-		case EnemyCount.low:
+		switch (CURRENT_DIFFICULTY) {
+		case Difficulty.easy:
 			int index = 0;
-			index = Random.Range(0,13);
-			switch(index){
-			case 0:
-				return RNGState.enemyType.falling;
-				break;
-			case 1:
-				return RNGState.enemyType.patrol;
-				break;
-			case 2:
-				return RNGState.enemyType.shooting;
-				break;
-			case 3:
-				return  RNGState.enemyType.stationary;
-				break;
-			case 4:
-				return RNGState.enemyType.none;
-				break;
-			case 5:
-				return RNGState.enemyType.none;
-				break;
-			case 6:
-				return RNGState.enemyType.none;
-				break;
-			case 8:
-				return RNGState.enemyType.none;
-				break;
-			case 9:
-				return RNGState.enemyType.none;
-				break;
-			case 10:
-				return RNGState.enemyType.none;
-				break;
-			case 11:
-				return RNGState.enemyType.none;
-				break;
-			case 12:
-				return RNGState.enemyType.none;
-				break;
-				
-			}
-			break;
-		case ItemCount.medium:
-			index = 0;
 			index = Random.Range(0,8);
 			switch(index){
 			case 0:
-				return RNGState.enemyType.falling;
+				return RNGState.platformType.collapsing;
 				break;
 			case 1:
-				return RNGState.enemyType.patrol;
+				return RNGState.platformType.moving;
 				break;
 			case 2:
-				return RNGState.enemyType.shooting;
+				return RNGState.platformType.standard;
 				break;
 			case 3:
-				return  RNGState.enemyType.stationary;
+				return RNGState.platformType.standard;
 				break;
 			case 4:
-				return RNGState.enemyType.none;
+				return RNGState.platformType.standard;
 				break;
 			case 5:
-				return RNGState.enemyType.none;
+				return RNGState.platformType.standard;
 				break;
 			case 6:
-				return RNGState.enemyType.none;
+				return RNGState.platformType.standard;
 				break;
 			case 7:
-				return RNGState.enemyType.none;
+				return RNGState.platformType.standard;
 				break;
-				
 			}
 			break;
-		case ItemCount.high:
+		case Difficulty.medium:
 			index = 0;
-			index = Random.Range(0,6);
+			index = Random.Range(0,5);
 			switch(index){
 			case 0:
-				return RNGState.enemyType.falling;
+				return RNGState.platformType.collapsing;
 				break;
 			case 1:
-				return RNGState.enemyType.patrol;
+				return RNGState.platformType.moving;
 				break;
 			case 2:
-				return RNGState.enemyType.shooting;
+				return RNGState.platformType.standard;
 				break;
 			case 3:
-				return  RNGState.enemyType.stationary;
+				return RNGState.platformType.standard;
 				break;
 			case 4:
-				return RNGState.enemyType.none;
+				return RNGState.platformType.standard;
 				break;
-			case 5:
-				return RNGState.enemyType.none;
+			}
+			break;
+		case Difficulty.hard:
+			index = 0;
+			index = Random.Range(0,3);
+			switch(index){
+			case 0:
+				return RNGState.platformType.collapsing;
+				break;
+			case 1:
+				return RNGState.platformType.moving;
+				break;
+			case 2:
+				return RNGState.platformType.standard;
 				break;
 			}
 			break;
 		}
+		
+		return RNGState.platformType.standard;
+	}
+
+	public int createLevelLength(){
+
+		switch (CURRENT_LEVELLENGTH) {
+		case LevelLength.low:
+			return 20;
+			break;
+		case LevelLength.medium:
+			return 50;
+			break;
+		case LevelLength.high:
+			return 100;
+			break;
+		}
+		return 20;
 	}
 }

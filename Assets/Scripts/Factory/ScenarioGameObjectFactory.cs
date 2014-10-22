@@ -22,17 +22,7 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 	public ScenarioGameObjectFactory(){
 		rng.generateNextState ();
 
-		switch (DifficultyManager.Instance.CURRENT_DIFFICULTY) {
-		case DifficultyManager.Difficulty.easy:
-			length = 20;
-			break;
-		case DifficultyManager.Difficulty.medium:
-			length = 50;
-			break;
-		case DifficultyManager.Difficulty.hard:
-			length = 100;
-			break;
-				}
+		length = DifficultyManager.Instance.createLevelLength ();
 	}
 
 	public void setRNGDependency(RNGStateGenerator dependency){
