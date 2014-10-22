@@ -50,9 +50,13 @@ public class CustomScenario : MonoBehaviour
 								LevelSelection.CURRENT_GAMEMODE = GameMode.scenario;
 								Application.LoadLevel ("scn_scenario");
 						}
-				}
-		}
 
+						if (hit.collider.gameObject.name == "back") {
+							Application.LoadLevel ("LevelSelection");
+						}
+				}
+	}
+	
 		private void OnGUI ()
 		{
 				style = new GUIStyle (GUI.skin.label);
@@ -67,7 +71,7 @@ public class CustomScenario : MonoBehaviour
 		// Dividing the dropdowns among functions for the sake of sanity and tidier code
 		private void levelLength ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.33f, 200, 250);
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.26f, 200, 250);
 				int height = 40;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showLevelLength) {
@@ -109,7 +113,7 @@ public class CustomScenario : MonoBehaviour
 
 		private void enemyCount ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.46f, 200, 250);
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.39f, 200, 250);
 				int height = 40;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showEnemyCount) {
@@ -151,7 +155,7 @@ public class CustomScenario : MonoBehaviour
 
 		private void itemCount ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.59f, 200, 250);
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.52f, 200, 250);
 				int height = 40;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showItemCount) {
@@ -194,7 +198,7 @@ public class CustomScenario : MonoBehaviour
 		private void difficulty ()
 		{
 
-				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.73f, 200, 250);
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.65f, 200, 250);
 				int height = 40;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showDifficulty) {

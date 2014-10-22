@@ -123,7 +123,7 @@ public class PlayerStatus {
 	//Display local copy of high scores for debugging
 	public void displayHighScoreList() {
 		for (int i = 1; i <= 5; i++) {
-			Debug.Log (highScoreDict[currentKey + i].getName() + ": " + highScoreDict[currentKey + i].getHighscore());
+			//Debug.Log (highScoreDict[currentKey + i].getName() + ": " + highScoreDict[currentKey + i].getHighscore());
  		}
 	}
 

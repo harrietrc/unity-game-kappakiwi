@@ -104,7 +104,6 @@ public class exitSuccess : MonoBehaviour {
 		
 		if(GUI.Button (new Rect (Screen.width * 0.25f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Next level", titleStyle)){
 			LevelSelection.LEVEL = LevelSelection.LEVEL + 1;
-			LevelSelection.CURRENT_THEME = Theme.story;
 			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME);
 		};
 
