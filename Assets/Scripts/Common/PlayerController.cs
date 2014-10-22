@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 			//transform.position.x,transform.position.y;
 		} else if ( transform.position.x >= (horzExtent)) 
 		{
-			transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);  
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);  
 		}
 	}
 
@@ -307,6 +307,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(thudSound, transform.position);
 		}
 	}
+
 	//if necessary it'll be added.
 	private void PlayEatChipsSound(){
 		if (eatChipsSound) {
@@ -320,6 +321,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(enemyRocketSound, transform.position);
 		}
 	}
+
 	private void PlayEnemyAlienSound(){
 		if (enemyAlienSound) {
 			AudioSource.PlayClipAtPoint(enemyAlienSound, transform.position);
