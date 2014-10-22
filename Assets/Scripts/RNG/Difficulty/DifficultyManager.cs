@@ -36,10 +36,10 @@ public class DifficultyManager {
 				index = Random.Range(0,7);
 				switch(index){
 				case 0:
-					return RNGState.itemType.healthy;
+				return RNGState.itemType.none;
 					break;
 				case 1:
-					return RNGState.itemType.junk;
+				return RNGState.itemType.none;
 					break;
 				case 2:
 					return RNGState.itemType.none;
@@ -105,16 +105,16 @@ public class DifficultyManager {
 			index = Random.Range(0,13);
 			switch(index){
 			case 0:
-				return RNGState.enemyType.falling;
+				return RNGState.enemyType.none;
 				break;
 			case 1:
-				return RNGState.enemyType.patrol;
+				return RNGState.enemyType.none;
 				break;
 			case 2:
-				return RNGState.enemyType.shooting;
+				return RNGState.enemyType.none;
 				break;
 			case 3:
-				return  RNGState.enemyType.stationary;
+				return  RNGState.enemyType.none;
 				break;
 			case 4:
 				return RNGState.enemyType.none;
@@ -210,10 +210,10 @@ public class DifficultyManager {
 			index = Random.Range(0,8);
 			switch(index){
 			case 0:
-				return RNGState.platformType.collapsing;
+				return RNGState.platformType.standard;
 				break;
 			case 1:
-				return RNGState.platformType.moving;
+				return RNGState.platformType.standard;
 				break;
 			case 2:
 				return RNGState.platformType.standard;
@@ -280,7 +280,7 @@ public class DifficultyManager {
 
 		switch (CURRENT_LEVELLENGTH) {
 		case LevelLength.low:
-			return 20;
+			return 1;
 			break;
 		case LevelLength.medium:
 			return 50;

@@ -15,7 +15,9 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 	private RNGStateGenerator rng = new EndlessRNGStateGenerator();
 
 	private int length;
+	private int currentLength = 0;
 
+	private bool generatedFlag = false;
 	
 	GameObject currentPlatform;
 
@@ -23,6 +25,7 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 		rng.generateNextState ();
 
 		length = DifficultyManager.Instance.createLevelLength ();
+		Debug.Log ("level length is " + length);
 	}
 
 	public void setRNGDependency(RNGStateGenerator dependency){
@@ -31,7 +34,7 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 
 	public override void generateLevelStart(){
 		float y = -1.0f;
-		for (int i = 0; i < 9; i ++) {
+		for (int i = 0; i < 8; i ++) {
 			rng.generateNextState();
 			float lastX = generateOneTickPlatforms(y, (i==0));
 			if(i == 0){
@@ -48,14 +51,19 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 
 
 	public override void generateTick(){
-		for (int i = 0; i < this.length; i++) {
-			rng.generateNextState ();
-			
-			float height = 17.0f;
-			generateOneTickPlatforms (height, false);
-			generateOneTickItems (height+.75f);
-			generateOneTickEnemies (height,false);
+		if (currentLength == length) {
+			if(!generatedFlag){
+			}
+			return;
 				}
+		currentLength ++;
+
+		rng.generateNextState ();
+			
+		float height = 18.0f;
+		generateOneTickPlatforms (height, false);
+		generateOneTickItems (height+.75f);
+		generateOneTickEnemies (height,false);
 	}
 
 
