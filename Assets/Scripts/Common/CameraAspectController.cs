@@ -7,11 +7,14 @@ public class CameraAspectController : MonoBehaviour
 		private float height;
 		private float width;
 
-		private bool enabled = false;
+		private bool enabled = true;
 
 		// Use this for initialization
 		void Start ()
 		{
+		//GUITextSpawner gTS = new GUITextSpawner ();
+		//gTS.SpawnNew ("ScreenSize: " + Camera.main.pixelWidth + ", " + Camera.main.pixelHeight);
+
 				if (enabled) {
 					
 						Screen.orientation = ScreenOrientation.Portrait;
@@ -22,6 +25,7 @@ public class CameraAspectController : MonoBehaviour
 						float orthoWidth = ((float)Screen.height / 2) / ((float)Screen.height / 100 * (float)Screen.width / 100);
 						print ("orthoWidth: " + orthoWidth);
 						Camera.main.orthographicSize = orthoWidth / (float)Screen.width * (float)Screen.height;
+
 				}
 		}
 }

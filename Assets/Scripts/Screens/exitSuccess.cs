@@ -19,7 +19,7 @@ public class exitSuccess : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		
 		if (PlayerPrefs.GetString ("LoadedLevel") == "scn_endless") {
 			currentKey = "EndlessHigh";
 		} else {
@@ -74,7 +74,16 @@ public class exitSuccess : MonoBehaviour {
 
 	void OnGUI(){
 		GUIStyle style = new GUIStyle (GUI.skin.label);
-		
+
+		int styleFontSize = 50;
+		int titleFontSize = 60;
+		float pixWidth = Camera.main.pixelWidth;
+
+		if (Camera.main.pixelWidth < 720) {
+			styleFontSize = (int)((float)50 * (float)(pixWidth/720));
+			titleFontSize = (int)((float)60 * (float)(pixWidth/720));
+		}
+
 		style.font = (Font)Resources.Load ("font/Animated");
 		style.fontSize = 50;
 		style.normal.textColor = Color.black;
@@ -87,7 +96,7 @@ public class exitSuccess : MonoBehaviour {
 
 		GUI.Label (new Rect(Screen.width * 0.30f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "CONGRATULATIONS", titleStyle);
 		
-           GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.40f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ", style);
+        GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.40f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ", style);
 		
 		if (GUI.Button (new Rect (Screen.width * 0.15f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Play again", style )) {
 			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME );
