@@ -67,25 +67,31 @@ public class levelSelection : MonoBehaviour {
 				destination = "levelOne";
 				sceneEnding = true;
 				//Application.LoadLevel ("level_one");
-				Debug.Log("yes");
+				LevelSelection.LEVEL = 1;
+				LevelSelection.CURRENT_GAMEMODE = GameMode.story;
 			}
 			
 			if (hit.collider.gameObject.name == "2"){
 				destination = "levelTwo";
 				sceneEnding = true;
 				//Application.LoadLevel ("level_two");
+				LevelSelection.LEVEL = 2;
+				LevelSelection.CURRENT_GAMEMODE = GameMode.story;
 			}
 			
 			if (hit.collider.gameObject.name == "3"){
 				destination = "levelThree";
 				sceneEnding = true;
 				//Application.LoadLevel ("level_three");
+				LevelSelection.LEVEL = 3;
+				LevelSelection.CURRENT_GAMEMODE = GameMode.story;
 			}
 
 			if (hit.collider.gameObject.name == "endless-label"){
 				destination = "endless";
 				sceneEnding = true;
 				//Application.LoadLevel ("scn_endless");
+				LevelSelection.CURRENT_GAMEMODE = GameMode.endless;
 			}
 
 			if (hit.collider.gameObject.name == "back-to-menu"){

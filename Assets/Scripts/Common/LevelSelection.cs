@@ -2,7 +2,7 @@
 using System.Collections;
 
 public enum Theme {story, xmas}
-public enum GameMode {endless, story}
+public enum GameMode {endless, story, scenario}
 
 public class LevelSelection{
 
@@ -11,6 +11,7 @@ public class LevelSelection{
 	public static int LEVEL = 1;
 
 	private LevelSelection(){
-		}
+
+	}
 
 }
