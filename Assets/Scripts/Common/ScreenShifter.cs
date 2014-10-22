@@ -17,12 +17,16 @@ public class ScreenShifter : MonoBehaviour {
 	private BackgroundScroller backgroundOneScroller;
 	private BackgroundScroller backgroundTwoScroller;
 	private float speed;
+	public int shiftDistance;
 
 	public ScreenShifter() {
+
+		shiftDistance = 0;
 
 	}
 
 	public void ShiftScreen(float shiftAmount){
+		shiftDistance++;
 
 		speed = shiftAmount;
 		platforms = GameObject.FindGameObjectsWithTag(Tags.TAG_PLATFORM);

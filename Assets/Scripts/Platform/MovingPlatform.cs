@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MovingPlatform : MonoBehaviour {
 
-	int moveSpeed = 2;
+	int moveSpeed = 5;
 	int touches = 0;
 	
 	float vertExtent;
@@ -12,9 +12,13 @@ public class MovingPlatform : MonoBehaviour {
 	float width;
 	float height;
 
+	GameObject player;
+	PlayerController playerScript;
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag(Tags.TAG_PLAYER);
+		playerScript = (PlayerController) player.GetComponent(typeof(PlayerController));
 		rigidbody2D.velocity = new Vector2(moveSpeed,0);
 	}
 	
@@ -45,7 +49,14 @@ public class MovingPlatform : MonoBehaviour {
 		}
 	}
 
-
+	void OnBecameVisible() {
+		playerScript.addPlatformToList(gameObject);
+		
+	}
+	
+	void OnBecameInvisible() {
+		playerScript.removePlatformToList(gameObject);
+	}
 	public void destoryIfOffScreen(){
 		if (transform.position.y < Constants.ITEM_DESTRY_THRESHHOLD) {
 			Destroy(this.gameObject);

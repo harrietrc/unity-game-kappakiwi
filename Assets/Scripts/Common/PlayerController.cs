@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -17,9 +19,12 @@ public class PlayerController : MonoBehaviour {
 	private GameObjectFactory factory = new NullGameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
-	private PlayerStatus playerStatus = new PlayerStatus();
+	public PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 	private GameObject multiplierText;
+
+	// list of platforms
+	private List<GameObject> listOfPlatforms = new List<GameObject>();
 
 	// Audio variables
 	public AudioClip deathSound; 
@@ -34,18 +39,37 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip enemyAlienSound;
 
 
+	// sprite changes
+	public Sprite spriteFlipped;
+	public Sprite spriteNormal;
+	private SpriteRenderer spriteRenderer; 
+	
+	// Xmas reskin
+	public Sprite xmasSpriteFlipped;
+	public Sprite xmasSpriteNormal;
+
 
 	private bool death = false;
 
 	// Use this for initialization
 	void Start () {
+
 		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
-			Debug.Log("theme was endless");
 			factory = new EndlessGameObjectFactory();
 		} else {
+			Debug.Log("factory is nullobjectfactory");
 			factory = new NullGameObjectFactory();
 		}
 
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		// Apply Xmas theme if relevant
+		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
+			spriteFlipped = xmasSpriteFlipped;
+			spriteNormal = xmasSpriteNormal;
+			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
+		}
+
+		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
 		initializeScore ();
@@ -53,6 +77,10 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
+
+		updatePlatformLayer();
+
+
 		Vector2 vel = rigidbody2D.velocity;
 		if (!death) {
 			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
@@ -60,49 +88,95 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			transform.position += Vector3.left * Constants.SPEED_MOVE * Time.deltaTime;
+			spriteRenderer.sprite = spriteNormal;
 		}
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
 			transform.position += Vector3.right * Constants.SPEED_MOVE * Time.deltaTime;
+			spriteRenderer.sprite = spriteFlipped;
 		}
 		transform.Translate(Input.acceleration.x/3, 0, 0);
+
+		if (Input.acceleration.x >0) {
+			spriteRenderer.sprite = spriteFlipped;
+		} else if (Input.acceleration.y < 0) {
+			spriteRenderer.sprite = spriteNormal;
+		}
 
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
+			if(screenShifter.shiftDistance  %40 == 0){
+				Debug.Log("generating");
+				factory.generateTick();
+			}
 		}
 
 		achievementManager.checkAchievements ();
 		updateScore ();
-		failIfBelowScreen ();
-		horizontalTeleport ();
+		handleTeleport();
+	}
+
+
+	private void updatePlatformLayer() {
+		float playerPos = transform.position.y - renderer.bounds.size.y / 2;
+
+		for (int i = 0; i < listOfPlatforms.Count; i++) {
+			if(listOfPlatforms[i] != null){
+				if(listOfPlatforms[i].transform.position.y > playerPos) {
+				// layer 10 is platform below
+				// layer 13 is platform above
+					listOfPlatforms[i].layer = 13;
+				} else {
+					listOfPlatforms[i].layer = 10;
+				}
+
+			}
+		}
+	}
+	public void addPlatformToList(GameObject newPlatform) {
+		listOfPlatforms.Add(newPlatform);
+	}
+
+	public void removePlatformToList(GameObject oldPlatform) {
+		listOfPlatforms.Remove(oldPlatform);
+	}
+
+	void OnBecameInvisible() {
+
+		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				Application.LoadLevel ("highscore");
+			} else {
+				Application.LoadLevel ("Exitfailed");
+			}
+		}
+
+	}
+
+	void handleTeleport() {
+		
+		var vertExtent = Camera.main.camera.orthographicSize;
+		var horzExtent = vertExtent * Screen.width / Screen.height; 
+		if (transform.position.x <= (horzExtent * -1)) 
+		{
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);      
+			//transform.position.x,transform.position.y;
+		} else if ( transform.position.x >= (horzExtent)) 
+		{
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);  
+		}
 	}
 
 	void OnDestroy(){
 		PlayAchievement.incrementPlayCount ();
-		playerStatus.saveScoreToPersistence ();
+		playerStatus.saveLastScore ();
+		//playerStatus.updateHighScoreList ();
+		//playerStatus.saveHighScoresToPersistence();
+		//playerStatus.displayPersistentHighScores ();
 		achievementManager.saveAchievementsToPersistence ();
 	}
-	private void failIfBelowScreen(){
 
-		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
-			Debug.Log ("failed because y was less than " + Constants.FAIL_THRESHHOLD);
-			Application.LoadLevel ("ExitFailed");
-		}
-	}
-
-	private void horizontalTeleport() {
-		Vector2 playerPosScreenPoint = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x, transform.position.y));
-		Vector2 screenBounds = new  Vector2 (Screen.width, Screen.height);
-
-		if (playerPosScreenPoint.x > screenBounds.x) {
-			//TODO Teleport to the left
-			// may need to convert screen bounds to world point
-		}
-		else if (playerPosScreenPoint.x < 0) {
-			//TODO Teleport to the right
-		}
-	}
 
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
@@ -125,11 +199,14 @@ public class PlayerController : MonoBehaviour {
 
 	// method to make player jump
 	public void boostPlayer() {
-		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
-		factory.generateTick();
-		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.AddForce (jumpForce);
+		if (!(gameObject.rigidbody2D.velocity.y > 0.0f)) {
+
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+			rigidbody2D.velocity = Vector2.zero;
+			rigidbody2D.AddForce (jumpForce);
+		}
 	}
+
 
 	private void handlePlatformCollision(Collision2D coll){
 		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) 
@@ -212,7 +289,11 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
-			Application.LoadLevel ("ExitSuccess");
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				Application.LoadLevel ("highscore");
+			} else {
+				Application.LoadLevel ("ExitSuccess");
+			}
 		}
 	}
 	private void initializeScore() {
@@ -230,9 +311,18 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void updateScore() {
+		try{
+
 		scoreText.guiText.text = "Score: " + playerStatus.score.getScore ().ToString();
 		multiplierText.guiText.text = "Mutiplier: " + playerStatus.score.getMultiplier ().ToString() + "x";
+
+		} catch (UnityException e) {
+				} 
+			catch (Exception e) {
+				}
 	}
+
+
 
 	// Sound functions are here
 	private void PlayDeathSound() {
@@ -264,6 +354,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(thudSound, transform.position);
 		}
 	}
+
 	//if necessary it'll be added.
 	private void PlayEatChipsSound(){
 		if (eatChipsSound) {
@@ -277,6 +368,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(enemyRocketSound, transform.position);
 		}
 	}
+
 	private void PlayEnemyAlienSound(){
 		if (enemyAlienSound) {
 			AudioSource.PlayClipAtPoint(enemyAlienSound, transform.position);
@@ -285,4 +377,3 @@ public class PlayerController : MonoBehaviour {
 
 }
 
-	

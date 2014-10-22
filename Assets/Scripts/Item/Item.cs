@@ -26,7 +26,8 @@ public class Item : MonoBehaviour {
 
 		playerStatus.FitnessLevel += modification;
 			 
-		}
+	}
 
 
 }
+

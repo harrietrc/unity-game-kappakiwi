@@ -14,6 +14,8 @@
 /*.pidb
 /*.booproj
 *.DS_store
+Thumbs.db
+Thumbs.db.meta
 
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
