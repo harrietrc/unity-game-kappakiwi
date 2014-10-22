@@ -1,3 +1,4 @@
+
 ﻿using UnityEngine;
 using System.Collections;
 
@@ -26,7 +27,8 @@ public class Item : MonoBehaviour {
 
 		playerStatus.FitnessLevel += modification;
 			 
-		}
+	}
 
 
 }
+

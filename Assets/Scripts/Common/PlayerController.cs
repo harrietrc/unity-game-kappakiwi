@@ -307,6 +307,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(thudSound, transform.position);
 		}
 	}
+
 	//if necessary it'll be added.
 	private void PlayEatChipsSound(){
 		if (eatChipsSound) {
@@ -320,6 +321,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(enemyRocketSound, transform.position);
 		}
 	}
+
 	private void PlayEnemyAlienSound(){
 		if (enemyAlienSound) {
 			AudioSource.PlayClipAtPoint(enemyAlienSound, transform.position);
