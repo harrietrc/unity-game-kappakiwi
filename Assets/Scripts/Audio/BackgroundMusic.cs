@@ -19,14 +19,15 @@ public class BackgroundMusic : MonoBehaviour {
 	}
 	
 	void Awake() {
-		
+		Debug.Log("BackgroundMusic, in Awake before if conds are: instance:" + instance );
 		if (instance != null && instance != this) {
+			Debug.Log("BackgroundMusic, in Awake after if before if conds are: instance:" + instance );
 			Destroy(this.gameObject);
 			return;
 		} else {
 			instance = this;
 		}
-		DontDestroyOnLoad(this.gameObject);
+		//DontDestroyOnLoad(this.gameObject);
 		
 	}
 }
