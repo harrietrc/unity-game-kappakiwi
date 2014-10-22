@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour {
 	public PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 	private GameObject multiplierText;
+
+	// list of platforms
+	private List<GameObject> listOfPlatforms = new List<GameObject>();
 
 	// Audio variables
 	public AudioClip deathSound; 
@@ -48,6 +52,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
 			factory = new EndlessGameObjectFactory();
 		} else {
@@ -71,6 +76,10 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
+
+		updatePlatformLayer();
+
+
 		Vector2 vel = rigidbody2D.velocity;
 		if (!death) {
 			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
@@ -107,6 +116,31 @@ public class PlayerController : MonoBehaviour {
 		handleTeleport();
 	}
 
+
+	private void updatePlatformLayer() {
+		float playerPos = transform.position.y - renderer.bounds.size.y / 2;
+
+		for (int i = 0; i < listOfPlatforms.Count; i++) {
+			if(listOfPlatforms[i] != null){
+				if(listOfPlatforms[i].transform.position.y > playerPos) {
+				// layer 10 is platform below
+				// layer 13 is platform above
+					listOfPlatforms[i].layer = 13;
+				} else {
+					listOfPlatforms[i].layer = 10;
+				}
+
+			}
+		}
+	}
+	public void addPlatformToList(GameObject newPlatform) {
+		listOfPlatforms.Add(newPlatform);
+	}
+
+	public void removePlatformToList(GameObject oldPlatform) {
+		listOfPlatforms.Remove(oldPlatform);
+	}
+
 	void OnBecameInvisible() {
 
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
@@ -123,9 +157,6 @@ public class PlayerController : MonoBehaviour {
 		
 		var vertExtent = Camera.main.camera.orthographicSize;
 		var horzExtent = vertExtent * Screen.width / Screen.height; 
-		var width = renderer.bounds.size.x / 2 + 0.5f; 
-		var height = renderer.bounds.size.y / 2 + 0.5f;
-		
 		if (transform.position.x <= (horzExtent * -1)) 
 		{
 			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);      
@@ -167,10 +198,14 @@ public class PlayerController : MonoBehaviour {
 
 	// method to make player jump
 	public void boostPlayer() {
-		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
-		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.AddForce (jumpForce);
+		if (!(gameObject.rigidbody2D.velocity.y > 0.0f)) {
+
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+			rigidbody2D.velocity = Vector2.zero;
+			rigidbody2D.AddForce (jumpForce);
+		}
 	}
+
 
 	private void handlePlatformCollision(Collision2D coll){
 		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) 
@@ -253,7 +288,11 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
-			Application.LoadLevel ("ExitSuccess");
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				Application.LoadLevel ("highscore");
+			} else {
+				Application.LoadLevel ("ExitSuccess");
+			}
 		}
 	}
 	private void initializeScore() {

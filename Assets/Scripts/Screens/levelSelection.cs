@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 
 /**
  *	The coordinates of the buttons are hard coded at the moment.
