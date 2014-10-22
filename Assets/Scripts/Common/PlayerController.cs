@@ -289,7 +289,11 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
-			Application.LoadLevel ("ExitSuccess");
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				Application.LoadLevel ("highscore");
+			} else {
+				Application.LoadLevel ("ExitSuccess");
+			}
 		}
 	}
 	private void initializeScore() {

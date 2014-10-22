@@ -14,6 +14,6 @@ public class ExplosionScript : MonoBehaviour {
 	}
 
 	void OnDestroy() {
-		Application.LoadLevel ("ExitFailed");
+		Application.LoadLevel ("Exitfailed");
 	}
 }

@@ -20,7 +20,6 @@ public class exitFailed : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log (PlayerPrefs.GetInt ("LastScore"));
 		playerStatus.score.setScore(PlayerPrefs.GetInt ("LastScore"));
 		name = PlayerPrefs.GetString ("NewName");
 		playerStatus.makeHighScoreList ();
@@ -80,7 +79,7 @@ public class exitFailed : MonoBehaviour {
 
 		float lastscore = PlayerPrefs.GetInt ("LastScore");
 
-		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Last score: " + lastscore, style);
+		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: " + lastscore, style);
 
 		if (GUI.Button (new Rect (Screen.width * 0.35f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Try again", style)) {
 			Application.LoadLevel ("levelSelection");
