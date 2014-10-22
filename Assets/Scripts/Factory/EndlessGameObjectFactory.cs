@@ -170,10 +170,10 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_falling_enemy"));
 					break;
 				case RNGState.enemyType.shooting:
-					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
+					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
 					break;
 				case RNGState.enemyType.stationary:
-					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
+					//this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
 					break;
 				case RNGState.enemyType.none:
 					this.newEnemy = null;

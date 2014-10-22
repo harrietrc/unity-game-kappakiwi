@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour {
 	public PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 	private GameObject multiplierText;
+
+	// list of platforms
+	private List<GameObject> listOfPlatforms = new List<GameObject>();
 
 	// Audio variables
 	public AudioClip deathSound; 
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
 			factory = new EndlessGameObjectFactory();
 		} else {
@@ -106,6 +111,16 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.checkAchievements ();
 		updateScore ();
 		handleTeleport();
+	}
+
+
+
+	public void addPlatformToList(GameObject newPlatform) {
+		listOfPlatforms.Add(newPlatform);
+	}
+
+	public void removePlatformToList(GameObject oldPlatform) {
+		listOfPlatforms.Remove(oldPlatform);
 	}
 	void OnBecameInvisible() {
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
