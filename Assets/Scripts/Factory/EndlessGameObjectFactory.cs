@@ -18,11 +18,11 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 		for (int i = 0; i < 8; i ++) {
 			rng.generateNextState();
 			float lastX = generateOneTickPlatforms(y, (i==0));
-			if(i == 0){
-				GameObject player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
-				Vector3 temp = new Vector3(lastX + rng.currentRNGState.platformXVariance[rng.currentRNGState.platformCount-1],rng.currentRNGState.platformYVariance[rng.currentRNGState.platformCount-1],0.0f);
-				player.transform.Translate(temp);
-			}
+//			if(i == 0){
+//				GameObject player = GameObject.FindGameObjectWithTag (Tags.TAG_PLAYER);
+//				Vector3 temp = new Vector3(lastX + rng.currentRNGState.platformXVariance[rng.currentRNGState.platformCount-1],rng.currentRNGState.platformYVariance[rng.currentRNGState.platformCount-1],0.0f);
+//				player.transform.Translate(temp);
+//			}
 			generateOneTickItems (y+.75f);
 			generateOneTickEnemies (y,(i==0 || i == 1 || i == 2));
 			y += 2.75f;
