@@ -8,9 +8,9 @@ public class DifficultyManager {
 	public enum ItemCount {low, medium, high}
 	public enum LevelLength {low, medium, high}
 
-	public Difficulty CURRENT_DIFFICULTY = Difficulty.hard;
-	public EnemyCount CURRENT_ENEMYCOUNT = EnemyCount.high;
-	public ItemCount CURRENT_ITEMCOUNT = ItemCount.high;
+	public Difficulty CURRENT_DIFFICULTY = Difficulty.easy;
+	public EnemyCount CURRENT_ENEMYCOUNT = EnemyCount.low;
+	public ItemCount CURRENT_ITEMCOUNT = ItemCount.low;
 	public LevelLength CURRENT_LEVELLENGTH = LevelLength.low;
 
 	private static DifficultyManager instance;
