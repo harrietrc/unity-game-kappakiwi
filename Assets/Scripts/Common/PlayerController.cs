@@ -69,13 +69,6 @@ public class PlayerController : MonoBehaviour {
 			break;
 				}
 
-		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
-			factory = new EndlessGameObjectFactory();
-		} else {
-			Debug.Log("factory is nullobjectfactory");
-			factory = new NullGameObjectFactory();
-		}
-
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		// Apply Xmas theme if relevant
 		if (LevelSelection.CURRENT_THEME == Theme.xmas) {
