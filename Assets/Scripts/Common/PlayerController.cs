@@ -57,12 +57,17 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
+		switch (LevelSelection.CURRENT_GAMEMODE) {
+		case GameMode.endless:
 			factory = new EndlessGameObjectFactory();
-		} else {
-			Debug.Log("factory is nullobjectfactory");
+			break;
+		case GameMode.scenario:
+			factory = new ScenarioGameObjectFactory();
+			break;
+		case GameMode.story:
 			factory = new NullGameObjectFactory();
-		}
+			break;
+				}
 
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		// Apply Xmas theme if relevant
@@ -72,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
 		}
 
+		PlayerPrefs.SetString ("LoadedLevel", Application.loadedLevelName);
 		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
@@ -98,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 			transform.position += Vector3.right * Constants.SPEED_MOVE * Time.deltaTime;
 			spriteRenderer.sprite = spriteFlipped;
 		}
-		transform.Translate(Input.acceleration.x/3, 0, 0);
+		transform.Translate(Input.acceleration.x/2, 0, 0);
 
 		if (Input.acceleration.x >0) {
 			spriteRenderer.sprite = spriteFlipped;
@@ -109,7 +115,7 @@ public class PlayerController : MonoBehaviour {
 		//calls the screenshifter's update method every frame because the screenshifter script isn't attached to the scene.
 		if (transform.position.y > Constants.SCREEN_SHIFT_THRESHHOLD) {
 			screenShifter.ShiftScreen (-.1f);
-			if(screenShifter.shiftDistance  %40 == 0){
+			if(screenShifter.shiftDistance  %30 == 0){
 				Debug.Log("generating");
 				factory.generateTick();
 			}
@@ -157,9 +163,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnBecameInvisible() {
-
+		PlayAchievement.incrementPlayCount ();
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				PlayerPrefs.SetInt ("Finished",0);
 				Application.LoadLevel ("highscore");
 			} else {
 				Application.LoadLevel ("Exitfailed");
@@ -183,7 +190,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		PlayAchievement.incrementPlayCount ();
 		playerStatus.saveLastScore ();
 		//playerStatus.updateHighScoreList ();
 		//playerStatus.saveHighScoresToPersistence();
@@ -213,7 +219,7 @@ public class PlayerController : MonoBehaviour {
 
 	// method to make player jump
 	public void boostPlayer() {
-		if (!(gameObject.rigidbody2D.velocity.y > 0.0f)) {
+		if (!(gameObject.rigidbody2D.velocity.y > 0.5f)) {
 
 			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
@@ -303,7 +309,9 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(playerStatus.weight, playerStatus.weight, 1);
 		}
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
+			PlayAchievement.incrementPlayCount ();
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				PlayerPrefs.SetInt ("Finished",1);
 				Application.LoadLevel ("highscore");
 			} else {
 				Application.LoadLevel ("ExitSuccess");

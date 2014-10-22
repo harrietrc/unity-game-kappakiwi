@@ -32,6 +32,14 @@ public class LayerCollisions : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision (8,13); // enemies with platformabove
 		Physics2D.IgnoreLayerCollision (8,14); // enemies with the default layer
 
+		Physics2D.IgnoreLayerCollision (0,8); // enemies with enemies
+		Physics2D.IgnoreLayerCollision (0,10); // enemies with platform below
+		Physics2D.IgnoreLayerCollision (0,11); // enemies with background
+		Physics2D.IgnoreLayerCollision (0,12); // enemies with flag
+		Physics2D.IgnoreLayerCollision (0,13); // enemies with platformabove
+		Physics2D.IgnoreLayerCollision (0,14); // enemies with the default layer
+
+
 		Physics2D.IgnoreLayerCollision (9,10); // player with platformAbove
 		Physics2D.IgnoreLayerCollision (14,14); // items with items
 
