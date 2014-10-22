@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour {
 
 		Vector2 vel = rigidbody2D.velocity;
 		if (!death) {
-			//Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
+			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
 		}
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
