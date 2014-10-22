@@ -16,6 +16,10 @@ public class Score {
 		this.score = score + (100 * multiplier);
 	}
 
+	public void increaseScoreByEnemy() {
+		this.score = score + (100 * multiplier);
+	}
+
 	//Increase score by 50 when picking up healthy food
 	public void increaseScoreByHealthyFood() {
 		this.score = score + (50 * multiplier);

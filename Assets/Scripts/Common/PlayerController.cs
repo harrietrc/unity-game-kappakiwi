@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private GameObjectFactory factory = new NullGameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
-	private PlayerStatus playerStatus = new PlayerStatus();
+	public PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 	private GameObject multiplierText;
 
@@ -105,16 +105,18 @@ public class PlayerController : MonoBehaviour {
 
 		achievementManager.checkAchievements ();
 		updateScore ();
-		failIfBelowScreen ();
-		horizontalTeleport ();
 		handleTeleport();
 	}
+	void OnBecameInvisible() {
+		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
+			Application.LoadLevel ("ExitFailed");
+		}
 
+	}
 	void handleTeleport() {
 		
 		var vertExtent = Camera.main.camera.orthographicSize;
 		var horzExtent = vertExtent * Screen.width / Screen.height; 
-		
 		var width = renderer.bounds.size.x / 2 + 0.5f; 
 		var height = renderer.bounds.size.y / 2 + 0.5f;
 		
@@ -135,26 +137,7 @@ public class PlayerController : MonoBehaviour {
 		playerStatus.displayPersistentHighScores ();
 		achievementManager.saveAchievementsToPersistence ();
 	}
-	private void failIfBelowScreen(){
 
-		if (transform.position.y < Constants.FAIL_THRESHHOLD) {
-			Debug.Log ("failed because y was less than " + Constants.FAIL_THRESHHOLD);
-			Application.LoadLevel ("ExitFailed");
-		}
-	}
-
-	private void horizontalTeleport() {
-		Vector2 playerPosScreenPoint = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x, transform.position.y));
-		Vector2 screenBounds = new  Vector2 (Screen.width, Screen.height);
-
-		if (playerPosScreenPoint.x > screenBounds.x) {
-			//TODO Teleport to the left
-			// may need to convert screen bounds to world point
-		}
-		else if (playerPosScreenPoint.x < 0) {
-			//TODO Teleport to the right
-		}
-	}
 
 	public void setFactoryDependency(GameObjectFactory dependency){
 		this.factory = dependency;
