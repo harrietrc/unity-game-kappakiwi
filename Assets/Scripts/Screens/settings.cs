@@ -159,14 +159,17 @@ public class settings : MonoBehaviour
 				}
 		
 				if (endlessDifficultyIndex == 0) {
-						// Easy
-						Debug.Log("Easy: not implemented");
+					DifficultyManager.Instance.CURRENT_DIFFICULTY = DifficultyManager.Difficulty.easy;
+					DifficultyManager.Instance.CURRENT_ENEMYCOUNT = DifficultyManager.EnemyCount.low;
+					DifficultyManager.Instance.CURRENT_ITEMCOUNT = DifficultyManager.ItemCount.low;
 				} else if (endlessDifficultyIndex == 1) {
-						// Medium
-						Debug.Log("Medium: not implemented");
+					DifficultyManager.Instance.CURRENT_DIFFICULTY = DifficultyManager.Difficulty.medium;
+					DifficultyManager.Instance.CURRENT_ENEMYCOUNT = DifficultyManager.EnemyCount.medium;
+					DifficultyManager.Instance.CURRENT_ITEMCOUNT = DifficultyManager.ItemCount.medium;
 				} else if (endlessDifficultyIndex == 2) {
-						// Hard
-						Debug.Log("Hard: not implemented");
+					DifficultyManager.Instance.CURRENT_DIFFICULTY = DifficultyManager.Difficulty.hard;
+					DifficultyManager.Instance.CURRENT_ENEMYCOUNT = DifficultyManager.EnemyCount.high;
+					DifficultyManager.Instance.CURRENT_ITEMCOUNT = DifficultyManager.ItemCount.high;
 				}
 		}
 
