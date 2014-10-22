@@ -47,8 +47,8 @@ public class CustomScenario : MonoBehaviour
 		
 				if (hit) {
 						if (hit.collider.gameObject.name == "start-label") {
-								Application.LoadLevel ("");
-								Debug.Log ("Not implemented");
+								LevelSelection.CURRENT_GAMEMODE = GameMode.scenario;
+								Application.LoadLevel ("scn_scenario");
 						}
 				}
 		}
@@ -99,14 +99,11 @@ public class CustomScenario : MonoBehaviour
 				}
 
 				if (levelLengthIndex == 0) {
-						// Short
-						Debug.Log ("Short: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_LEVELLENGTH = DifficultyManager.LevelLength.low;
 				} else if (levelLengthIndex == 1) {
-						// Medium
-						Debug.Log ("Medium: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_LEVELLENGTH = DifficultyManager.LevelLength.medium;
 				} else if (levelLengthIndex == 2) {
-						// Long
-						Debug.Log ("Long: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_LEVELLENGTH = DifficultyManager.LevelLength.high;
 				}
 		}
 
@@ -144,14 +141,11 @@ public class CustomScenario : MonoBehaviour
 				}
 
 				if (enemyCountIndex == 0) {
-						// Low
-						Debug.Log ("Low: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_ENEMYCOUNT = DifficultyManager.EnemyCount.low;
 				} else if (enemyCountIndex == 1) {
-						// Medium
-						Debug.Log ("Medium: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_ENEMYCOUNT = DifficultyManager.EnemyCount.medium;
 				} else if (enemyCountIndex == 2) {
-						// High
-						Debug.Log ("High: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_ENEMYCOUNT = DifficultyManager.EnemyCount.high;
 				}
 		}
 
@@ -189,14 +183,11 @@ public class CustomScenario : MonoBehaviour
 				}
 
 				if (itemCountIndex == 0) {
-						// Low
-						Debug.Log ("Low: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_ITEMCOUNT = DifficultyManager.ItemCount.low;
 				} else if (itemCountIndex == 1) {
-						// Medium
-						Debug.Log ("Medium: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_ITEMCOUNT = DifficultyManager.ItemCount.medium;
 				} else if (itemCountIndex == 2) {
-						// High
-						Debug.Log ("High: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_ITEMCOUNT = DifficultyManager.ItemCount.high;
 				}
 		}
 
@@ -234,14 +225,11 @@ public class CustomScenario : MonoBehaviour
 				}
 
 				if (difficultyIndex == 0) {
-						// Easy
-						Debug.Log ("Easy: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_DIFFICULTY = DifficultyManager.Difficulty.easy;
 				} else if (difficultyIndex == 1) {
-						// Medium
-						Debug.Log ("Medium: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_DIFFICULTY = DifficultyManager.Difficulty.medium;
 				} else if (difficultyIndex == 2) {
-						// Hard
-						Debug.Log ("Hard: Not yet implemented");
+					DifficultyManager.Instance.CURRENT_DIFFICULTY = DifficultyManager.Difficulty.hard;
 				}
 		}
 }

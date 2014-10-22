@@ -15,7 +15,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 
 	public override void generateLevelStart(){
 		float y = -1.0f;
-		for (int i = 0; i < 9; i ++) {
+		for (int i = 0; i < 8; i ++) {
 			rng.generateNextState();
 			float lastX = generateOneTickPlatforms(y, (i==0));
 			if(i == 0){
