@@ -8,9 +8,9 @@ public class DifficultyManager {
 	public enum ItemCount {low, medium, high}
 	public enum LevelLength {low, medium, high}
 
-	public Difficulty CURRENT_DIFFICULTY = Difficulty.easy;
-	public EnemyCount CURRENT_ENEMYCOUNT = EnemyCount.low;
-	public ItemCount CURRENT_ITEMCOUNT = ItemCount.low;
+	public Difficulty CURRENT_DIFFICULTY = Difficulty.hard;
+	public EnemyCount CURRENT_ENEMYCOUNT = EnemyCount.high;
+	public ItemCount CURRENT_ITEMCOUNT = ItemCount.high;
 	public LevelLength CURRENT_LEVELLENGTH = LevelLength.low;
 
 	private static DifficultyManager instance;
@@ -36,10 +36,10 @@ public class DifficultyManager {
 				index = Random.Range(0,7);
 				switch(index){
 				case 0:
-				return RNGState.itemType.none;
+					return RNGState.itemType.healthy;
 					break;
 				case 1:
-				return RNGState.itemType.none;
+					return RNGState.itemType.junk;
 					break;
 				case 2:
 					return RNGState.itemType.none;
@@ -105,16 +105,16 @@ public class DifficultyManager {
 			index = Random.Range(0,13);
 			switch(index){
 			case 0:
-				return RNGState.enemyType.none;
+				return RNGState.enemyType.falling;
 				break;
 			case 1:
-				return RNGState.enemyType.none;
+				return RNGState.enemyType.patrol;
 				break;
 			case 2:
-				return RNGState.enemyType.none;
+				return RNGState.enemyType.shooting;
 				break;
 			case 3:
-				return  RNGState.enemyType.none;
+				return  RNGState.enemyType.stationary;
 				break;
 			case 4:
 				return RNGState.enemyType.none;
@@ -210,10 +210,10 @@ public class DifficultyManager {
 			index = Random.Range(0,8);
 			switch(index){
 			case 0:
-				return RNGState.platformType.standard;
+				return RNGState.platformType.collapsing;
 				break;
 			case 1:
-				return RNGState.platformType.standard;
+				return RNGState.platformType.moving;
 				break;
 			case 2:
 				return RNGState.platformType.standard;
@@ -280,7 +280,7 @@ public class DifficultyManager {
 
 		switch (CURRENT_LEVELLENGTH) {
 		case LevelLength.low:
-			return 1;
+			return 20;
 			break;
 		case LevelLength.medium:
 			return 50;
