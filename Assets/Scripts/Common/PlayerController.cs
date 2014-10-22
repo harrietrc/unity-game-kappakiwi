@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 			transform.position += Vector3.right * Constants.SPEED_MOVE * Time.deltaTime;
 			spriteRenderer.sprite = spriteFlipped;
 		}
-		transform.Translate(Input.acceleration.x/3, 0, 0);
+		transform.Translate(Input.acceleration.x/2, 0, 0);
 
 		if (Input.acceleration.x >0) {
 			spriteRenderer.sprite = spriteFlipped;
