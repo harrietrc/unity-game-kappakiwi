@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HighScoreScript : MonoBehaviour {
 
-	private string name = "Enter your name here";
+	private string name = "Enter name";
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +27,7 @@ public class HighScoreScript : MonoBehaviour {
 		GUI.Label (new Rect(Screen.width * 0.35f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "New Highscore!", style);
 		GUI.Label (new Rect(Screen.width * 0.35f, Screen.height * 0.20f, Screen.width * 0.8f, Screen.height * 0.2f), PlayerPrefs.GetInt ("LastScore").ToString (), style);
 
-		this.name = GUI.TextField (new Rect (Screen.width * 0.35f, Screen.height * 0.35f, Screen.width * 0.3f, Screen.height * 0.1f), name, 25);
+		this.name = GUI.TextField (new Rect (Screen.width * 0.35f, Screen.height * 0.35f, Screen.width * 0.3f, Screen.height * 0.1f), name, 10);
 
 		PlayerPrefs.SetString ("NewName", this.name);
 
@@ -37,9 +37,9 @@ public class HighScoreScript : MonoBehaviour {
 
 
 			if (PlayerPrefs.GetInt ("Finished") == 0) {
-				Application.LoadLevel("exitSuccess");
-			}else{
 				Application.LoadLevel("exitFailed");
+			}else if (PlayerPrefs.GetInt ("Finished") == 1){
+				Application.LoadLevel("exitSuccess");
 			}
 		}
 	}

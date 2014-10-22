@@ -76,24 +76,30 @@ public class exitSuccess : MonoBehaviour {
 		GUIStyle style = new GUIStyle (GUI.skin.label);
 		
 		style.font = (Font)Resources.Load ("font/Animated");
-		style.fontSize = 30;
+		style.fontSize = 50;
 		style.normal.textColor = Color.black;
 
-		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Congratulations, you have passed this level!", style);
+		GUIStyle titleStyle = new GUIStyle (GUI.skin.label);
 		
-		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ", style);
+		titleStyle.font = (Font)Resources.Load ("font/Animated");
+		titleStyle.fontSize = 60;
+		titleStyle.normal.textColor = Color.black;
+
+		GUI.Label (new Rect(Screen.width * 0.30f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "CONGRATULATIONS", titleStyle);
+		
+           GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.40f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ", style);
 		
 		if (GUI.Button (new Rect (Screen.width * 0.15f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Play again", style )) {
 			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME );
 				};
 		
-		if(GUI.Button (new Rect(Screen.width * 0.65f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f), "Next level", style)){
+		if(GUI.Button (new Rect (Screen.width * 0.25f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Next level", titleStyle)){
 			LevelSelection.LEVEL = LevelSelection.LEVEL + 1;
 			LevelSelection.CURRENT_THEME = Theme.story;
 			ScreenTransitionManager.Instance.loadLevel(LevelSelection.LEVEL,LevelSelection.CURRENT_THEME);
 		};
 
-		if (GUI.Button (new Rect (Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu", style)) {
+		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Back to menu", titleStyle)) {
 			Application.LoadLevel("WelcomeScreen");		
 		}
 

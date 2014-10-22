@@ -52,8 +52,8 @@ public class exitFailed : MonoBehaviour {
 		highScores.Add(PlayerPrefs.GetInt (highScoreNames[3]));
 		highScores.Add(PlayerPrefs.GetInt (highScoreNames[4]));
 
-		float tempX = 0.7f;
-		float tempY = 0.8f;
+		float tempX = 0.5f;
+		float tempY = 0.6f;
 		GameObject h;
 	
 		for (int i = 0; i < 5; i++) {
@@ -63,7 +63,8 @@ public class exitFailed : MonoBehaviour {
 			h.transform.position = new Vector3(tempX,tempY,0);
 			h.guiText.text = (i+1) + ": " + highScoreNames[i] + " " + highScores[i];
 			h.guiText.material.color = Color.black;
-			tempY -= 0.1f;
+			h.guiText.fontSize = 30;
+			tempY -= 0.05f;
 		}
 	}
 	
@@ -79,19 +80,25 @@ public class exitFailed : MonoBehaviour {
 		style.fontSize = 50;
 		style.normal.textColor = Color.black;
 
-		GUI.Label (new Rect(Screen.width * 0.6f, Screen.height * 0.15f, Screen.width * 0.8f, Screen.height * 0.1f), "Highscores", style);
+		GUIStyle titleStyle = new GUIStyle (GUI.skin.label);
 
-		GUI.Label (new Rect(Screen.width * 0.35f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Game Over", style);
+		titleStyle.font = (Font)Resources.Load ("font/Animated");
+		titleStyle.fontSize = 60;
+		titleStyle.normal.textColor = Color.black;
+
+		GUI.Label (new Rect(Screen.width * 0.5f, Screen.height * 0.30f, Screen.width * 0.8f, Screen.height * 0.1f), "Highscores", style);
+
+		GUI.Label (new Rect(Screen.width * 0.30f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "GAME OVER", titleStyle);
 
 		float lastscore = PlayerPrefs.GetInt ("LastScore");
 
-		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: " + lastscore, style);
+		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.40f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: " + lastscore, style);
 
-		if (GUI.Button (new Rect (Screen.width * 0.25f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Try again", style)) {
+		if (GUI.Button (new Rect (Screen.width * 0.25f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Try again", titleStyle)) {
 			Application.LoadLevel ("levelSelection");
 		}
 
-		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Back to menu", style)) {
+		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Back to menu", titleStyle)) {
 			Application.LoadLevel("WelcomeScreen");		
 		}
 
