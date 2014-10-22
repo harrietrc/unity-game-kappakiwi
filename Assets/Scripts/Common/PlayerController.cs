@@ -114,6 +114,8 @@ public class PlayerController : MonoBehaviour {
 		achievementManager.checkAchievements ();
 		updateScore ();
 		handleTeleport();
+
+
 	}
 
 
