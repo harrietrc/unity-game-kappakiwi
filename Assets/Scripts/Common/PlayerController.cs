@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip eatCandySound;
 	public AudioClip thudSound; //if necessary it'll be added.
 	public AudioClip eatChipsSound;
-
 	// Enemy collision sounds
 	public AudioClip enemyRocketSound;
 	public AudioClip enemyAlienSound;
