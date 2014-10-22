@@ -81,14 +81,48 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 
 
 			currentRNGState.platformYVariance[i] = Random.Range(minYVariance, maxYVariance);
-			
-			currentRNGState.platformTypes[i] = DifficultyManager.Instance.createPlatformType();
+
+			int index = 0;
+			index = Random.Range(0,6);
+			switch(index){
+			case 0:
+				currentRNGState.platformTypes[i] = RNGState.platformType.collapsing;
+				break;
+			case 1:
+				currentRNGState.platformTypes[i] = RNGState.platformType.moving;
+				break;
+			case 3:
+				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
+				break;
+			case 4:
+				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
+				break;
+			case 5:
+				currentRNGState.platformTypes[i] = RNGState.platformType.standard;
+				break;
+			}
 		}
 		for(int i = 0; i < currentRNGState.itemCount; i++){ 
 			currentRNGState.itemXVariance[i] = currentRNGState.platformXVariance[i];
 			currentRNGState.itemYVariance[i] = currentRNGState.platformYVariance[i];
+
+			int index = 0;
+			index = Random.Range(0,5);
+			switch(index){
+			case 0:
+				currentRNGState.itemTypes[i] = RNGState.itemType.healthy;
+				break;
+			case 1:
+				currentRNGState.itemTypes[i] = RNGState.itemType.junk;
+				break;
+			case 2:
+				currentRNGState.itemTypes[i] = RNGState.itemType.none;
+				break;
+			case 3:
+				currentRNGState.itemTypes[i] = RNGState.itemType.none;
+				break;
 			
-			currentRNGState.itemTypes[i] = DifficultyManager.Instance.createItemType();
+			}
 		}
 		for(int i = 0; i < currentRNGState.obstacleCount; i++){ 
 			currentRNGState.obstacleXVariance[i] = Random.Range(minXVariance, maxXVariance);
@@ -127,8 +161,36 @@ public class EndlessRNGStateGenerator : RNGStateGenerator {
 		for(int i = 0; i < currentRNGState.enemyCount; i++){ 
 			currentRNGState.enemyXVariance[i] = Random.Range(minXVariance, maxXVariance);
 			currentRNGState.enemyYVariance[i] = Mathf.Max(currentRNGState.platformYVariance) + Random.Range(minYVariance, maxYVariance);
-			
-			currentRNGState.enemyTypes[i] = DifficultyManager.Instance.createEnemyType();
+		
+			int index = 0;
+			index = Random.Range(0,8);
+			switch(index){
+			case 0:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.falling;
+				break;
+			case 1:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.patrol;
+				break;
+			case 2:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.shooting;
+				break;
+			case 3:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.stationary;
+				break;
+			case 4:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+			case 5:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+			case 6:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+			case 7:
+				currentRNGState.enemyTypes[i] = RNGState.enemyType.none;
+				break;
+
+			}
 		}
 	}
 

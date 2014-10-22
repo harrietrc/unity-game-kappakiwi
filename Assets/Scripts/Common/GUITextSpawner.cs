@@ -8,7 +8,7 @@ public class GUITextSpawner
 	private List<GameObject> GUITextObjects;
 	
 	private string defaultText;
-	public Vector2 defaultCoords;
+	private Vector2 defaultCoords;
 	private int defaultFontSize;
 	private FontStyle defaultFontStyle;
 	private Color defaultColor;
