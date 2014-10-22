@@ -166,6 +166,7 @@ public class PlayerController : MonoBehaviour {
 		PlayAchievement.incrementPlayCount ();
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				PlayerPrefs.SetInt ("Finished",0);
 				Application.LoadLevel ("highscore");
 			} else {
 				Application.LoadLevel ("Exitfailed");
@@ -312,6 +313,7 @@ public class PlayerController : MonoBehaviour {
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
 				Application.LoadLevel ("highscore");
 			} else {
+				PlayerPrefs.SetInt ("Finished",0);
 				Application.LoadLevel ("ExitSuccess");
 			}
 		}

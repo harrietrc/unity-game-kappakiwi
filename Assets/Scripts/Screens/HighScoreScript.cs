@@ -34,7 +34,13 @@ public class HighScoreScript : MonoBehaviour {
 		Debug.Log (PlayerPrefs.GetString ("NewName"));
 
 		if (GUI.Button (new Rect (300, 150, 300, 50), "Continue")) {
-			Application.LoadLevel("exitFailed");
+
+
+			if (PlayerPrefs.GetInt ("Finished") == 0) {
+				Application.LoadLevel("exitSuccess");
+			}else{
+				Application.LoadLevel("exitFailed");
+			}
 		}
 	}
 }
