@@ -88,7 +88,7 @@ public class settings : MonoBehaviour
 		private void theme ()
 		{
 				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.25f, 400, 500);
-				int height = 150;
+				int height = 125;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showTheme) {
 								showTheme = true;
@@ -115,7 +115,7 @@ public class settings : MonoBehaviour
 			
 						GUI.EndScrollView ();   
 				} else {
-						GUI.Label (new Rect ((dropDownRect.x), dropDownRect.y, 300, height), themeImages [themeIndex]);
+						GUI.Label (new Rect ((dropDownRect.x), dropDownRect.y, dropDownRect.width, height), themeImages [themeIndex]);
 				}
 		
 				if (themeIndex == 0) {
@@ -127,8 +127,8 @@ public class settings : MonoBehaviour
 
 		private void endlessDifficulty ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.6f, 400, 500);
-				int height = 80;
+				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.61f, 400, 500);
+				int height = 75;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showEndlessDifficulty) {
 								showEndlessDifficulty = true;
