@@ -158,9 +158,6 @@ public class PlayerController : MonoBehaviour {
 		
 		var vertExtent = Camera.main.camera.orthographicSize;
 		var horzExtent = vertExtent * Screen.width / Screen.height; 
-		var width = renderer.bounds.size.x / 2 + 0.5f; 
-		var height = renderer.bounds.size.y / 2 + 0.5f;
-		
 		if (transform.position.x <= (horzExtent * -1)) 
 		{
 			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);      
@@ -202,10 +199,14 @@ public class PlayerController : MonoBehaviour {
 
 	// method to make player jump
 	public void boostPlayer() {
-		Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
-		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.AddForce (jumpForce);
+		if (!(gameObject.rigidbody2D.velocity.y > 0.0f)) {
+
+			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
+			rigidbody2D.velocity = Vector2.zero;
+			rigidbody2D.AddForce (jumpForce);
+		}
 	}
+
 
 	private void handlePlatformCollision(Collision2D coll){
 		if (( coll.gameObject.tag == Tags.TAG_PLATFORM || coll.gameObject.tag == "pref_collapsing_platform" ) 
