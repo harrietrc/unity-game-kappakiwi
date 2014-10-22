@@ -50,8 +50,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 		generateOneTickPlatforms (height, false);
 		generateOneTickItems (height+.75f);
 		generateOneTickEnemies (height,false);
-	//	generateOneTickObstacles (height);
-
+	
 	}
 
 
@@ -185,44 +184,6 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			} 
 			try{
 				this.newEnemy.transform.position = new Vector3 (currentX + rng.currentRNGState.enemyXVariance[j], y + rng.currentRNGState.enemyYVariance[j], 0.0f);
-			}catch (System.Exception e) {
-				Debug.Log("Exception " + e);
-			}
-			currentX += 4.0f;
-		}
-	}
-
-	private void generateOneTickObstacles(float y){
-		float currentX = 0.0f;
-		switch (rng.currentRNGState.obstacleCount) {
-		case(1):
-			currentX = 0.0f;
-			break;
-		case(2):
-			currentX = -2.0f;
-			break;
-		case(3):
-			currentX = -4.0f;
-			break;
-		case(4):
-			currentX = -6.0f;
-			break;
-		case(5):
-			currentX = -8.0f;
-			break;
-		}
-		for (int j = 0; j < rng.currentRNGState.obstacleCount; j++) {
-			switch(rng.currentRNGState.obstacleTypes[j]){
-			case RNGState.obstacleType.turret:
-				this.newObstacle = (GameObject)Instantiate (Resources.Load ("Prefabs/Obstacles/" + "junkfood_turret"));
-				break;
-			case RNGState.obstacleType.none:
-				this.newObstacle = null;
-				var temp = 0;
-				break;
-			}
-			try{
-				this.newObstacle.transform.position = new Vector3 (currentX + rng.currentRNGState.obstacleXVariance[j], y + rng.currentRNGState.obstacleYVariance[j], 0.0f);
 			}catch (System.Exception e) {
 				Debug.Log("Exception " + e);
 			}
