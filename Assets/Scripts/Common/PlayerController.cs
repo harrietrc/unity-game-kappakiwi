@@ -111,10 +111,9 @@ public class PlayerController : MonoBehaviour {
 	void OnBecameInvisible() {
 
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
-			if (playerStatus.score.getScore () > PlayerPrefs.GetInt ("HighScore5")) {
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
 				Application.LoadLevel ("highscore");
 			} else {
-				Debug.Log ("here");
 				Application.LoadLevel ("Exitfailed");
 			}
 		}
