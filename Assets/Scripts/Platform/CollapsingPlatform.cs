@@ -3,9 +3,22 @@ using System.Collections;
 
 public class CollapsingPlatform : Platform {
 	int count = 1;
+	GameObject player;
+	PlayerController playerScript;
+
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag(Tags.TAG_PLAYER);
+		playerScript = (PlayerController) player.GetComponent(typeof(PlayerController));
+	}
+
+	void OnBecameVisible() {
+		playerScript.addPlatformToList(gameObject);
+		
+	}
 	
+	void OnBecameInvisible() {
+		playerScript.removePlatformToList(gameObject);
 	}
 	
 	// Update is called once per frame

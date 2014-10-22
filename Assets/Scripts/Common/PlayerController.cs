@@ -77,9 +77,13 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
+
+		updatePlatformLayer();
+
+
 		Vector2 vel = rigidbody2D.velocity;
 		if (!death) {
-			Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
+			//Physics2D.IgnoreLayerCollision (10,9,vel.y > 0.0f);
 		}
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
@@ -114,7 +118,22 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
+	private void updatePlatformLayer() {
+		float playerPos = transform.position.y - renderer.bounds.size.y / 2;
 
+		for (int i = 0; i < listOfPlatforms.Count; i++) {
+			if(listOfPlatforms[i] != null){
+				if(listOfPlatforms[i].transform.position.y > playerPos) {
+				// layer 10 is platform below
+				// layer 13 is platform above
+					listOfPlatforms[i].layer = 13;
+				} else {
+					listOfPlatforms[i].layer = 10;
+				}
+
+			}
+		}
+	}
 	public void addPlatformToList(GameObject newPlatform) {
 		listOfPlatforms.Add(newPlatform);
 	}
