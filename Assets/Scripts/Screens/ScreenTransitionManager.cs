@@ -23,8 +23,11 @@ public class ScreenTransitionManager {
 	public void loadLevel(int level, Theme theme){
 
 		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
-			Application.LoadLevel("scn_mock");
-			return;
+						Application.LoadLevel ("scn_endless");
+						return;
+				} else if (LevelSelection.CURRENT_GAMEMODE == GameMode.scenario) {
+						Application.LoadLevel("scn_scenario");
+						return;
 				}
 		switch (LevelSelection.LEVEL) {
 		case 1:
