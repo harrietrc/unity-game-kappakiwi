@@ -53,7 +53,7 @@ public class HighScoreScript : MonoBehaviour {
 		// For displaying score figure
 		GUI.Label (new Rect (0, Screen.height * 0.3f, Screen.width, Screen.height * 0.2f), PlayerPrefs.GetInt ("LastScore").ToString (), style);
 
-		this.name = GUI.TextField (new Rect (Screen.width * 0.2f, Screen.height * 0.45f, Screen.width * 0.6f, Screen.height*0.06f), name, 10);
+		this.name = GUI.TextField (new Rect (Screen.width * 0.2f, Screen.height * 0.6f, Screen.width * 0.6f, Screen.height*0.06f), name, 10);
 		
 		PlayerPrefs.SetString ("NewName", this.name);
 
