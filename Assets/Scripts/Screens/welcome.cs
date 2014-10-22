@@ -29,9 +29,6 @@ public class welcome : MonoBehaviour {
 		float newSize = (16f/9f) *screenProp; 
 		backgroundImg.transform.localScale = new Vector3 (newSize, 1, 1);
 
-		// Change the size and position of the play and settings button
-		playBtn.transform.localScale = new Vector3 (newSize, 1, 1);
-		settingsBtn.transform.localScale = new Vector3 (newSize, 1, 1);
 	}
 
 	void Update(){
@@ -76,6 +73,13 @@ public class welcome : MonoBehaviour {
 				Debug.Log ("Settings Clicked");
 				sceneEnding = true;
 				destination = "Settings";
+				//Application.LoadLevel ("scn_settings");
+			}
+
+			if (hit.collider.gameObject.name == "Achievements"){
+				Debug.Log ("Achievement Clicked");
+				sceneEnding = true;
+				destination = "Achievements";
 				//Application.LoadLevel ("scn_settings");
 			}
 
@@ -137,6 +141,8 @@ public class welcome : MonoBehaviour {
 				Application.LoadLevel ("LevelSelection");
 			}else if(destination == "Settings"){
 				Application.LoadLevel ("scn_settings");
+			}else if(destination == "Achievements"){
+				Application.LoadLevel("scn_achievements");
 			}
 		}
 	}
