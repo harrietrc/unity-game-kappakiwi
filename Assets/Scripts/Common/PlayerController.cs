@@ -311,9 +311,9 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == Tags.TAG_FLAG) {
 			PlayAchievement.incrementPlayCount ();
 			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				PlayerPrefs.SetInt ("Finished",1);
 				Application.LoadLevel ("highscore");
 			} else {
-				PlayerPrefs.SetInt ("Finished",0);
 				Application.LoadLevel ("ExitSuccess");
 			}
 		}

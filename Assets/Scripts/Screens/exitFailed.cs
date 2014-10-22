@@ -79,9 +79,9 @@ public class exitFailed : MonoBehaviour {
 		style.fontSize = 50;
 		style.normal.textColor = Color.black;
 
-		GUI.Label (new Rect(Screen.width * 0.7f, Screen.height * 0.15f, Screen.width * 0.8f, Screen.height * 0.1f), "Highscores", style);
+		GUI.Label (new Rect(Screen.width * 0.6f, Screen.height * 0.15f, Screen.width * 0.8f, Screen.height * 0.1f), "Highscores", style);
 
-		GUI.Label (new Rect(Screen.width * 0.5f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Game Over", style);
+		GUI.Label (new Rect(Screen.width * 0.35f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Game Over", style);
 
 		float lastscore = PlayerPrefs.GetInt ("LastScore");
 
@@ -91,7 +91,7 @@ public class exitFailed : MonoBehaviour {
 			Application.LoadLevel ("levelSelection");
 		}
 
-		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.1f), "Back to menu", style)) {
+		if (GUI.Button (new Rect (Screen.width * 0.55f, Screen.height * 0.75f, Screen.width * 0.2f, Screen.height * 0.25f), "Back to menu", style)) {
 			Application.LoadLevel("WelcomeScreen");		
 		}
 
