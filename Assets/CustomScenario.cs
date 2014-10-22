@@ -67,8 +67,8 @@ public class CustomScenario : MonoBehaviour
 		// Dividing the dropdowns among functions for the sake of sanity and tidier code
 		private void levelLength ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.25f, 200, 250);
-				int height = 75;
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.25f, 200, 250);
+				int height = 50;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showLevelLength) {
 								showLevelLength = true;
@@ -109,8 +109,8 @@ public class CustomScenario : MonoBehaviour
 
 		private void enemyCount ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.35f, 200, 250);
-				int height = 75;
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.4f, 200, 250);
+				int height = 50;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showEnemyCount) {
 								showEnemyCount = true;
@@ -151,8 +151,8 @@ public class CustomScenario : MonoBehaviour
 
 		private void itemCount ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.45f, 200, 250);
-				int height = 75;
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.55f, 200, 250);
+				int height = 50;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showItemCount) {
 								showItemCount = true;
@@ -193,8 +193,8 @@ public class CustomScenario : MonoBehaviour
 
 		private void difficulty ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.55f, 200, 250);
-				int height = 75;
+				Rect dropDownRect = new Rect (Screen.width * 0.6f, Screen.height * 0.7f, 200, 250);
+				int height = 50;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showDifficulty) {
 								showDifficulty = true;

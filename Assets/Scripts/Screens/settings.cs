@@ -127,8 +127,8 @@ public class settings : MonoBehaviour
 
 		private void endlessDifficulty ()
 		{
-				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.55f, 400, 500);
-				int height = 100;
+				Rect dropDownRect = new Rect (Screen.width * 0.4f, Screen.height * 0.6f, 400, 500);
+				int height = 80;
 				if (GUI.Button (new Rect ((dropDownRect.x - 5), dropDownRect.y, dropDownRect.width, height), "")) {
 						if (!showEndlessDifficulty) {
 								showEndlessDifficulty = true;
