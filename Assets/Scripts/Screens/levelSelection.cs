@@ -6,26 +6,25 @@ using System.Collections;
  **/
 public class levelSelection : MonoBehaviour {
 
-	// Create empty GUIStyle i.e. no characteristics
-	private GUIStyle invisible = new GUIStyle();
-	public GameObject playButton;
-	// Attach objects on start of script
-	void Start(){
-	
+	public GameObject playBtn, settingsButn;
+	public bool canMute;
+
+	void Update(){
+		if (Input.GetMouseButtonDown (0)) {
+			CastRay ();
+		}
 	}
-	void OnGUI(){
-		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (548, 140, 50, 50), "1", invisible)) {
-			LevelSelection.LEVEL = 1;
-			Application.LoadLevel("level_one");
-		}
-		// Create an invisible button and handle activity
-		if (GUI.Button (new Rect (655, 140, 50, 50), "2", invisible)) {
-			LevelSelection.LEVEL = 2;
-			Application.LoadLevel("level_two");
-		}
-		if (GUI.Button (new Rect (380, 600, 100, 50), "Back")) {
-			Application.LoadLevel("WelcomeScreen");		
+
+	void CastRay() {
+		// Get the ray casted by the mouse (Current position) when the mouse is clicked
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		
+		// Figure out what object the ray collided with
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, Mathf.Infinity);
+		
+		
+		if (hit) {
+			Debug.Log (ray);
 		}
 	}
 }
