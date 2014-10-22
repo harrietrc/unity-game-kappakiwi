@@ -4,7 +4,7 @@ using System.Collections;
 public class CustomScenario : MonoBehaviour
 {
 		private Vector2 scrollViewVector = Vector2.zero;
-		public static string[] levelLengthList = {"Short", "Medium", "Long"};
+		public static string[] levelLengthList = {"Short", "Medium", "Long"}; // These could be taken out but have been left here for readability / possible use later
 		public Texture2D[] levelLengthImages;
 		public static string[] enemyCountList = {"Low", "Medium", "High"};
 		public Texture2D[] enemyCountImages;
