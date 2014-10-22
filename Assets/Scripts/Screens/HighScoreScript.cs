@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HighScoreScript : MonoBehaviour {
 
-	private string name = "";
+	private string name = "Enter Name";
 	public Texture buttonImg;
 
 	// GUI Texture used to fade in and out screen
@@ -53,7 +53,10 @@ public class HighScoreScript : MonoBehaviour {
 		// For displaying score figure
 		GUI.Label (new Rect (0, Screen.height * 0.3f, Screen.width, Screen.height * 0.2f), PlayerPrefs.GetInt ("LastScore").ToString (), style);
 
-		this.name = GUI.TextField (new Rect (Screen.width * 0.2f, Screen.height * 0.6f, Screen.width * 0.6f, Screen.height*0.06f), name, 10);
+		GUIStyle biggerFontSize = new GUIStyle ();
+		biggerFontSize.fontSize = 36;
+		biggerFontSize.alignment = TextAnchor.UpperCenter;
+		this.name = GUI.TextField (new Rect (Screen.width * 0.2f, Screen.height * 0.65f, Screen.width * 0.6f, Screen.height*0.06f), name, 10, biggerFontSize);
 		
 		PlayerPrefs.SetString ("NewName", this.name);
 
@@ -63,6 +66,7 @@ public class HighScoreScript : MonoBehaviour {
 		buttonStyle.fixedHeight = 0;
 		buttonStyle.stretchWidth = true;
 		buttonStyle.stretchHeight = true;
+
 		if (GUI.Button (new Rect (Screen.width*0.2f, Screen.height * 0.8f, Screen.width*0.6f, Screen.height*0.2f), buttonImg, buttonStyle)) {
 			if (PlayerPrefs.GetInt ("Finished") == 0) {
 				destination = "fail";

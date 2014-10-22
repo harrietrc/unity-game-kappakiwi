@@ -72,6 +72,12 @@ public class exitFailed : MonoBehaviour {
 			h = new GameObject();
 			h.AddComponent<GUIText>();
 		}
+		float screenProp = (float)Screen.width / (float)Screen.height;
+		
+		// Change the size of the background image
+		SpriteRenderer backgroundImg = GetComponent<SpriteRenderer> ();
+		float newSize = (16f/9f) *screenProp; 
+		backgroundImg.transform.localScale = new Vector3 (newSize, 1, 1);
 	}
 	// Set up the gui texture
 	void Awake ()
