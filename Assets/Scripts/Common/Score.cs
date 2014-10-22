@@ -36,4 +36,8 @@ public class Score {
 	public int getMultiplier() {
 		return this.multiplier;
 	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 }
