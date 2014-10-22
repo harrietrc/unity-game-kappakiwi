@@ -89,15 +89,14 @@ public class JunkFood : Item {
 	 * to get the index rnd / 10 to get the array index
 	 */
 	void OnCollisionEnter2D (Collision2D col2d) {
-		if (col2d.gameObject.tag == "player" ) {
+		if (col2d.gameObject.name == "player" ) {
 			// to find sound file location in the storySoundLocs
 			loc = rnd / 10;
-
+				
+			//under if colliding with something player
+			itemSound = gameObject.AddComponent<AudioSource>();
+			
 			if (LevelSelection.CURRENT_THEME == Theme.story) {
-
-		       //under if colliding with something player
-		       itemSound = gameObject.AddComponent<AudioSource>();
-		
 		       //get the item sound file under the project
 	    	   // for example, "Resource/Audio/simple-gulp" below for location path
 	           itemSound.clip = Resources.Load(storySoundLocs[loc]) as AudioClip;
@@ -107,10 +106,6 @@ public class JunkFood : Item {
 		       Destroy(itemSound);
 		    }
 			if (LevelSelection.CURRENT_THEME == Theme.xmas) {
-				
-				//under if colliding with something player
-				itemSound = gameObject.AddComponent<AudioSource>();
-				
 				//get the item sound file under the project
 				// for example, "Resource/Audio/simple-gulp" below for location path
 				itemSound.clip = Resources.Load(xmasSoundLocs[loc]) as AudioClip;
