@@ -30,6 +30,7 @@ public class FallingEnemy : Enemy {
 			Destroy(col.gameObject); // destroying the rocket
 			Destroy (gameObject); // destroying the kiwibird
 			Destroy(particle,2.6f); // destroying the explosion prefab after 2.6 seconds which will trigger an event in explosionScript.cs to load exit screen.
+			Application.LoadLevel ("Exitfailed");
 		}
 
 	}
