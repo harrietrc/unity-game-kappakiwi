@@ -96,9 +96,7 @@ public class GameObjectFactory : MonoBehaviour{
 			}
 			try{
 				this.newItem.transform.position = new Vector3 (currentX + rng.currentRNGState.itemXVariance[j], y + rng.currentRNGState.itemYVariance[j], 0.0f);
-			}catch (System.Exception e) {
-				Debug.Log("Exception " + e);
-			}
+			}catch (System.Exception e) {}
 			currentX += 4.0f;
 		}
 		
@@ -135,9 +133,6 @@ public class GameObjectFactory : MonoBehaviour{
 				case RNGState.enemyType.shooting:
 					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
 					break;
-					//				case RNGState.enemyType.stationary:
-					//					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
-					//					break;
 				case RNGState.enemyType.none:
 					this.newEnemy = null;
 					var temp = 0;
@@ -146,9 +141,7 @@ public class GameObjectFactory : MonoBehaviour{
 			} 
 			try{
 				this.newEnemy.transform.position = new Vector3 (currentX + rng.currentRNGState.enemyXVariance[j], y + rng.currentRNGState.enemyYVariance[j], 0.0f);
-			}catch (System.Exception e) {
-				Debug.Log("Exception " + e);
-			}
+			}catch (System.Exception e) {}
 			currentX += 4.0f;
 		}
 	}

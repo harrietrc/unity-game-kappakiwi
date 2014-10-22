@@ -32,8 +32,6 @@ public class DifficultyManager {
 	public RNGState.itemType createItemType(){
 		switch (CURRENT_ITEMCOUNT) {
 			case ItemCount.low:
-			
-			Debug.Log("low item count");
 				int index = 0;
 				index = Random.Range(0,7);
 				switch(index){

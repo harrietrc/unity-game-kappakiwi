@@ -45,7 +45,6 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 			}
 			generateOneTickItems (y+.75f);
 			generateOneTickEnemies (y,(i==0 || i == 1 || i == 2));
-			//	generateOneTickObstacles (y);
 			y += 2.75f;
 		}
 	}
@@ -189,9 +188,6 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 				case RNGState.enemyType.shooting:
 					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "Shooting_enemy"));
 					break;
-					//				case RNGState.enemyType.stationary:
-					//					this.newEnemy = (GameObject)Instantiate (Resources.Load ("Prefabs/Enemies/" + "pref_stationary_enemy"));
-					//					break;
 				case RNGState.enemyType.none:
 					this.newEnemy = null;
 					var temp = 0;
