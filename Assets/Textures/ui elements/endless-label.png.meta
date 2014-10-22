@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 70fdae0e94bcc244bb4bf28eca9b3ca1
+guid: 23486bcead1bd5d4c8db5bc12a71667a
 TextureImporter:
   fileIDToRecycleName:
-    21300000: settings-screen
+    21300000: endless-label
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

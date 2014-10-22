@@ -63,10 +63,10 @@ public class PlayerController : MonoBehaviour {
 			spriteRenderer.sprite = spriteFlipped; // Else the kiwi magically gets a Santa hat...
 		}
 
+		playerStatus.makeHighScoreList ();
 		rigidbody2D.fixedAngle = true;
 		factory.generateLevelStart ();
 		initializeScore ();
-		playerStatus.makeHighScoreList ();
 	}
 
 	void Update ()
@@ -106,12 +106,19 @@ public class PlayerController : MonoBehaviour {
 		updateScore ();
 		handleTeleport();
 	}
+
 	void OnBecameInvisible() {
+
 		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
-			Application.LoadLevel ("ExitFailed");
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt (PlayerPrefs.GetString ("HighScore5"))) {
+				Application.LoadLevel ("highscore");
+			} else {
+				Application.LoadLevel ("Exitfailed");
+			}
 		}
 
 	}
+
 	void handleTeleport() {
 		
 		var vertExtent = Camera.main.camera.orthographicSize;
@@ -131,9 +138,10 @@ public class PlayerController : MonoBehaviour {
 
 	void OnDestroy(){
 		PlayAchievement.incrementPlayCount ();
-		playerStatus.updateHighScoreList ();
-		playerStatus.saveHighScoresToPersistence();
-		playerStatus.displayPersistentHighScores ();
+		playerStatus.saveLastScore ();
+		//playerStatus.updateHighScoreList ();
+		//playerStatus.saveHighScoresToPersistence();
+		//playerStatus.displayPersistentHighScores ();
 		achievementManager.saveAchievementsToPersistence ();
 	}
 
