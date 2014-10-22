@@ -57,12 +57,17 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (LevelSelection.CURRENT_GAMEMODE == GameMode.endless) {
+		switch (LevelSelection.CURRENT_GAMEMODE) {
+		case GameMode.endless:
 			factory = new EndlessGameObjectFactory();
-		} else {
-			Debug.Log("factory is nullobjectfactory");
+			break;
+		case GameMode.scenario:
+			factory = new ScenarioGameObjectFactory();
+			break;
+		case GameMode.story:
 			factory = new NullGameObjectFactory();
-		}
+			break;
+				}
 
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		// Apply Xmas theme if relevant

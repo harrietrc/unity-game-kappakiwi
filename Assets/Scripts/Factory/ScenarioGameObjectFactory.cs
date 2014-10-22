@@ -2,15 +2,41 @@
 using System.Collections;
 
 
-public class EndlessGameObjectFactory : GameObjectFactory {
+public class ScenarioGameObjectFactory : GameObjectFactory {
 
+	private GameObject newPlatform;
+	private GameObject newItem;
+	private GameObject newEnemy;
+	private GameObject newObstacle;
 
-	public EndlessGameObjectFactory(){
+	private int ypos = -2;
+	private int xpos = 2;
 
+	private RNGStateGenerator rng = new EndlessRNGStateGenerator();
+
+	private int length;
+
+	
+	GameObject currentPlatform;
+
+	public ScenarioGameObjectFactory(){
+		rng.generateNextState ();
+
+		switch (DifficultyManager.Instance.CURRENT_DIFFICULTY) {
+		case DifficultyManager.Difficulty.easy:
+			length = 20;
+			break;
+		case DifficultyManager.Difficulty.medium:
+			length = 50;
+			break;
+		case DifficultyManager.Difficulty.hard:
+			length = 100;
+			break;
+				}
 	}
 
 	public void setRNGDependency(RNGStateGenerator dependency){
-		rng = dependency;
+		this.rng = dependency;
 		}
 
 	public override void generateLevelStart(){
@@ -32,16 +58,13 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 
 
 	public override void generateTick(){
+		for (int i = 0; i < this.length; i++) {
 			rng.generateNextState ();
 			
 			float height = 17.0f;
 			generateOneTickPlatforms (height, false);
 			generateOneTickItems (height+.75f);
 			generateOneTickEnemies (height,false);
+				}
 	}
-
-
-
-
-
 }
