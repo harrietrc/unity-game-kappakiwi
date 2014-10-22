@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private GameObjectFactory factory = new NullGameObjectFactory();
 	private ScreenShifter screenShifter = new ScreenShifter();
 	private AchievementManager achievementManager = new AchievementManager();
-	private PlayerStatus playerStatus = new PlayerStatus();
+	public PlayerStatus playerStatus = new PlayerStatus();
 	private GameObject scoreText;
 	private GameObject multiplierText;
 
@@ -110,20 +110,21 @@ public class PlayerController : MonoBehaviour {
 
 	void OnBecameInvisible() {
 
-		
-		if (playerStatus.score.getScore () > PlayerPrefs.GetInt ("HighScore5")) {
-			Application.LoadLevel ("highscore");
-		} else {
-			Debug.Log ("here");
-			Application.LoadLevel ("Exitfailed");
+		if (transform.position.y <= -Camera.main.camera.orthographicSize) {
+			if (playerStatus.score.getScore () > PlayerPrefs.GetInt ("HighScore5")) {
+				Application.LoadLevel ("highscore");
+			} else {
+				Debug.Log ("here");
+				Application.LoadLevel ("Exitfailed");
+			}
 		}
+
 	}
 
 	void handleTeleport() {
 		
 		var vertExtent = Camera.main.camera.orthographicSize;
 		var horzExtent = vertExtent * Screen.width / Screen.height; 
-		print (vertExtent);
 		var width = renderer.bounds.size.x / 2 + 0.5f; 
 		var height = renderer.bounds.size.y / 2 + 0.5f;
 		
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour {
 			//transform.position.x,transform.position.y;
 		} else if ( transform.position.x >= (horzExtent)) 
 		{
-			transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);  
+			transform.position = new Vector3(-transform.position.x,transform.position.y,transform.position.z);  
 		}
 	}
 
@@ -315,6 +316,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(thudSound, transform.position);
 		}
 	}
+
 	//if necessary it'll be added.
 	private void PlayEatChipsSound(){
 		if (eatChipsSound) {
@@ -328,6 +330,7 @@ public class PlayerController : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(enemyRocketSound, transform.position);
 		}
 	}
+
 	private void PlayEnemyAlienSound(){
 		if (enemyAlienSound) {
 			AudioSource.PlayClipAtPoint(enemyAlienSound, transform.position);

@@ -24,6 +24,7 @@ public class exitFailed : MonoBehaviour {
 		playerStatus.updateHighScoreList (this.name);
 		playerStatus.displayHighScoreList ();
 		playerStatus.saveHighScoresToPersistence ();
+
 	}
 	
 	// Update is called once per frame
