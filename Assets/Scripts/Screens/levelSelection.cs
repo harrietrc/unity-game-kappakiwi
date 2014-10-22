@@ -94,6 +94,12 @@ public class levelSelection : MonoBehaviour {
 				LevelSelection.CURRENT_GAMEMODE = GameMode.endless;
 			}
 
+			if (hit.collider.gameObject.name == "custom-button"){
+				destination = "custom";
+				sceneEnding = true;
+				//Application.LoadLevel ("scn_endless");
+			}
+
 			if (hit.collider.gameObject.name == "back-to-menu"){
 				destination = "welcome";
 				sceneEnding = true;
@@ -154,6 +160,8 @@ public class levelSelection : MonoBehaviour {
 				Application.LoadLevel ("scn_endless");
 			}else if(destination == "welcome"){
 				Application.LoadLevel ("WelcomeScreen");
+			}else if(destination == "custom"){
+				Application.LoadLevel ("scn_custom_scenario");
 			}
 		}
 	}
