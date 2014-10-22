@@ -38,7 +38,7 @@ public class EndlessGameObjectFactory : GameObjectFactory {
 			generateOneTickItems (y+.75f);
 			generateOneTickEnemies (y,(i==0));
 		//	generateOneTickObstacles (y);
-			y += 4.0f;
+			y += 3.0f;
 		}
 	}
 
