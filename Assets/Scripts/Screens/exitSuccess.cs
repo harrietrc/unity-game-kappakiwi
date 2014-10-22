@@ -19,7 +19,7 @@ public class exitSuccess : MonoBehaviour {
 		style.font = (Font)Resources.Load ("font/Animated");
 		style.fontSize = 30;
 		style.normal.textColor = Color.black;
-		
+
 		GUI.Label (new Rect(Screen.width * 0.1f, Screen.height * 0.05f, Screen.width * 0.8f, Screen.height * 0.2f), "Congratulations, you have passed this level!", style);
 		
 		GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.35f, Screen.width * 0.25f, Screen.height * 0.2f), "Your score: ", style);
