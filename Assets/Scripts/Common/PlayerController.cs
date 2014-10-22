@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 
 	// method to make player jump
 	public void boostPlayer() {
-		if (!(gameObject.rigidbody2D.velocity.y > 0.0f)) {
+		if (!(gameObject.rigidbody2D.velocity.y > 0.5f)) {
 
 			Vector2 jumpForce = new Vector2(0, Constants.DISTANCE_JUMP + playerStatus.FitnessLevel);
 			rigidbody2D.velocity = Vector2.zero;
