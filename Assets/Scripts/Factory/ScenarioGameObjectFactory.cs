@@ -44,7 +44,7 @@ public class ScenarioGameObjectFactory : GameObjectFactory {
 				player.transform.Translate(temp);
 			}
 			generateOneTickItems (y+.75f);
-			generateOneTickEnemies (y,(i==0));
+			generateOneTickEnemies (y,(i==0 || i == 1 || i == 2));
 			//	generateOneTickObstacles (y);
 			y += 2.75f;
 		}
