@@ -1,6 +1,4 @@
-Kappa Kiwi
+Kappa Kiwi - Team Simurg
 ==============
-*Team Simurg
-** SoftEng306 Project2
 
-2D platform game developed using Unity Engine.
+2D platform game developed using Unity Engine, as SoftEng 306 Project 2
